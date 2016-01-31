@@ -37,8 +37,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li  class="active" aria-disabled="true"><a href="#">Register</a></li>
-                <li><a href="login.html">Login</a></li>
                 <li><a href="#">Username</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
@@ -52,13 +50,13 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="home.html">Home</a></li>
-                <li><a href="#">Profile</a></li>
+                <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Admin</a></li>
                 <li><a href="#">Forms</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Register</h1>
+            <h1 class="page-header">Profile</h1>
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="exampleInputUsername" class="col-sm-2 control-label">Username:</label>
@@ -73,13 +71,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword2" class="col-sm-2 control-label">Verify Password:</label>
+                    <label for="exampleInputFirstName" class="col-sm-2 control-label">First Name:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Re-enter Password">
+                        <input type="text" class="form-control" id="exampleInputFirstName" placeholder="First Name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1" class="col-sm-2 control-label">Email address:</label>
+                    <label for="exampleInputLastName" class="col-sm-2 control-label">Last Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="exampleInputLastName" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1" class="col-sm-2 control-label">Email:</label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                     </div>
@@ -87,9 +91,10 @@
                 <div class="form-group">
                     <label for="blank" class="col-sm-2 control-label"></label>
                     <div class="col-sm-10">
-                          <button type="submit" class="btn btn-primary form-control" id="blank">Register</button>
+                        <button type="submit" class="btn btn-primary form-control" id="blank">Update</button>
                     </div>
                 </div>
+
             </form>
             <!-- Placed at the end of the document so the pages load faster -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
