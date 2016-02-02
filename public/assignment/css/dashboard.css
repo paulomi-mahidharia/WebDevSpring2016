@@ -106,4 +106,6 @@ body {
 
 .span12{
     border:solid 1px lightgrey;
+    width: 99%;
+    margin: 0;
 }
