@@ -144,6 +144,13 @@
                     .unbind("mouseout");
         }
     </script>
+    <script type="text/javascript">
+
+            document.getElementById('clear').addEventListener('click', function() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }, false);
+
+    </script>
 
 </head>
 
@@ -154,5 +161,6 @@
     <!-- It's bad practice (to me) to put your CSS here.  I'd recommend the use of a CSS file! -->
     <canvas id="canvasSignature" width="500px" height="500px" style="border:2px solid #000000;"></canvas>
 </div>
+<div><button id="clear" class="btn btn-primary">Clear Canvas</button></div>
 </body>
 </html>
