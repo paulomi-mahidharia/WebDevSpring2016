@@ -1,125 +1,453 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="I AM X is a responsive personal portfolio vCard template">
-    <meta name="keywords" content="resume template, html template, portfolio template, vCard template">
-    <meta name="author" content="trendytheme.net">
-
-    <title>Paulomi Mahidharia - WebDevSpring2016-02</title>
-
-    <!--  favicon -->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
     <link rel="shortcut icon" href="http://www.emblibrary.com/EL/Product_images/F8144.jpg">
-    <!--  apple-touch-icon -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://trendytheme.net/demo/iamx/assets/images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://trendytheme.net/demo/iamx/assets/images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://trendytheme.net/demo/iamx/assets/images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="http://trendytheme.net/demo/iamx/assets/images/ico/apple-touch-icon-57-precomposed.png">
-
-
-
-    <!-- bootstrap css -->
-    <link href="http://trendytheme.net/demo/iamx/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Style CSS -->
-    <link href="http://trendytheme.net/demo/iamx/style.css" rel="stylesheet" />
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Load Bootstrap css-->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!--load font awesome-->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Paulomi Mahidharia</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <link href="css/social.css" rel="stylesheet">
-
+    <![endif]-->
 </head>
-<body>
-<header class="header-wrapper">
+<body id="page-top">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button><br/>
+            <a class="navbar-brand page-scroll" href="#page-top"><div class="intro-text">
+                <div class="intro-lead-in"><i>Paulomi Mahidharia's Homepage...!</i></div></div></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#webdev">Web Development - CS5610</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="slider-container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Welcome To My Home Page!</div>
+                <div class="intro-heading">It's Nice To Meet You</div>
+                <a href="#about" class="page-scroll btn btn-xl">Tell Me More</a>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="about" class="light-bg">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="header-intro text-center">
-                    <h1>I AM <i>Paulomi Mahidharia</i></h1>
-                    <div class="intro-desc">
-                        <p>Web App and Android App Developer, Database Enthusiast, ...</p>
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>ABOUT</h2>
+                    <div class="row">
+                        <div class="col-sm-3 text-center">
+                            <img src="images/gallery/main.jpg" style="border-radius: 50%; height: 200px; width: 160px">
+                        </div>
+                        <div class="col-md-9">
+                            <p>I am a <a href="http://www.northeastern.edu/">Northeastern University</a>
+                                Graduate Student pursuing Master of Science in Computer Science.
+                                My specialization is Software Engineering and Database Management Systems.
+                                I am actively seeking a Software Engineering Co-op for May - Dec 2016.
+                            </p>
+                            <p>I am enthusiastic about learning new technologies, traveling to new places and photography...!</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- about module -->
+            <div class="col-md-3 text-center">
+                <div class="mz-module-about">
+                    <i class="fa fa-briefcase ot-circle"></i>
+                    <h3>Web Development</h3>
+                    <p>I am currently pursuing Web Development CS 5610 at Northeatern and working on MEAN Stack</p>
+                </div>
+            </div>
+            <!-- end about module -->
+            <!-- about module -->
+            <div class="col-md-3 text-center">
+                <div class="mz-module-about">
+                    <i class="fa fa-code ot-circle"></i>
+                    <h3>Technologies</h3>
+                    <p>I make sure that I learn a new technology in every project I work on. This helpes me explore various frameworks and libraries</p>
+                </div>
+            </div>
+            <!-- end about module -->
+            <!-- about module -->
+            <div class="col-md-3 text-center">
+                <div class="mz-module-about">
+                    <i class="fa fa-camera-retro ot-circle"></i>
+                    <h3>Photography</h3>
+                    <p>I am a huge fan of Photography. I like taking pictures of self, with friends and family, and of nature. I believe in capturing every emotion forever</p>
+                </div>
+            </div>
+            <!-- end about module -->
+            <!-- about module -->
+            <div class="col-md-3 text-center">
+                <div class="mz-module-about">
+                    <i class="fa fa-automobile ot-circle"></i>
+                    <h3>Traveling</h3>
+                    <p>I inherited a strong liking for traveling from my father. I wish to go around every place that I have an oppotunity to visit and enjoy the diversity</p>
+                </div>
+            </div>
+            <!-- end about module -->
+        </div>
+    </div>
+    <!-- /.container -->
+</section>
+
+<section class="overlay-dark bg-img1 dark-bg short-section stats-bar">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-3 mb-sm-30">
+                <div class="counter-item">
+                    <h2 class="stat-number" data-n="3.835/4.00">3.835/4.00</h2>
+                    <h6>GPA (GRAD)</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-sm-30">
+                <div class="counter-item">
+                    <h2 class="stat-number" data-n="5">5</h2>
+                    <h6>Projects</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-sm-30">
+                <div class="counter-item">
+                    <h2 class="stat-number" data-n="49">49</h2>
+                    <h6>Courses</h6>
+                </div>
+            </div>
+            <div class="col-md-3 mb-sm-30">
+                <div class="counter-item">
+                    <h2 class="stat-number" data-n="8.43/10.00">8.43</h2>
+                    <h6>CGPA (UNDERGRAD)</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="portfolio" class="light-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>Portfolio</h2>
+                    <p>My portfolio is the best way to show my work. You can see here a big range of my work. Check them all and you will find what you are looking for.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- start portfolio item -->
+            <div class="col-md-4">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="images/demo/portfolio-1.jpg" alt="img02" class="img-responsive" />
+                        <figcaption>
+                            <h2>RESUME</h2>
+                            <p>Look up to my Resume...</p>
+                            <a href="https://drive.google.com/open?id=0BwBD2CPSlXOUZ0hTR0tpSGFKVVk" target="_blank"></a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+            <!-- start portfolio item -->
+            <div class="col-md-4">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img style="height: 235px;" src="images/demo/portfolio-2.jpg" alt="img02" class="img-responsive" />
+                        <figcaption>
+                            <h2>GITHUB</h2>
+                            <p>Some sample code..</p>
+                            <a href="https://github.com/paulomi-mahidharia" target="_blank"></a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+            <!-- start portfolio item -->
+            <div class="col-md-4">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="images/demo/portfolio-3.jpg" alt="img02" class="img-responsive" />
+                        <figcaption>
+                            <h2>FINAL YEAR PROJECT - 2015</h2>
+                            <p>Report and Documentation</p>
+                            <a href="https://drive.google.com/open?id=0BwBD2CPSlXOUTkxkbkE5bmtuVTQ" target="_blank"></a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+        </div>
+
+    </div><!-- end container -->
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>MY GALLERY</h2>
+                    <p>Some of my nostalgic moments...</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="owl-carousel">
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/jahnviMeShikha.jpg" target="_blank">
+                                <img href="images/gallery/jahnviMeShikha.jpg"
+                                     src="images/gallery/jahnviMeShikha.jpg" alt="partners">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/me.jpg" target="_blank">
+                                <img src="images/gallery/me.jpg" alt="partners">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/meAndVidhi.jpg" target="_blank">
+                                <img src="images/gallery/meAndVidhi.jpg" alt="partners">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/meJay.jpg" target="_blank">
+                              <img src="images/gallery/meJay.jpg" alt="partners">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/me2.jpg" target="_blank">
+                                <img src="images/gallery/meMaheeVidhi.jpg" alt="partners">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/me2.jpg" target="_blank">
+                                <img src="images/gallery/me2.jpg" alt="partners">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="partner-logo">
+                            <a href="images/gallery/mom.jpg" target="_blank">
+                                <img src="images/gallery/mom.jpg" alt="partners">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</header>
-
-
-<section class="feature-section text-center">
+</section>
+<section id="webdev" class="light-bg">
     <div class="container">
-        <h2>Welcome to my homepage for <a href="http://portal-cs5610online.rhcloud.com/">"Web Development 2016 - Section 02"</a></h2>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2><a href="http://portal-cs5610online.rhcloud.com/" target="_blank">
+                            WEB DEVELOPMENT (CS5610) SPRING 2016
+                        </a>
+                    </h2>
+                    <p>I am currently pursuing Web Development at Northeastern University under
+                        <a href="http://www.ccs.neu.edu/people/faculty/member/annunziato/" target="_blank">
+                            Prof. Jose Annunziato
+                        </a>.
+                        I am working on MEAN Stack - MongoDB, ExpressJS, AngularJS, NodeJS. You can have a quick look on my work here...
+                    </p>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="feature-box">
-                    <a href="assignment/index.html"><img src="http://www.webuybooks.co.uk/wp-content/uploads/2014/10/Book-Icon.png" alt="" /></a>
-                    <p>Assignment</span></a></p>
+            <!-- team member item -->
+           <a href="assignment/index.html" target="_blank"><div class="col-md-3">
+                <div class="team-item">
+                    <div class="team-image">
+                        <img src="images/demo/webdev-1.jpg" class="img-responsive" alt="author">
+                    </div>
+                    <div class="team-text">
+                        <h3>ASSIGNMENT</h3>
+                        <div class="team-position">– Form Builder App –</div>
+                        <p>Implementing a Form Building Application using MEAN Stack.</p>
+                    </div>
                 </div>
+            </div></a>
+            <!-- end team member item -->
+            <!-- team member item -->
+            <a href="project/index.html" target="_blank"> <div class="col-md-3">
+                <div class="team-item">
+                    <div class="team-image">
+                        <img src="images/demo/webdev-2.jpg" class="img-responsive" alt="author">
+                    </div>
+                    <div class="team-text">
+                        <h3>PROJECT</h3>
+                        <div class="team-position">– NoteSpace –</div>
+                        <p>Designing a web application that allows a user to create,
+                            manage and share notes comprising of multiple forms of data</p>
+                    </div>
+                </div>
+            </div></a>
+
+            <!-- end team member item -->
+            <!-- team member item -->
+            <a href="experiments/index.html" target="_blank"><div class="col-md-3">
+                <div class="team-item">
+                    <div class="team-image">
+                        <img style="height: 200px;" src="images/demo/webdev-3.png" class="img-responsive" alt="author">
+                    </div>
+                    <div class="team-text">
+                        <h3>EXPERIMENTS</h3>
+                        <!--<div class="team-location">Miami, Floria</div>-->
+                        <div class="team-position">– Raw Implementation –</div>
+                        <p>This is where everything builds up till their final touch</p>
+                    </div>
+                </div>
+            </div></a>
+            <!-- end team member item -->
+            <!-- team member item -->
+            <a href="https://github.com/paulomi-mahidharia/WebDevSpring2016" target="_blank"><div class="col-md-3">
+                <div class="team-item">
+                    <div class="team-image">
+                        <img style="height: 180px" src="images/demo/webdev-4.png" class="img-responsive" alt="author">
+                    </div>
+                    <div class="team-text">
+                        <h3>GITHUB</h3>
+                        <div class="team-position">– Web Development Code –</div>
+                        <p>Code for Web Development assignments, project, and experiments is available right here
+                        </p>
+                    </div>
+                </div>
+            </div></a>
+            <!-- end team member item -->
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="feature-box">
-                    <a href="project/index.html"><img src="http://carecomputers.co.uk/wp-content/uploads/2015/04/project-management-icon.png" alt="" /></a>
-                    <p>Project</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="feature-box">
-                    <a href="experiments/index.html"><img src="http://rationalwiki.org/w/images/thumb/7/7a/Icon_pseudoscience.svg/100px-Icon_pseudoscience.svg.png" alt="" /></a>
-                    <p>Experiments</span></p>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="feature-box">
-                    <img src="http://www.miq.com/wp-content/uploads/2014/06/icon_supplychain_green2-100x100.png" alt="" />
-                    <p>Contact</p>
-                </div>
+            <div class="col-md-3">
+                <a href="https://drive.google.com/open?id=1_WaaUtvhjEDQP0_IlkQZmhm5HJjRG8obJFJvKsKfuUE" target="_blank">
+                    <div class="team-position"><b><center>PROJECT DOCUMENTATION </center></b></div>
+                </a>
             </div>
         </div>
 
     </div>
 </section>
-
-
-
-
-
-
-<footer class="footer">
-    <div class="container text-center">
-        <div class="social">
-            <ul>
-                <li><a href="http://www.facebook.com/paulomi.mahidharia"><i class="fa fa-lg fa-facebook"></i></a></li>
-                <li><a href="http://www.google.com/+PaulomiMahidharia"><i class="fa fa-lg fa-google-plus"></i></a></li>
-                <li><a href="https://github.com/paulomi-mahidharia/WebDevSpring2016"><i class="fa fa-lg fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/paulomimahidharia"><i class="fa fa-lg fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-lg fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa fa-lg fa-dropbox"></i></a></li>
-                <li><a href="#"><i class="fa fa-lg fa-skype"></i></a></li>
-            </ul>
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="section-title">
+                    <h2>Contact Information</h2>
+                    <p>For more information about me, you can explore here...!</p>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Home Address</h3>
+                <p>75 Saint Alphonsus Street, Apt# 1905, Boston MA 02120</p>
+                <p><i class="fa fa-phone"></i> +1 (857)269-5510</p>
+                <p><i class="fa fa-envelope"></i> mahidharia.p@husky.neu.edu</p>
+            </div>
+
+
+<!-- Modal for portfolio item 1 -->
+            <div class="col-md-6">
+                <h3>You can reach me out here as well...!</h3><br/>
+                    <div class="social">
+                            <a href="http://www.facebook.com/paulomi.mahidharia"><i class="fa fa-lg fa-facebook"></i></a>
+                            <a style="padding-left: 3em" href="http://www.google.com/+PaulomiMahidharia"><i class="fa fa-lg fa-google-plus"></i></a>
+                            <a style="padding-left: 3em" href="https://github.com/paulomi-mahidharia/WebDevSpring2016"><i class="fa fa-lg fa-github"></i></a>
+                            <a style="padding-left: 3em" href="https://www.linkedin.com/in/paulomimahidharia"><i class="fa fa-lg fa-linkedin"></i></a>
+                            <!--<li><a href="#"><i class="fa fa-lg fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-lg fa-dropbox"></i></a></li>
+                            <li><a href="#"><i class="fa fa-lg fa-skype"></i></a></li>-->
+
+                    </div>
+                </div>
+
+
+       </div>
+   </div>
+</section>
+<p id="back-top">
+   <a href="#top"><i class="fa fa-angle-up"></i></a>
+</p>
+<footer>
+   <div class="container text-center">
+       <p>Designed by Paulomi Mahidharia</p>
+   </div>
 </footer>
 
 
 
-<!-- Preloader -->
-<div id="preloader">
-    <div id="status">
-        <div class="status-mes"></div>
-    </div>
-</div>
-
-
-<script src="http://trendytheme.net/demo/iamx/assets/js/jquery-2.1.3.min.js"></script>
-<script src="http://trendytheme.net/demo/iamx/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="http://trendytheme.net/demo/iamx/assets/js/scripts.js"></script>
-
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/cbpAnimatedHeader.js"></script>
+<script src="js/theme-scripts.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

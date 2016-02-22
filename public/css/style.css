@@ -168,7 +168,7 @@ section {
 --------------------*/
 
 header {
-    background-image: url(../images/demo/bg-main.jpg);
+    background-image: url(../images/boston.jpg);
     background-repeat: none;
     background-attachment: scroll;
     background-position: center center;
@@ -177,7 +177,7 @@ header {
     background-size: cover;
     -o-background-size: cover;
     text-align: center;
-    color: #fff;
+    color: #402D0D;
 }
 
 header .intro-text {
@@ -465,7 +465,7 @@ figure.effect-bubba:hover p {
 }
 
 .bg-img1 {
-    background-image: url(../images/demo/office-bg.jpg);
+    background-image: url(../images/demo/books.jpg);
     background-size: cover !important;
     background-position: center center;
     background-repeat: no-repeat;
@@ -473,7 +473,7 @@ figure.effect-bubba:hover p {
 }
 
 .light-bg {
-	background-color: #f8f8f8;
+	background-color: #FCF8E3;
 }
 
 .overlay-dark:before, .overlay-light:before {
@@ -706,8 +706,8 @@ font-size: 11px;
 
 .btn-xl {
     color: #fff;
-     background-color: #726FB9;
-    border-color: #726FB9;
+     background-color: #543F1A;
+    border-color: #543F1A;
     font-family: "Robot",sans-serif;
     text-transform: uppercase;
     font-weight: 700;
