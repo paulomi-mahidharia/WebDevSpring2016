@@ -17,17 +17,18 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input type="text" class="form-control" id="inputName" placeholder="name"/></td>
+                        <td><input ng-model="form.title" type="text" class="form-control" id="inputName" placeholder="name"/></td>
                         <td>
-                            <a href="" class="btn btn-default" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </a>
-
-                            <a href="" class="btn btn-default">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            </a>
+                            <span ng-click="addForm(form)" class="glyphicon glyphicon-plus btn btn-default" aria-hidden="true"></span>
+                            <span ng-click="updateForm(form)" class="glyphicon glyphicon-ok btn btn-default" aria-hidden="true"></span>
                         </td>
                     </tr>
+                    <tr ng-repeat="form in forms">
+                        <td>{{form.title}}</td>
+                        <td><span ng-click="deleteForm($index)" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true"></span>
+                            <span ng-click="selectForm($index)" class="glyphicon glyphicon-pencil btn btn-default" aria-hidden="true"></span></td>
+                    </tr>
+                    <!--
                     <tr>
 
                         <td>Registration Form</td>
@@ -67,6 +68,7 @@
                             </a>
                         </td>
                     </tr>
+                    -->
                     </tbody>
                 </table>
             </div>

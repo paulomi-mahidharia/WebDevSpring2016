@@ -7,7 +7,20 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope){
+    function RegisterController($scope, $location, $rootScope, UserService){
+        $scope.register = register;
 
+        function register(user){
+
+            UserService.createUser(
+                user,
+                function(newUser){
+                    $rootScope.newUser = newUser;
+                    $location.url("/profile/");
+                });
+
+
+
+        }
     }
 })();
