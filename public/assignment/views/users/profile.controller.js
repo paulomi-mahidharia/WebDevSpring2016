@@ -21,7 +21,7 @@
             UserService.updateUser(
                 $rootScope.newUser._id,
                 user,
-                updateProfile)
+                updateProfile);
 
             function updateProfile(updatedUser){
 

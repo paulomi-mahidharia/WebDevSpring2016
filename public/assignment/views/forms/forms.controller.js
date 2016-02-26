@@ -36,7 +36,6 @@
             function updateSelectedForm(updatedForm) {
                 var formIndex = $scope.forms.indexOf(form);
                 $scope.forms[formIndex] = updatedForm;
-                $scope.form = {};
             }
         }
 
