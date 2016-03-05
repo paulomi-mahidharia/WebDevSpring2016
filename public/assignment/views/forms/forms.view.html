@@ -45,7 +45,7 @@
                     </td>
                 </tr>
                 <tr ng-repeat="form in forms">
-                    <td>{{form.title}}</td>
+                    <td><a  href="#/fields">{{form.title}}</a></td>
                     <td><span ng-click="deleteForm($index)" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true"></span>
                         <span ng-click="selectForm($index)" class="glyphicon glyphicon-pencil btn btn-default" aria-hidden="true"></span>
                     </td>
