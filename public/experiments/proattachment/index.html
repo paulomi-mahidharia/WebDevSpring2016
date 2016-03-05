@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+    <script src="file.controller.js"></script>
+</head>
+<body>
+<div ng-controller = "myCtrl">
+    <input type="file" file-model="myFile"/>
+    <button ng-click="uploadFile()">upload me</button>
+    <h2>Results</h2>
+    <div class="table-responsive darker padding-all-sides" >
+        <table class="table table-bordered table-striped" ng-controller="myCtrl">
+            <thead>
+            <tr>
+                <th>
+                    <a href="" class="btn btn-default">
+                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    </a>
+                    Attachments
+                </th>
+
+                <th>
+                    <a href="" class="btn btn-default">
+                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    </a>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="widget in data">
+                <td><a href="../proattachment/myfiles/{{widget.name}}">{{widget.name}}</a></td>
+                <td>
+                    <span ng-click="deleteText(widget)" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
