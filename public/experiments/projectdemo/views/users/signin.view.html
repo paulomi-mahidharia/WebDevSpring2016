@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NoteSpace">
+<head>
+    <title>NoteSpace</title>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="assets/img/fevicon.png">
+
+    <title>NoteSpace</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/animate.css">
+    <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="../../assets/css/owl.theme.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/transparent.css">
+    <link rel="stylesheet" href="../../assets/css/center.css">
+
+    <!-- scripts -->
+    <script type="text/javascript" src="assets/js/modernizr.custom.97074.js"></script>
+
+</head>
+<body background="../../assets/img/slider1.jpg">
+
+<div class="container">
+    <div>
+        <form>
+            <div class="row">
+                <div class="col-md-4 welcome-speech">
+                    <p><h2><center>SIGN IN</center></h2></p>
+
+                    <div class="form-group">
+                        <input name="name" type="text" class="form-control transparent" id="name" required="required" placeholder="Full Name">
+                    </div>
+
+                    <div class="form-group">
+                        <input name="email" type="email" class="form-control transparent" id="email" required="required" placeholder="Email Address">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="submit" name="submit" class="btn btn-orange left-align">Sign In</button>
+                    </div>
+                    <div class="form-group">
+                        <div><p>Do not have an account? <a href="#">SIGN UP</a></p></div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="assets/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+<script type="text/javascript" src="assets/js/jquery.hoverdir.js"></script>
+
+
+<!-- script for portfolio section using hoverdirection -->
+<script type="text/javascript">
+    $(function() {
+
+        $('.portfolio-item > .item-image').each( function() { $(this).hoverdir({
+            hoverDelay : 75
+        }); } );
+
+    });
+</script>
+
+
+<!-- script for twitter-feed using owl carousel-->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#twit").owlCarousel({
+
+            navigation : true, // Show next and prev buttons
+            slideSpeed : 100,
+            paginationSpeed : 400,
+            navigationText : false,
+            singleItem: true,
+            autoPlay: true,
+            pagination: false
+        });
+
+    });
+</script>
+
+
+<!-- script for testimonial section using owl carousel -->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#client-speech").owlCarousel({
+
+            autoPlay: 5000, //Set AutoPlay to 3 seconds
+            stopOnHover: true,
+            singleItem:true
+        });
+
+    });
+</script>
+
+</body>
+</html>

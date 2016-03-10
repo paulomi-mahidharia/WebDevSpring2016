@@ -7,42 +7,42 @@
 
 </head>
 <body  ng-controller="SearchController">
-    <h2>SEARCH</h2>
-    <div>
-        <label for="Autocomplete">Autocomplete Search</label>
-        <input id="Autocomplete" ng-autocomplete="result1" ng-model="result1" class="form-control"/>
-        <button ng-click="search(result1)" class="btn btn-primary btn-block">Search</button>
-    </div>
+<h2>SEARCH</h2>
+<div>
+    <label for="Autocomplete">Autocomplete Search</label>
+    <input id="Autocomplete" ng-autocomplete="result1" ng-model="result1" class="form-control"/>
+    <button ng-click="search(result1)" class="btn btn-primary btn-block">Search</button>
+</div>
 
-    <div class="table-responsive">
-        <table class="table table-stripped">
-            <tr ng-repeat="address in data.results">
-                <td>
-                    <h3>{{address.formatted_address}}</h3><br/>
-                    <!--Cannot implement iframe-->
-                    <!--<iframe
-                            width="600"
-                            height="450"
-                            frameborder="0"
-                            style="border:0"
-                            ng-src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y
-                            &q='{{address.formatted_address}}'" allowfullscreen>
+<div class="table-responsive">
+    <table class="table table-stripped">
+        <tr ng-repeat="address in data.results">
+            <td>
+                <h3>{{address.formatted_address}}</h3><br/>
+                <!--Cannot implement iframe-->
+                <!--<iframe
+                        width="600"
+                        height="450"
+                        frameborder="0"
+                        style="border:0"
+                        ng-src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y
+                        &q='{{address.formatted_address}}'" allowfullscreen>
 
-                            </iframe>-->
+                        </iframe>-->
 
-                </td>
-            </tr>
-        </table>
-    </div>
+            </td>
+        </tr>
+    </table>
+</div>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/config.js"></script>
-    <script src="controllers/search.controller.js"></script>
-    <script src="controllers/autocomplete.directive.js"></script>
-    <script src="services/googleMapsApi.service.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/config.js"></script>
+<script src="controllers/search.controller.js"></script>
+<script src="controllers/autocomplete.directive.js"></script>
+<script src="services/googleMapsApi.service.js"></script>
 </body>
 </html>

@@ -10,16 +10,20 @@
     function configuration($routeProvider){
         $routeProvider
             .when("/home", {
-                templateUrl: "home.html",
+                templateUrl: "views/home/home.view.html",
                 controller: "HomeController"
             })
             .when("/header", {
                 templateUrl: "views/header/header.view.html",
                 controller: "HeaderController"
             })
-            .when("/sidebar", {
-                templateUrl: "views/sidebar/sidebar.view.html",
-                controller: "SidebarController"
+            .when("/text", {
+                templateUrl: "views/widgets/text/text.view.html",
+                controller: "TextEditorController"
+            })
+            .when("/map", {
+                templateUrl: "views/widgets/googlemap/map.view.html",
+                controller: "MapController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
@@ -33,9 +37,7 @@
                 templateUrl: "views/users/register.view.html",
                 controller: "RegisterController"
             })
-            .when("/textedit", {
-                templateUrl: "views/widgets/textedit.view.html"
-            })
+
             .otherwise({
                 redirectTo: "/home"
             });

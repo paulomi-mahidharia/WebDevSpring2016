@@ -1,0 +1,49 @@
+<div class=" main">
+    <h1>Text Editor Widget</h1><br>
+
+
+    <div class="table-responsive darker padding-all-sides" >
+        <table class="table table-bordered table-striped" ng-controller="TextEditorController">
+            <thead>
+            <tr>
+                <th>
+                    <a href="" class="btn btn-default">
+                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    </a>
+                    Form Name
+                </th>
+
+                <th>
+                    <a href="" class="btn btn-default">
+                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    </a>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                        <textarea  type="text"
+                                   rows="3"
+                                   class="form-control"
+                                   ng-model = "widget.notetext"
+                                   id="text" placeholder="Start writing notes...">
+
+                        </textarea>
+                </td>
+                <td>
+                    <span ng-click="addText(widget)" class="glyphicon glyphicon-plus btn btn-default" aria-hidden="true"></span>
+                    <span ng-click="updateText(widget)" class="glyphicon glyphicon-ok btn btn-default" aria-hidden="true"></span>
+                </td>
+            </tr>
+            <tr ng-repeat="widget in widgets">
+                <td>{{widget.notetext}}</td>
+                <td><span ng-click="deleteText(widget)" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true"></span>
+                    <span ng-click="selectText(widget)" class="glyphicon glyphicon-pencil btn btn-default" aria-hidden="true"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

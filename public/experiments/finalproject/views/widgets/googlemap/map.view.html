@@ -1,0 +1,19 @@
+<div class=" main" ng-controller="MapController">
+    <h1>Search Location</h1><br>
+    <div>
+        <label for="Autocomplete">Autocomplete Search</label>
+        <input id="Autocomplete" ng-autocomplete="result1" ng-model="result1" class="form-control" style="background: transparent"/>
+        <br/>
+        <button ng-click="search(result1)" class="btn btn btn-orange btn-block">Search</button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-stripped">
+            <tr ng-repeat="address in data.results">
+                <td>
+                    <h3>{{address.formatted_address}}</h3><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

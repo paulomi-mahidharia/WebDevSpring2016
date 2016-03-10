@@ -4,7 +4,7 @@
 "use strict";
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("NoteSpace")
         .controller("LoginController", LoginController);
 
     function LoginController($scope, $rootScope, $location, UserService){
