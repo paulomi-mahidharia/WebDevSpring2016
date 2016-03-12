@@ -2,18 +2,34 @@
     <h1>Search Location</h1><br>
     <div>
         <label for="Autocomplete">Autocomplete Search</label>
-        <input id="Autocomplete" ng-autocomplete="result1" ng-model="result1" class="form-control" style="background: transparent"/>
+        <i class="glyphicon glyphicon-map-marker left"></i>
+        <input id="Autocomplete" ng-model="result1" class="form-control" style="background: transparent"/>
         <br/>
-        <button ng-click="search(result1)" class="btn btn btn-orange btn-block">Search</button>
+        <button ng-click="search()" class="btn btn btn-orange btn-block">Search</button>
     </div>
+    <br/>
+
+    <div id="map" style="height:300px; width: 1200px;"></div>
+
 
     <div class="table-responsive">
         <table class="table table-stripped">
             <tr ng-repeat="address in data.results">
                 <td>
-                    <h3>{{address.formatted_address}}</h3><br/>
+                    <center><h3>{{address.formatted_address}}</h3><br/>
+                    <ul>
+                        <li>
+                            Lattitude: {{address.geometry.location.lat}}
+                        </li>
+                        <li>
+                            Longitude: {{address.geometry.location.lng}}
+                        </li>
+                    </ul></center>
+
                 </td>
             </tr>
         </table>
     </div>
+
+
 </div>

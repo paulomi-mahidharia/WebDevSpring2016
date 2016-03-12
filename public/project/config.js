@@ -25,6 +25,10 @@
                 templateUrl: "views/widgets/googlemap/map.view.html",
                 controller: "MapController"
             })
+            .when("/note", {
+                templateUrl: "views/widgets/note/note.view.html",
+                controller: "NoteController"
+            })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
                 controller: "LoginController"
