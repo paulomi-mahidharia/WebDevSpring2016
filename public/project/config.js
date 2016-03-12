@@ -25,9 +25,29 @@
                 templateUrl: "views/widgets/googlemap/map.view.html",
                 controller: "MapController"
             })
+            .when("/fileupload", {
+                templateUrl: "views/widgets/fileupload/fileupload.view.html",
+                controller: "myCtrl"
+            })
             .when("/note", {
                 templateUrl: "views/widgets/note/note.view.html",
                 controller: "NoteController"
+            })
+            .when("/todo", {
+                templateUrl: "views/widgets/todoWidget/todoWidget.view.html",
+                controller: "toDoController"
+            })
+            .when("/image", {
+                templateUrl: "views/widgets/imageWidget/imageWidget.view.html",
+                controller: "imageController"
+            })
+            .when("/youtube", {
+                templateUrl: "views/widgets/youtubeApiWidget/youtubeApiWidget.view.html",
+                controller: "YouTubeController"
+            })
+            .when("/notebook", {
+                templateUrl: "views/widgets/notebook/notebook.view.html",
+                controller: "noteBookController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
