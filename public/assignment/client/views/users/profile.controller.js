@@ -9,17 +9,17 @@
 
     function ProfileController($scope, $rootScope, UserService){
         $scope.user = {};
-        $scope.user.username = $rootScope.newUser.username;
-        $scope.user.password = $rootScope.newUser.password;
-        $scope.user.firstName = $rootScope.newUser.firstName;
-        $scope.user.lastName = $rootScope.newUser.lastName;
-        $scope.user.email = $rootScope.newUser.email;
+        $scope.user.username = $rootScope.currentUser.username;
+        $scope.user.password = $rootScope.currentUser.password;
+        $scope.user.firstName = $rootScope.currentUser.firstName;
+        $scope.user.lastName = $rootScope.currentUser.lastName;
+        $scope.user.email = $rootScope.currentUser.email;
 
         $scope.update = update;
 
         function update(user) {
             UserService.updateUser(
-                $rootScope.newUser._id,
+                $rootScope.currentUser._id,
                 user,
                 updateProfile);
 

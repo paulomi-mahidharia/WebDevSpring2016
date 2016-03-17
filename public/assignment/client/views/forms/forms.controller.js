@@ -15,14 +15,14 @@
         $scope.selectForm = selectForm;
         $scope.deleteForm = deleteForm;
 
-        FormService.findAllFormsForUser($rootScope.newUser._id, getForms);
+        FormService.findAllFormsForUser($rootScope.currentUser._id, getForms);
 
         function getForms(foundForms) {
             $scope.forms = foundForms;
         }
 
         function addForm(form) {
-            FormService.createFormForUser($rootScope.newUser._id, form, createForm);
+            FormService.createFormForUser($rootScope.currentUser._id, form, createForm);
 
             function createForm(newForm) {
                 $scope.forms.push(newForm);
@@ -55,7 +55,7 @@
             FormService.deleteFormById(selectedFormId, deleteSelectedForm);
 
             function deleteSelectedForm(formsAfterDeletion) {
-                FormService.findAllFormsForUser($rootScope.newUser._id, getForms);
+                FormService.findAllFormsForUser($rootScope.currentUser._id, getForms);
 
                 function getForms(formsAfterDeletion) {
                     $scope.forms = formsAfterDeletion;

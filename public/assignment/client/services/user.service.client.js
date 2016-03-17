@@ -7,23 +7,13 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    var users =  [
-        {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-            "username":"alice",  "password":"alice",   "roles": ["student"]		},
-        {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-            "username":"bob",    "password":"bob",     "roles": ["admin"]		},
-        {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-            "username":"charlie","password":"charlie", "roles": ["faculty"]		},
-        {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-            "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
-        {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-            "username":"ed",     "password":"ed",      "roles": ["student"]		}
-    ];
 
-    function UserService(){
+
+    function UserService($http){
         var api = {
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
+            findUserByUsername: findUserByUsername,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser
@@ -31,27 +21,16 @@
 
         return api;
 
-        function findUserByUsernameAndPassword(username, password, callback){
-            var matchingUser = null;
-            for (var i=0; i<users.length; i++){
-                if(users[i].username === username && users[i].password === password){
-                    matchingUser = {
-                        _id: users[i]._id,
-                        firstName: users[i].firstName,
-                        lastName: users[i].lastName,
-                        username: users[i].username,
-                        password: users[i].password,
-                        roles: users[i].roles,
-                        email: users[i].email
-                    }
-                    break;
-                }
-            }
-        callback(matchingUser);
+        function findUserByCredentials(username, password){
+            return $http.get("/api/assignment/user?username="+username+"&password="+password);
         }
 
-        function findAllUsers(callback){
-            callback(users);
+        function findAllUsers(){
+            return $http.get("/api/assignment/user");
+        }
+
+        function findUserByUsername(username){
+            return $http.get("/api/assignemnt/user?username="+username);
         }
 
         function createUser(user, callback){
@@ -64,8 +43,8 @@
                 roles: user.roles,
                 email: user.email
             };
-            users.push(newUser);
-            callback(newUser);
+            users.push(currentUser);
+            callback(currentUser);
         }
 
         function deleteUserById(userId, callback){
