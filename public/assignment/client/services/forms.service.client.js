@@ -46,10 +46,11 @@
             var url = "/api/assignment/user/:userId/form";
             url = url.replace(":userId", userID);
 
-            $http.get(url).success(function (response) {
-
-                deferred.resolve(response);
-            });
+            //return $http.get("/api/assignment/user/"+userID+"/form");
+            $http.get(url)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
 
             return deferred.promise;
         }
@@ -76,8 +77,7 @@
 
             var url = "/api/assignment/form/:formId";
             url = url.replace(":formId", formID);
-
-            $http.put(url, newForm).success(function(response) {
+            $http.put("/api/assignment/form/"+formID, newForm).success(function(response) {
 
                 deferred.resolve(response);
             });

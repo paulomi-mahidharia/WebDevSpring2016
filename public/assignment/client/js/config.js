@@ -22,9 +22,10 @@
                 controller: "FormController",
                 controllerAs: "model"
             })
-            .when("/fields", {
+            .when("/form/:formId/fields", {
                 templateUrl: "views/forms/form-fields.view.html",
-                controller: "FormFieldsController"
+                controller: "FormFieldsController",
+                controllerAs: "model"
             })
             .when("/header", {
                 templateUrl: "views/header/header.view.html",

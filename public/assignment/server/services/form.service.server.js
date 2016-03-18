@@ -3,13 +3,8 @@
  */
 "use strict";
 
-module.exports = function(app, formModel, uuid) {
+module.exports = function(app, FormModel, uuid) {
 
-    //creates a new form whose properties are the same as the form object embedded in the HTTP request's body and
-    //the form belongs to a user whose id is equal to the userId path parameter.
-    //The form object's id is initially null since it is a new record.
-    // The id of the new form should be set dynamically using Node.js guid or node-uuid libraries.
-    // These will eventually be set by the database when they are inserted into a collection
     app.post("/api/assignment/user/:userId/form", createForm);
 
     //returns an array of forms belonging to a user whose id is equal to the userId path parameter
@@ -33,43 +28,38 @@ module.exports = function(app, formModel, uuid) {
         form.userId = userId;
         form._id = parseInt(uuid.v4(), 16);
 
-        formModel.createForm(form);
-        res.json(formModel.findAllFormsByUserId(userId));
+        FormModel.createForm(form);
+        res.json(FormModel.findAllFormsByUserId(userId));
     }
 
     function findAllformsForUser(req, res) {
         var userId = parseInt(req.params.userId);
-        res.json(formModel.findAllFormsByUserId(userId));
+        res.json(FormModel.findAllFormsByUserId(userId));
     }
 
     function findAllForms(req, res) {
 
-        res.json(formModel.findAllForms());
+        res.json(FormModel.findAllForms());
     }
 
     function findFormById(req, res) {
 
         var formId = req.params.formId;
-
-        res.json(formModel.findFormById(formId));
+        res.json(FormModel.findFormById(formId));
     }
 
     function updateFormById(req, res) {
 
         var formId = req.params.formId;
         var form = req.body;
-
-        formModel.updateFormById(formId, form);
-
-        res.send(200);
+        var forms = FormModel.updateFormById(formId, form);
+        res.json(forms);
     }
 
     function deleteFormById(req, res) {
 
         var formId = req.params.formId;
-
-        formModel.deleteFormById(formId);
-
+        FormModel.deleteFormById(formId);
         res.send(200);
     }
 }
