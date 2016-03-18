@@ -3,3 +3,11 @@
     width: 99%;
     margin: 0;
 }
+
+.align-icons{
+    padding-top: 24px;
+}
+
+.non-visible{
+    visibility: hidden;
+}
