@@ -4,31 +4,31 @@
         <div class="form-group">
             <label for="exampleInputUsername" class="col-sm-2 control-label">Username:</label>
             <div class="col-sm-10">
-                <input ng-model="user.username" type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
+                <input ng-model="model.user.username" type="text" class="form-control" id="exampleInputUsername" placeholder="Username">
             </div>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1" class="col-sm-2 control-label">Password:</label>
             <div class="col-sm-10">
-                <input ng-model="user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input ng-model="model.user.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword2" class="col-sm-2 control-label">Verify Password:</label>
             <div class="col-sm-10">
-                <input ng-model="user.password2" type="password" class="form-control" id="exampleInputPassword2" placeholder="Re-enter Password">
+                <input ng-model="model.user.password2" type="password" class="form-control" id="exampleInputPassword2" placeholder="Re-enter Password">
             </div>
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1" class="col-sm-2 control-label">Email address:</label>
             <div class="col-sm-10">
-                <input ng-model="user.email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <input ng-model="model.user.email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
             </div>
         </div>
         <div class="form-group">
             <label for="blank" class="col-sm-2 control-label"></label>
             <div class="col-sm-10">
-                  <button ng-click="register(user)" type="submit" class="btn btn-primary form-control" id="blank">Register</button>
+                  <button ng-click="model.register(model.user)" type="submit" class="btn btn-primary form-control" id="blank">Register</button>
             </div>
         </div>
     </form>

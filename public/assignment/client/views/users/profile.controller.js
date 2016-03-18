@@ -7,30 +7,44 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService){
-        $scope.user = {};
-        $scope.user.username = $rootScope.currentUser.username;
-        $scope.user.password = $rootScope.currentUser.password;
-        $scope.user.firstName = $rootScope.currentUser.firstName;
-        $scope.user.lastName = $rootScope.currentUser.lastName;
-        $scope.user.email = $rootScope.currentUser.email;
+    function ProfileController(UserService, $location, $rootScope) {
 
-        $scope.update = update;
+
+        var vm = this;
+
+        function init() {
+            vm.user = {};
+
+            vm.user.username = $rootScope.currentUser.username;
+            vm.user.password = $rootScope.currentUser.password;
+            vm.user.email = $rootScope.currentUser.email;
+            vm.user.firstName = $rootScope.currentUser.firstName;
+            vm.user.lastName = $rootScope.currentUser.lastName;
+
+        }
+
+        init();
+
+        vm.update = update;
+
 
         function update(user) {
-            UserService.updateUser(
-                $rootScope.currentUser._id,
-                user,
-                updateProfile);
+            var updatedContent = {
+                _id: $rootScope.currentUser._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                password: user.password,
+                email: user.email
 
-            function updateProfile(updatedUser){
+            };
 
-                $scope.user.username = updatedUser.username;
-                $scope.user.password = updatedUser.password;
-                $scope.user.firstName = updatedUser.firstName;
-                $scope.user.lastName = updatedUser.lastName;
-                $scope.user.email = updatedUser.email;
-            }
+            UserService.updateUser($rootScope.currentUser._id, updatedContent)
+                .then(function (user){
+                    $rootScope.currentUser = user.config.data;
+                }
+
+                )
         }
     }
 })();

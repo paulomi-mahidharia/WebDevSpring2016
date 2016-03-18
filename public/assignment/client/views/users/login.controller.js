@@ -7,18 +7,26 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($rootScope, $location, UserService){
+    function LoginController($location, UserService){
 
         var vm = this;
 
         vm.login = login;
 
+        function init(){
+
+        }
+
         function login(user){
+
+            if(!user) {
+                return;
+            }
+
             UserService.findUserByCredentials(user.username, user.password)
-                .then(function(user) {
-                    console.log(user);
-                    if(user){
-                        $rootScope.currentUser = user;
+                .then(function(response) {
+                    if(response) {
+                        UserService.setCurrentUser(response.data);
                         $location.url("/profile");
                     }
                 });

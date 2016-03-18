@@ -27,7 +27,8 @@
             })
             .when("/header", {
                 templateUrl: "views/header/header.view.html",
-                controller: "HeaderController"
+                controller: "HeaderController",
+                controllerAs : "model"
             })
             .when("/sidebar", {
                 templateUrl: "views/sidebar/sidebar.view.html",
@@ -35,18 +36,46 @@
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                controller: "LoginController"
+                controller: "LoginController",
+                controllerAs : "model"
             })
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController"
+                controller: "ProfileController",
+                controllerAs : "model"
+                /*resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }*/
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller: "RegisterController"
+                controller: "RegisterController",
+                controllerAs : "model"
             })
             .otherwise({
                 redirectTo: "/home"
             });
     }
+
+    /*function checkLoggedIn(UserService, $q, $location) {
+
+        var deferred = $q.defer();
+
+        UserService.getCurrentUser().then(function (response) {
+
+            var currentUser = response.data;
+
+            if (currentUser) {
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+
+            } else {
+
+                deferred.reject();
+                $location.url("/home");
+            }
+        });
+
+        return deferred.promise;
+    }*/
 })();

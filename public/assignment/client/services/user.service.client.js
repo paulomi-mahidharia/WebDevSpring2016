@@ -9,17 +9,35 @@
 
 
 
-    function UserService($http){
+    function UserService($http, $rootScope){
         var api = {
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
+            findUserById: findUserById,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser
+            //logout: logout
         }
 
         return api;
+
+        function getCurrentUser() {
+            //return $http.get("/api/assignment/user/loggedin");
+            return $rootScope.currentUser;
+        }
+
+        function setCurrentUser(user) {
+            $rootScope.currentUser = user;
+        }
+
+        /*function logout() {
+            return $http.post("/api/assignment/user/logout");
+        }*/
+
 
         function findUserByCredentials(username, password){
             return $http.get("/api/assignment/user?username="+username+"&password="+password);
@@ -33,51 +51,21 @@
             return $http.get("/api/assignemnt/user?username="+username);
         }
 
-        function createUser(user, callback){
-            var newUser = {
-                _id: (new Date).getTime(),
-                firstName: user.firstName,
-                lastName: user.lastName,
-                username: user.username,
-                password: user.password,
-                roles: user.roles,
-                email: user.email
-            };
-            users.push(currentUser);
-            callback(currentUser);
+        function createUser(user){
+            return $http.post("/api/assignment/user",user);
         }
 
-        function deleteUserById(userId, callback){
-            var userIndex = -1;
-            for (var user in users){
-                if(user._id === userId) {
-                    userIndex = users.indexOf(user);
-                    break;
-                }
-            }
-            if(userIndex >= 0){
-                users.splice(userIndex, 1);
-            }
-            callback(users);
+        function deleteUserById(userId) {
+            return $http.delete("/api/assignment/user/"+userId);
         }
 
-        function updateUser(userId, user, callback){
-            var updatedUserIndex = -1;
-            for(var i = 0; i<users.length; i++){
-                if(users[i]._id === userId){
-                    updatedUserIndex = i;
-                    break;
-                }
-            }
-            if(updatedUserIndex != -1) {
-                users[updatedUserIndex].firstName = user.firstName;
-                users[updatedUserIndex].lastName = user.lastName;
-                users[updatedUserIndex].username = user.username;
-                users[updatedUserIndex].password = user.password;
-                users[updatedUserIndex].roles = user.roles;
-                users[updatedUserIndex].email = user.email;
-            }
-            callback(users[updatedUserIndex]);
+        function updateUser(userId, user){
+
+            return $http.put("/api/assignment/user/"+userId, user);
+        }
+        function findUserById(userId){
+
+            return $http.get("/api/assignment/user/"+userId);
         }
 
     }
