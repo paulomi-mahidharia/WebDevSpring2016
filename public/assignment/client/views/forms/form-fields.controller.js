@@ -179,81 +179,82 @@
 
 
         vm.open = open;
-        function open($index) {
-            var field = $scope.fields[$index];
-            //console.log(field);
+        function open($index){
+        vm.editTheField = vm.fields[$index];
+        var modalInstance = $uibModal.open({
+            templateUrl: 'popup.html',
+            controller: 'popupCtrl',
+            resolve: {
+                field: function () {
 
-            var modalInstance = $uibModal.open({
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                resolve: {
-                    selectedField: function () {
-                        return field;
-                    }
+                    console.log(vm.editTheField);
+
+                    return vm.editTheField;
                 }
+            }
+
+        });
+
+        modalInstance.result
+            .then(function (field) {
+                console.log(field);
+                return FieldService.updateField(formId, field._id, field);
+
+            })
+            .then(function (response) {
+                if (response === "OK") {
+                    return FieldService.getFieldsForForm(formId);
+
+                }
+            })
+            .then(function (response) {
+                vm.fields = response;
+
+
             });
+    }
+}
 
-            modalInstance.result
-                .then(function (selectedField) {
-                    $scope.selected = selectedField;
-                    return FieldService.updateField(formId, selectedField._id, selectedField);})
 
-                .then(function(response){
-                    if(response === "OK"){
-                        return FieldService.getFieldsForForm(formId);}})
+angular.module('FormBuilderApp').controller('popupCtrl', function ($scope, $uibModalInstance, field) {
 
-                .then(function(response){
-                    vm.fields = response;
-                    $scope.fields = vm.fields;});
+    $scope.field = field;
+    $scope.ok = function () {
+
+        if($scope.newLabel) {
+            $scope.field.label = $scope.newLabel;
         }
 
-    }
-
-    angular.module('FormBuilderApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, selectedField) {
-
-        $scope.field = selectedField;
-        $scope.ok = function () {
-
-            if($scope.textLabel){
-                $scope.field.label = $scope.textLabel;
-            }
-
-            if($scope.field.type != "DATE"){
-                if ($scope.textPlaceholder) {
-                    if ($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
-
-                        $scope.field.placeholder = $scope.textPlaceholder;
-
-                    } else {
-
-                        checkOtherFields();
-                    }
+        if($scope.field.type != "DATE") {
+            if($scope.newPlaceholder) {
+                if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
+                    $scope.field.placeholder = $scope.newPlaceholder;
+                } else {
+                    OtherFields();
                 }
             }
 
-            function checkOtherFields(){
-                var content = $scope.newPlaceholder;
-                content = content.trim();
-                var rawOptions = content.split("\n");
-                var options = [];
+        }
 
-                for (var i in rawOptions) {
-                    var rawField = rawOptions[i].split(":");
-                    var option = {label: rawField[0], value: rawField[1]};
-                    options.push(option);
-                }
-
-                $scope.field.options = options;
-
+        function OtherFields() {
+            var content = $scope.newPlaceholder;
+            content = content.trim();
+            var rawOptions = content.split("\n");
+            var options = [];
+            for (var i in rawOptions) {
+                var rawField = rawOptions[i].split(":");
+                var option = {label: rawField[0], value: rawField[1]};
+                options.push(option);
             }
+            $scope.field.options = options;
+        }
+        $uibModalInstance.close($scope.field);
+    };
 
-            $uibModalInstance.close($scope.field);
-        };
-
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-    });
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
 
 
 })();
