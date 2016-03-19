@@ -1,3 +1,4 @@
+
 /**
  * Created by paulomimahidharia on 2/19/16.
  */
@@ -13,12 +14,14 @@
 
         vm.fields = [];
         vm.field = {};
+
         vm.options = [];
 
         vm.removeField = removeField;
         vm.addField = addField;
 
         vm.oldIndex = -1;
+
         var formId = -1;
 
         function init() {
@@ -26,11 +29,11 @@
             if($routeParams.formId) {
                 formId = $routeParams.formId;
 
-                FieldService.getFieldsForForm(formId)
-                    .then(function (response) {
-                        vm.fields = response;
-                        $scope.fields = vm.fields;
-                    });
+                FieldService.getFieldsForForm(formId).then(function (response) {
+
+                    vm.fields = response;
+                    $scope.fields = vm.fields;
+                });
 
             }  else {
                 $location.url("/forms");
@@ -100,7 +103,7 @@
                     vm.fields = response;
                     $scope.fields = vm.fields;
                     vm.field = {};
-            });
+                });
 
         }
 
@@ -176,34 +179,35 @@
 
 
         vm.open = open;
-            function open($index) {
-                var field = $scope.fields[$index];
+        function open($index) {
+            var field = $scope.fields[$index];
+            //console.log(field);
 
-                var modalInstance = $uibModal.open({
-                    templateUrl: 'myModalContent.html',
-                    controller: 'ModalInstanceCtrl',
-                    resolve: {
-                        selectedField: function () {
-                            return field;
-                        }
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                resolve: {
+                    selectedField: function () {
+                        return field;
                     }
-                });
+                }
+            });
 
-                modalInstance.result
-                    .then(function (selectedField) {
-                        $scope.selected = selectedField;
-                        return FieldService.updateFieldByFieldIdAndFormId(formId, selectedField._id, selectedField);})
+            modalInstance.result
+                .then(function (selectedField) {
+                    $scope.selected = selectedField;
+                    return FieldService.updateField(formId, selectedField._id, selectedField);})
 
-                    .then(function(response){
-                            if(response === "OK"){
-                            return FieldService.getFieldsForForm(formId);}})
+                .then(function(response){
+                    if(response === "OK"){
+                        return FieldService.getFieldsForForm(formId);}})
 
-                    .then(function(response){
-                                vm.fields = response;
-                                $scope.fields = vm.fields;});
-            }
-
+                .then(function(response){
+                    vm.fields = response;
+                    $scope.fields = vm.fields;});
         }
+
+    }
 
     angular.module('FormBuilderApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, selectedField) {
 
@@ -217,9 +221,11 @@
             if($scope.field.type != "DATE"){
                 if ($scope.textPlaceholder) {
                     if ($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
+
                         $scope.field.placeholder = $scope.textPlaceholder;
-                    }
-                    else {
+
+                    } else {
+
                         checkOtherFields();
                     }
                 }
@@ -238,6 +244,7 @@
                 }
 
                 $scope.field.options = options;
+
             }
 
             $uibModalInstance.close($scope.field);
@@ -247,4 +254,6 @@
             $uibModalInstance.dismiss('cancel');
         };
     });
+
+
 })();
