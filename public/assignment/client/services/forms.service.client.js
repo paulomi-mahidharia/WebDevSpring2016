@@ -2,7 +2,6 @@
  * Created by paulomimahidharia on 2/20/16.
  */
 "use strict";
-"use strict";
 
 (function () {
     angular
@@ -13,15 +12,12 @@
 
         var api = {
             createFormForUser: createFormForUser,
-
             findAllFormsForUser: findAllFormsForUser,
-
             deleteFormById: deleteFormById,
-
             updateFormById: updateFormById,
-
             findFormById: findFormById
         };
+
         return api;
 
         function createFormForUser(userID, form) {
@@ -32,7 +28,6 @@
             url = url.replace(":userId", userID);
 
             $http.post(url, form).success(function (response) {
-
                 deferred.resolve(response);
             });
 
@@ -46,7 +41,6 @@
             var url = "/api/assignment/user/:userId/form";
             url = url.replace(":userId", userID);
 
-            //return $http.get("/api/assignment/user/"+userID+"/form");
             $http.get(url)
                 .success(function (response) {
                     deferred.resolve(response);
@@ -62,9 +56,9 @@
             var url = "/api/assignment/form/:formId";
             url = url.replace(":formId", formID);
 
-            $http.delete(url).success(function(response) {
-
-                deferred.resolve(response);
+            $http.delete(url)
+                .success(function(response) {
+                    deferred.resolve(response);
             });
 
             return deferred.promise;
@@ -77,9 +71,9 @@
 
             var url = "/api/assignment/form/:formId";
             url = url.replace(":formId", formID);
-            $http.put("/api/assignment/form/"+formID, newForm).success(function(response) {
-
-                deferred.resolve(response);
+            $http.put("/api/assignment/form/"+formID, newForm)
+                .success(function(response) {
+                    deferred.resolve(response);
             });
 
             return deferred.promise;
@@ -91,13 +85,12 @@
             var url = "/api/assignment/form/:formId";
             url = url.replace(":formId", formID);
 
-            $http.get(url).success(function(response) {
-
-                deferred.resolve(response);
+            $http.get(url)
+                .success(function(response) {
+                    deferred.resolve(response);
             });
 
             return deferred.promise;
-
         }
     }
 })();

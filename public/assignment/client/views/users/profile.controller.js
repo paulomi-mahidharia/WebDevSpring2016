@@ -42,9 +42,7 @@
             UserService.updateUser($rootScope.currentUser._id, updatedContent)
                 .then(function (user){
                     $rootScope.currentUser = user.config.data;
-                }
-
-                )
+                });
         }
     }
 })();

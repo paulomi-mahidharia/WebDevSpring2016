@@ -28,7 +28,6 @@
             url = url.replace(":formId", formId);
 
             $http.post(url, field).success(function(response) {
-
                 deferred.resolve(response);
             });
 
@@ -43,7 +42,6 @@
             url = url.replace(":formId", formId);
 
             $http.get(url).success(function(response) {
-
                 deferred.resolve(response);
             });
 

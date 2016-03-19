@@ -13,14 +13,12 @@
 
         vm.fields = [];
         vm.field = {};
-
         vm.options = [];
 
         vm.removeField = removeField;
         vm.addField = addField;
 
         vm.oldIndex = -1;
-
         var formId = -1;
 
         function init() {
@@ -28,11 +26,11 @@
             if($routeParams.formId) {
                 formId = $routeParams.formId;
 
-                FieldService.getFieldsForForm(formId).then(function (response) {
-
-                    vm.fields = response;
-                    $scope.fields = vm.fields;
-                });
+                FieldService.getFieldsForForm(formId)
+                    .then(function (response) {
+                        vm.fields = response;
+                        $scope.fields = vm.fields;
+                    });
 
             }  else {
                 $location.url("/forms");
@@ -180,7 +178,6 @@
         vm.open = open;
             function open($index) {
                 var field = $scope.fields[$index];
-                //console.log(field);
 
                 var modalInstance = $uibModal.open({
                     templateUrl: 'myModalContent.html',
@@ -220,11 +217,9 @@
             if($scope.field.type != "DATE"){
                 if ($scope.textPlaceholder) {
                     if ($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
-
                         $scope.field.placeholder = $scope.textPlaceholder;
-
-                    } else {
-
+                    }
+                    else {
                         checkOtherFields();
                     }
                 }
@@ -243,7 +238,6 @@
                 }
 
                 $scope.field.options = options;
-
             }
 
             $uibModalInstance.close($scope.field);
@@ -253,6 +247,4 @@
             $uibModalInstance.dismiss('cancel');
         };
     });
-
-
 })();

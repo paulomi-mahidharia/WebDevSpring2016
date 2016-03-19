@@ -35,17 +35,43 @@
             <tbody>
                 <tr>
                     <td>
-                        <input ng-model="model.form.title" type="text" class="form-control" id="inputName" placeholder="name"/>
+                        <input ng-model="model.form.title"
+                               type="text"
+                               class="form-control"
+                               id="inputName"
+                               placeholder="name"/>
                     </td>
                     <td>
-                        <span ng-click="model.addForm(model.form)" class="glyphicon glyphicon-plus btn btn-default" aria-hidden="true"></span>
-                        <span ng-click="model.updateForm(model.form)" class="glyphicon glyphicon-ok btn btn-default" aria-hidden="true"></span>
+                        <span ng-click="model.addForm(model.form)"
+                              class="glyphicon glyphicon-plus btn btn-default"
+                              aria-hidden="true">
+                        </span>
+
+                        <span ng-click="model.updateForm(model.form)"
+                              class="glyphicon glyphicon-ok btn btn-default"
+                              aria-hidden="true">
+                        </span>
                     </td>
                 </tr>
+
                 <tr ng-repeat="form in model.forms">
-                    <td><a  href="#/form/{{form._id}}/fields">{{form.title}}</a></td>
-                    <td><span ng-click="model.deleteForm($index)" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true"></span>
-                        <span ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil btn btn-default" aria-hidden="true"></span>
+                    <td>
+                        <a  href="#/form/{{form._id}}/fields">
+                            {{form.title}}
+                        </a>
+                    </td>
+
+                    <td>
+                        <span ng-click="model.deleteForm($index)"
+                              class="glyphicon glyphicon-remove btn btn-default"
+                              aria-hidden="true">
+                        </span>
+
+                        <span ng-click="model.selectForm($index)"
+                              class="glyphicon glyphicon-pencil btn btn-default"
+                              aria-hidden="true">
+                        </span>
+
                     </td>
                 </tr>
             </tbody>

@@ -7,8 +7,6 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-
-
     function UserService($http, $rootScope){
         var api = {
             findUserByCredentials: findUserByCredentials,
@@ -20,7 +18,6 @@
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser
-            //logout: logout
         }
 
         return api;
@@ -33,11 +30,6 @@
         function setCurrentUser(user) {
             $rootScope.currentUser = user;
         }
-
-        /*function logout() {
-            return $http.post("/api/assignment/user/logout");
-        }*/
-
 
         function findUserByCredentials(username, password){
             return $http.get("/api/assignment/user?username="+username+"&password="+password);

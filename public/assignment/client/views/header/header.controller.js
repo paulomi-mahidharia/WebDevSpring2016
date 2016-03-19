@@ -18,13 +18,8 @@
         init();
 
         function logout() {
-            UserService
-                .logout()
-                .then(function(){
-                    console.log("logging out");
-                    UserService.setCurrentUser(null);
-                    $location.url("/home");
-                });
+                UserService.setCurrentUser(null);
+                $location.url("/home");
         }
     }
 })();

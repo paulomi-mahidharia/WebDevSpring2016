@@ -2,10 +2,23 @@
  * Created by paulomimahidharia on 3/16/16.
  */
 module.exports = function(app, UserModel){
+
+    //responds with an array of all users
     app.get("/api/assignment/user", findAllUsers);
+
+    //updates an existing user whose id property is equal to the id path parameter.
+    //The new properties are set to the values in the user object embedded in the HTTP request. Responds with an array of all users
     app.put("/api/assignment/user/:id", updateUser);
+
+    //creates a new user embedded in the body of the request, and responds with an array of all users
     app.post("/api/assignment/user", createUser);
+
+    //removes an existing user whose id property is equal to the id path parameter.
+    // Responds with an array of all users
     app.delete("/api/assignment/user/:id", deleteUserById);
+
+    //responds with a single user whose id property is equal to the id path parameter
+    app.get("/api/assignment/user/:id", findUserById);
 
     //Return logged in user (possibly null)
     //app.get("/api/assignment/user/loggedin", loggedIn);
@@ -13,8 +26,7 @@ module.exports = function(app, UserModel){
     //Logout current user
     //app.post("/api/assignment/user/logout", logout);
 
-    //responds with a single user whose id property is equal to the id path parameter
-    app.get("/api/assignment/user/:id", findUserById);
+
 
     function findAllUsers(req, res){
 
