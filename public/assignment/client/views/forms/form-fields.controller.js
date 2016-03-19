@@ -175,6 +175,8 @@
             return field;
         }
 
+
+
         vm.open = open;
             function open($index) {
                 var field = $scope.fields[$index];
@@ -190,14 +192,21 @@
                     }
                 });
 
-                modalInstance.result.then(function (selectedField) {
-                    $scope.selected = selectedField;
-                }, function () {
-                    $log.info('Modal dismissed at: ' + new Date());
-                });
+                modalInstance.result
+                    .then(function (selectedField) {
+                        $scope.selected = selectedField;
+                        return FieldService.updateFieldByFieldIdAndFormId(formId, selectedField._id, selectedField);})
+
+                    .then(function(response){
+                            if(response === "OK"){
+                            return FieldService.getFieldsForForm(formId);}})
+
+                    .then(function(response){
+                                vm.fields = response;
+                                $scope.fields = vm.fields;});
             }
 
-    }
+        }
 
     angular.module('FormBuilderApp').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, selectedField) {
 
