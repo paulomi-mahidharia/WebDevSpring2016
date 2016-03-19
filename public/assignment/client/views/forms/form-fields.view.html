@@ -1,19 +1,74 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+        <div class="modal-header" ng-switch on="field.type">
+            <h3 class="modal-title" ng-switch-default>Single Line Text Field</h3>
+            <h3 class="modal-title" ng-switch-when="TEXTAREA">Multi Line Text Field</h3>
+            <h3 class="modal-title" ng-switch-when="DATE">Date Field</h3>
+            <h3 class="modal-title" ng-switch-when="OPTIONS">Dropdown Field</h3>
+            <h3 class="modal-title" ng-switch-when="CHECKBOXES">Checkboxes Field</h3>
+            <h3 class="modal-title" ng-switch-when="RADIOS">Radio Buttons Field</h3>
         </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+        <div class="modal-body" ng-switch on="field.type">
+            <form ng-switch-default>
+                <div>
+                    <label>Label </label>
+                    <input type="text" class="form-control" ng-model="$parent.textLabel">
+                </div>
+                <div>
+                    <label>Placeholder </label>
+                    <input type="text" class="form-control" ng-model="$parent.textPlaceholder">
+                </div>
+            </form>
+            <form ng-switch-when="TEXTAREA">
+                <div>
+                    <label>Label </label>
+                    <input type="text" class="form-control" ng-model="$parent.textLabel">
+                </div>
+                <div>
+                    <label>Placeholder </label>
+                    <textarea rows="5" class="form-control" ng-model="$parent.textPlaceholder"></textarea>
+                </div>
+            </form>
+            <form ng-switch-when="DATE">
+                <div>
+                    <label>Label </label>
+                    <input type="text" class="form-control" ng-model="$parent.textLabel">
+                </div>
+            </form>
+            <form ng-switch-when="OPTIONS">
+                <div>
+                    <label>Label </label>
+                    <input type="text" class="form-control" ng-model="$parent.optionsLabel">
+                </div>
+                <div>
+                    <label>Options </label>
+                    <textarea rows="5" class="form-control" ng-model="$parent.textPlaceholder"></textarea>
+                </div>
+            </form>
+            <form ng-switch-when="CHECKBOXES">
+                <div>
+                    <label>Label </label>
+                    <input type="text" class="form-control" ng-model="$parent.textLabel">
+                </div>
+                <div>
+                    <label>Options </label>
+                    <textarea rows="5" class="form-control" ng-model="$parent.textPlaceholder"></textarea>
+                </div>
+            </form>
+            <form ng-switch-when="RADIOS">
+                <div>
+                    <label>Label </label>
+                    <input type="text" class="form-control" ng-model="$parent.textLabel">
+                </div>
+                <div>
+                    <label>Options </label>
+                    <textarea rows="5" class="form-control" ng-model="$parent.textPlaceholder"></textarea>
+                </div>
+            </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-primary" type="button" ng-click="ok()">Update</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
@@ -55,7 +110,7 @@
                             <label for="{{field._id}}">{{field.label}} : </label>
                             <textarea type="{{field.type}}" class="form-control"
                                        placeholder="{{field.placeholder}}"
-                                       row="{{field.row}}"
+                                       rows="{{field.row}}"
                                        id="{{field._id}}"></textarea>
                             <br/>
                         </div>
