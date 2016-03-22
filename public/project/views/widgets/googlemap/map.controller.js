@@ -34,7 +34,7 @@
                     lng: response.results[0].geometry.location.lng};
 
                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 8,
+                    zoom: 12,
                     center: myLatLng
                 });
 

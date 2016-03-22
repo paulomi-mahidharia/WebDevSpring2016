@@ -15,7 +15,7 @@
             UserService.createUser(
                 user,
                 function(newUser){
-                    $rootScope.newUser = newUser;
+                    $rootScope.currentUser = currentUser;
                     $location.url("/profile/");
                 });
 

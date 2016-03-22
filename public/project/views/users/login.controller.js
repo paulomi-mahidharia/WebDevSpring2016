@@ -16,7 +16,7 @@
             function findAuthenticUser(user){
                 console.log(user);
                 if(user){
-                    $rootScope.newUser = user;
+                    $rootScope.currentUser = user;
                     $location.url("/profile");
                 }
             }
