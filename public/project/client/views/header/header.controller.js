@@ -18,9 +18,7 @@
         init();
 
         function logout() {
-            console.log("in logout");
             UserService.setCurrentUser(null);
-            console.log(UserService.getCurrentUser());
             $location.url("/home");
         }
     }

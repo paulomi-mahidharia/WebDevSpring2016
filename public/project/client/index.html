@@ -37,6 +37,7 @@
 
             <div class="container-fluid">
                 <div class="row">
+                    <div ng-include="'views/sidebar/sidebar.view.html'" ng-show="currentUser"></div>
                     <div ng-view></div>
                 </div>
             </div>
@@ -83,6 +84,8 @@
 
 
         <!-- script for portfolio section using hoverdirection -->
+
+
         <script type="text/javascript">
             $(function() {
 

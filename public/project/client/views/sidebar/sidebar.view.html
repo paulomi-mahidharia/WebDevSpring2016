@@ -1,4 +1,4 @@
-<div class="col-sm-3 col-md-2 sidebar">
+<!--<div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
         <li ng-class="{'active': $location.url() == '/home'}"><a href="#/home">   Home </a></li>
         <li ng-class="{'active': $location.url() == '/profile'}"><a href="#/profile">   Profile</a></li>
@@ -6,4 +6,45 @@
         <li ng-class="{'active': $location.url() == '/forms'}"><a href="#/forms">   Google Map API</a></li>
         <li ng-class="{'active': $location.url() == '/textedit'}"><a href="#/textedit">   Text Editor</a></li>
     </ul>
+</div>-->
+<div id="wrapper">
+
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+    </div>
+    <script type="text/javascript">
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </div>
