@@ -4,7 +4,13 @@
 
         <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-collapse">
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#main-nav-collapse"
+                    aria-expanded="false"
+                    aria-controls="navbar">
+
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -14,7 +20,7 @@
             <!-- navbar logo -->
             <div class="navbar-brand">
                 <span class="sr-only">NoteSpace</span>
-                <a href="#/home">
+                <a href="#/home" data-toggle="collapse" data-target=".navbar-collapse">
                     <img style="height: 50px" src="assets/img/main_logo.png" class="img-responsive center-block" alt="logo">
                 </a>
             </div>
@@ -26,23 +32,24 @@
         <div class="collapse navbar-collapse" id="main-nav-collapse">
             <ul class="nav navbar-nav navbar-right text-uppercase">
                 <li>
-                    <a href="#/home"><span>home</span></a>
+                    <a href="#/home" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span>home</span></a>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>Paulomi's Implementation</span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#/text">Text Widget</a>
+                            <a href="#/text" data-toggle="collapse" data-target=".navbar-collapse">Text Widget</a>
                         </li>
                         <li>
-                            <a href="#/map">Google Map Widget</a>
+                            <a href="#/map" data-toggle="collapse" data-target=".navbar-collapse">Google Map Widget</a>
                         </li>
                         <li>
-                            <a href="#/note">Note Widget</a>
+                            <a href="#/note" data-toggle="collapse" data-target=".navbar-collapse">Note Widget</a>
                         </li>
                         <li>
-                            <a href="#/fileupload">File Upload Widget (partially complete | permission from professor)</a>
+                            <a href="#/fileupload" data-toggle="collapse" data-target=".navbar-collapse">File Upload Widget (partially complete | permission from professor)</a>
                         </li>
                     </ul>  <!-- end of /.dropdown-menu -->
                 </li> <!-- end of /.dropdown -->
@@ -51,16 +58,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>Anvita's Implementation</span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#/todo">To Do Widget</a>
+                            <a href="#/todo" data-toggle="collapse" data-target=".navbar-collapse">To Do Widget</a>
                         </li>
                         <li>
                             <a href="#/image">Images Widget</a>
                         </li>
                         <li>
-                            <a href="#/youtube">Youtube API Widget</a>
+                            <a href="#/youtube" data-toggle="collapse" data-target=".navbar-collapse">Youtube API Widget</a>
                         </li>
                         <li>
-                            <a href="#/notebook">NoteBook module</a>
+                            <a href="#/notebook" data-toggle="collapse" data-target=".navbar-collapse">NoteBook module</a>
                         </li>
 
                     </ul> <!-- end of /.dropdown-menu -->
