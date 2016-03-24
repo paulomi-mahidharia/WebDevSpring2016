@@ -4,7 +4,7 @@
         <div class="form-group">
             <label for="exampleInputUsername" class="col-sm-2 control-label">Username:</label>
             <div class="col-sm-10">
-                <input ng-model="user.username"
+                <input ng-model="model.user.username"
                        type="text"
                        class="form-control"
                        id="exampleInputUsername"
@@ -15,7 +15,7 @@
         <div class="form-group">
             <label for="exampleInputPassword1" class="col-sm-2 control-label">Password:</label>
             <div class="col-sm-10">
-                <input ng-model="user.password"
+                <input ng-model="model.user.password"
                        type="password"
                        class="form-control"
                        id="exampleInputPassword1"
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="exampleInputFirstName" class="col-sm-2 control-label">First Name:</label>
             <div class="col-sm-10">
-                <input ng-model="user.firstName"
+                <input ng-model="model.user.firstName"
                        type="text"
                        class="form-control"
                        id="exampleInputFirstName"
@@ -37,7 +37,7 @@
         <div class="form-group">
             <label for="exampleInputLastName" class="col-sm-2 control-label">Last Name:</label>
             <div class="col-sm-10">
-                <input ng-model="user.lastName"
+                <input ng-model="model.user.lastName"
                        type="text"
                        class="form-control"
                        id="exampleInputLastName"
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1" class="col-sm-2 control-label">Email:</label>
             <div class="col-sm-10">
-                <input ng-model="user.email"
+                <input ng-model="model.user.email"
                        type="email"
                        class="form-control"
                        id="exampleInputEmail1"
@@ -59,7 +59,7 @@
         <div class="form-group">
             <label for="blank" class="col-sm-2 control-label"></label>
             <div class="col-sm-10">
-                <button ng-click="update(user)"
+                <button ng-click="model.update(model.user)"
                         type="submit"
                         class="btn btn-primary form-control"
                         id="blank">

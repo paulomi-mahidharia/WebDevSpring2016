@@ -4,7 +4,7 @@
 "use strict";
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("NoteSpace")
         .factory("UserService", UserService);
 
     function UserService($http, $rootScope){

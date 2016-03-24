@@ -7,19 +7,29 @@
         .module("NoteSpace")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $rootScope, $location, UserService){
-        $scope.login = login;
+    function LoginController($location, UserService){
+
+        var vm = this;
+
+        vm.login = login;
+
+        function init(){
+
+        }
 
         function login(user){
-            UserService.findUserByUsernameAndPassword(user.username, user.password, findAuthenticUser);
 
-            function findAuthenticUser(user){
-                console.log(user);
-                if(user){
-                    $rootScope.currentUser = user;
-                    $location.url("/profile");
-                }
+            if(!user) {
+                return;
+            }
+
+            UserService.findUserByCredentials(user.username, user.password)
+                .then(function(response) {
+                    if(response) {
+                        UserService.setCurrentUser(response.data);
+                        $location.url("/profile");
+                    }
+                });
             }
         }
-    }
 })();
