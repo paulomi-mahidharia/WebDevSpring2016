@@ -1,5 +1,5 @@
 <!-- site-navigation start -->
-<nav id="mainNavigation" class="navbar navbar-dafault main-navigation" role="navigation">
+<nav id="mainNavigation" class="navbar navbar-dafault main-navigation" role="navigation" ng-controller="HeaderController as model">
     <div class="container">
 
         <div class="navbar-header">
@@ -36,43 +36,28 @@
                         <span>home</span></a>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>Paulomi's Implementation</span></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#/text" data-toggle="collapse" data-target=".navbar-collapse">Text Widget</a>
-                        </li>
-                        <li>
-                            <a href="#/map" data-toggle="collapse" data-target=".navbar-collapse">Google Map Widget</a>
-                        </li>
-                        <li>
-                            <a href="#/note" data-toggle="collapse" data-target=".navbar-collapse">Note Widget</a>
-                        </li>
-                        <li>
-                            <a href="#/fileupload" data-toggle="collapse" data-target=".navbar-collapse">File Upload Widget (partially complete | permission from professor)</a>
-                        </li>
-                    </ul>  <!-- end of /.dropdown-menu -->
-                </li> <!-- end of /.dropdown -->
+                <li ng-class="{'active': model.$location.url() == '/register'}" ng-hide="currentUser">
+                    <a href="#/register" data-toggle="collapse" data-target=".navbar-collapse">
+                        Create Account
+                    </a>
+                </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>Anvita's Implementation</span></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#/todo" data-toggle="collapse" data-target=".navbar-collapse">To Do Widget</a>
-                        </li>
-                        <li>
-                            <a href="#/image">Images Widget</a>
-                        </li>
-                        <li>
-                            <a href="#/youtube" data-toggle="collapse" data-target=".navbar-collapse">Youtube API Widget</a>
-                        </li>
-                        <li>
-                            <a href="#/notebook" data-toggle="collapse" data-target=".navbar-collapse">NoteBook module</a>
-                        </li>
+                <li ng-class="{'active': model.$location.url() == '/login'}" ng-hide="currentUser">
+                    <a href="#/login" data-toggle="collapse" data-target=".navbar-collapse">
+                        Sign in
+                    </a>
+                </li>
+                <li ng-show="currentUser">
+                    <a href="#/home" ng-click="model.logout()">
+                        Logout
+                    </a>
+                </li>
 
-                    </ul> <!-- end of /.dropdown-menu -->
-                </li> <!-- end of /.dropdown -->
-
+                <li ng-class="{'active': model.$location.url() == '/profile'}" ng-show="currentUser">
+                    <a href="#/profile" data-toggle="collapse" data-target=".navbar-collapse">
+                        {{currentUser.username}}
+                    </a>
+                </li>
             </ul>
         </div><!-- nav links -->
 

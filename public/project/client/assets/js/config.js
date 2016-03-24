@@ -16,7 +16,8 @@
             })
             .when("/header", {
                 templateUrl: "views/header/header.view.html",
-                controller: "HeaderController"
+                controller: "HeaderController",
+                controllerAs : "model"
             })
             .when("/text", {
                 templateUrl: "views/widgets/text/text.view.html",
