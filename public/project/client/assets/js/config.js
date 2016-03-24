@@ -11,7 +11,8 @@
         $routeProvider
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                controller: "HomeController"
+                controller: "HomeController",
+                controllerAs : "model"
             })
             .when("/header", {
                 templateUrl: "views/header/header.view.html",

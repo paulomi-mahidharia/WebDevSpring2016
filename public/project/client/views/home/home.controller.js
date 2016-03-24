@@ -7,7 +7,28 @@
         .module("NoteSpace")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope){
+    function HomeController($location, UserService){
+        var vm = this;
 
+        vm.login = login;
+
+        function init(){
+
+        }
+
+        function login(user){
+
+            if(!user) {
+                return;
+            }
+
+            UserService.findUserByCredentials(user.username, user.password)
+                .then(function(response) {
+                    if(response) {
+                        UserService.setCurrentUser(response.data);
+                        $location.url("/profile");
+                    }
+                });
+        }
     }
 })();
