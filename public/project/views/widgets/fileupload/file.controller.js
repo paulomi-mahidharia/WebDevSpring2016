@@ -1,7 +1,7 @@
 /**
  * Created by paulomimahidharia on 3/4/16.
  */
-var myApp = angular.module('NoteSpace', []);
+var myApp = angular.module('NoteSpace');
 
 widgets = [];
 
