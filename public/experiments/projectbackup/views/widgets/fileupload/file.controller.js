@@ -1,7 +1,11 @@
 /**
  * Created by paulomimahidharia on 3/4/16.
  */
+<<<<<<< HEAD:public/experiments/projectbackup/views/widgets/fileupload/file.controller.js
 var myApp = angular.module('NoteSpace');
+=======
+var myApp = angular.module('myApp', []);
+>>>>>>> parent of fba871b... Latest file upload:public/project/views/widgets/fileupload/file.controller.js
 
 widgets = [];
 

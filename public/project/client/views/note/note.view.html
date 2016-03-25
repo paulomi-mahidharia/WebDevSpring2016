@@ -1,0 +1,114 @@
+<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2" ng-controller="NoteController as model">
+    <h1>Notes</h1>
+    <div style="float: right">
+        <a href="#/createnote" ng-click="showTableAdd = 1; showPlus = 1; showPencil = 2; showDelete = 2;
+         showTable = 2; ; showColumn = 2;hideDeleteButton = 2;showHideDeleteButton = 2">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+        <a
+                ng-click="showTable = 1; showPencil = 1; showTableAdd = 2; showDelete = 2;
+                 showColumn = 1;hideDeleteButton = 2;showHideDeleteButton = 2; showStar = 1" >
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        </a>
+
+        <a
+                ng-hide="hideDeleteButton==1"
+                ng-click="showDelete = 1; showHideDeleteButton = 1; showColumn = 1;
+         hideDeleteButton = 1;showTableAdd = 2; showTable = 2; showPencil = 2; showStar = 2">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </a>
+
+        <a
+                ng-show="showHideDeleteButton==1"
+                ng-click="hideDeleteButton = 2; showDelete = 2; showHideDeleteButton = 2; showColumn = 2">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </a>
+    </div>
+    <p>When the user creates a note, he chooses which notebook it belongs to...</p>
+    <p>User can only edit and delete and jump to a specific note here</p>
+
+
+    <div class="table-responsive darker padding-all-sides" >
+        <table class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+
+            <tbody>
+            <tr ng-show="showTable==1">
+                <td><b>Name :</b><br/> <input type="text" class="form-control"
+                                ng-model = "model.widget.name"
+                                id="name" placeholder="Note Title">
+                    <br/>
+
+                    <b>Select notebook to which this note belongs:</b>
+
+                    <select ng-model="model.widget.notebook"
+                            class="form-control">
+
+                       <option ng-repeat="notebook in model.notebooks"
+                               value="{{notebook.name}}">
+                           {{notebook.name}}
+                       </option>
+
+                    </select>
+                </td>
+                <td>
+                    <!--<button class="btn btn-default" ng-click="addNote(widget)">
+                        <span  class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>-->
+                    <button class="btn btn-default" ng-click="model.updateNote(model.widget);
+                                                              showTable = 2;
+                                                              showPencil = 2;
+                                                              showColumn = 2"
+                            ng-show="showPencil==1">
+
+                        <span  class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+
+            <tr ng-repeat="note in model.notes">
+                <td>
+                    <h3>{{note.name}}</h3>
+                    <br/>
+                    Notebook of {{note.name}} : {{note.notebook}}
+                </td>
+                <td ng-show="showColumn==1">
+                    <button class="btn btn-default"
+                            ng-click="model.deleteNote($index)"
+                            ng-show="showDelete==1">
+                        <span
+                              class="glyphicon glyphicon-remove "
+                              aria-hidden="true">
+                        </span>
+                    </button>
+
+                    <button class="btn btn-default"
+                            ng-click="model.selectNote($index)"
+                            ng-show="showPencil==1">
+                        <span
+                              class="glyphicon glyphicon-pencil"
+                              aria-hidden="true">
+                        </span>
+                    </button>
+
+                    <button class="btn btn-default" ng-show="showStar==1"
+                            ng-click="model.favorite(model.note)">
+
+                            <span ng-show="note.likes.indexOf(currentUser._id) > -1"
+                                  class="glyphicon glyphicon-star "></span>
+                            <span ng-show="!note || !note.likes || note.likes.indexOf(currentUser._id) == -1"
+                                  class="glyphicon glyphicon-star-empty "></span>
+
+                    </button>
+                </td>
+            </tr>
+
+
+
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+</div>

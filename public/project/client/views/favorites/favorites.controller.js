@@ -16,7 +16,7 @@
         function init() {
 
 
-            NoteService.findAllNotesForUser($rootScope.currentUser._id)
+            NoteService.findAllNotesLikedByUser($rootScope.currentUser._id)
                 .then(function (foundNotes) {
                     vm.notes = foundNotes.data;
                     vm.$location = $location;

@@ -2,14 +2,22 @@
  * Created by paulomimahidharia on 3/25/16.
  */
 "use strict";
-module.exports = function(app, NoteModel) {
+module.exports = function(app, NoteModel, NotebookModel) {
     //app.post("/api/project/user/:userId/movie/:noteId", userLikesNote);
-    app.get("/api/project/user/:userId/note", findAllNotesForUser);
-    app.delete("/api/project/note/:noteId", deleteNoteById);
 
-    function findAllNotesForUser(req, res){
+    //Note api calls
+    app.get("/api/project/user/:userId/note/liked", findAllNotesLikedByUser);
+    app.delete("/api/project/note/:noteId", deleteNoteById);
+    app.get("/api/project/user/:userId/note", findAllNotesForUser);
+    app.get("/api/project/note/:noteId", selectNoteById);
+    app.put("/api/project/note/:noteId", updateNoteById);
+
+    //Notebook api calls
+    app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
+
+    function findAllNotesLikedByUser(req, res){
         var userId = req.params.userId;
-        res.json(NoteModel.findAllNotesForUser(userId));
+        res.json(NoteModel.findAllNotesLikedByUser(userId));
     }
 
     function deleteNoteById(req, res){
@@ -20,32 +28,25 @@ module.exports = function(app, NoteModel) {
         //res.send(200);
     }
 
-
-    /*function userLikesNote(req, res) {
-        var likedNote  = req.body;
+    function findAllNotesForUser(req, res){
         var userId = req.params.userId;
-        var noteId = req.params.noteId;
-        var movie;
+        //console.log(userId);
+        res.json(NoteModel.findAllNotesForUser(userId));
+    }
 
-        noteModel
-            .userLikesNote(userId, likedNote)
-            // add user to note likes
-            .then(
-                function (note) {
-                    return userModel.userLikesNote(userId, note);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
-            // add note to user likes
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
-    }*/
-}
+    function selectNoteById(req, res){
+        var noteId = req.params.noteId;
+        res.send(NoteModel.selectNoteById(noteId));
+    }
+
+    function findAllNoteBooksForUser(req, res){
+        var userId = req.params.userId;
+        res.json(NotebookModel.findAllNoteBooksForUser(userId));
+    }
+
+    function updateNoteById(req, res){
+        var noteId = req.params.noteId;
+        var newNote = req.body;
+        res.json(NoteModel.updateNoteById(noteId, newNote));
+    }
+};

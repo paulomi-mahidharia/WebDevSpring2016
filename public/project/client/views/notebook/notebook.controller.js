@@ -7,7 +7,7 @@
         .controller("noteBookController", noteBookController);
 
     function noteBookController($scope){
-        var noteBooks  = [
+        /*var noteBooks  = [
             {"_id": "000", "name": "notebook1","description": "this is notebook1",
                 "notes": [{"id": "03", "name":"note3"}]},
             {"_id": "001", "name": "notebook2","description": "this is notebook2",
@@ -19,13 +19,13 @@
             {"id": "02", "name":"note2"},
             {"id": "03", "name":"note3"},
             {"id": "04", "name":"note4"},
-            {"id": "05", "name":"note5"}];
+            {"id": "05", "name":"note5"}];*/
 
 
-        var selected_notebook = null;
-        $scope.noteBooks = noteBooks;
-        $scope.notes = notes;
-        $scope.selected_notebook = selected_notebook;
+        //var selected_notebook = null;
+        //$scope.noteBooks = noteBooks;
+        //$scope.notes = notes;
+        //$scope.selected_notebook = selected_notebook;
 
 
 

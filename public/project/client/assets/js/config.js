@@ -32,7 +32,7 @@
                 controller: "myCtrl"
             })
             .when("/note", {
-                templateUrl: "views/widgets/note/note.view.html",
+                templateUrl: "views/note/note.view.html",
                 controller: "NoteController",
                 controllerAs: "model",
                 resolve: {
@@ -52,8 +52,12 @@
                 controller: "YouTubeController"
             })
             .when("/notebook", {
-                templateUrl: "views/widgets/notebook/notebook.view.html",
-                controller: "noteBookController"
+                templateUrl: "views//notebook/notebook.view.html",
+                controller: "noteBookController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",

@@ -15,6 +15,16 @@
 
         var autocompleteOrigin = new google.maps.places.Autocomplete(input);
 
+        //search();
+        //$scope.details = details;
+
+       /* if($scope.place){
+            conlose.log($scope.place);
+            search($scope.place);
+        }*/
+
+
+
         function search(){
             MapService.findPlaceByName(document.getElementById('Autocomplete').value, function(response){
                 console.log(response);
