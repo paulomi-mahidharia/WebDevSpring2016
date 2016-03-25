@@ -33,7 +33,11 @@
             })
             .when("/note", {
                 templateUrl: "views/widgets/note/note.view.html",
-                controller: "NoteController"
+                controller: "NoteController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/todo", {
                 templateUrl: "views/widgets/todoWidget/todoWidget.view.html",

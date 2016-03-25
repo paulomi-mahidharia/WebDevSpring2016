@@ -1940,7 +1940,7 @@ Tags: responsive layout, multiple-page
 	height: 100%;
 	margin-left: -250px;
 	overflow-y: auto;
-	background: #000;
+	background: whitesmoke;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
@@ -1981,13 +1981,13 @@ Tags: responsive layout, multiple-page
 .sidebar-nav li a {
 	display: block;
 	text-decoration: none;
-	color: #999999;
+	color: darkorange;
 }
 
 .sidebar-nav li a:hover {
 	text-decoration: none;
-	color: #fff;
-	background: rgba(255,255,255,0.2);
+	color: black;
+	background: darkorange;
 }
 
 .sidebar-nav li a:active,
@@ -2002,12 +2002,12 @@ Tags: responsive layout, multiple-page
 }
 
 .sidebar-nav > .sidebar-brand a {
-	color: #999999;
+	color: darkorange;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-	color: #fff;
-	background: none;
+	color: black;
+	background: darkorange;
 }
 
 @media(min-width:768px) {
