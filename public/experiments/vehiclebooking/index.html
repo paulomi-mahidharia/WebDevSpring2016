@@ -1,0 +1,268 @@
+
+Google Maps JavaScript API
+
+Search
+mahidharia.p@husky.neu.edu
+Change account | Sign out
+
+HOME GUIDES REFERENCE SAMPLES SUPPORT TUTORIALS
+SEND FEEDBACK
+Overview
+Basics
+Simple map
+Showing pixel and tile coordinates
+Geolocation
+Localizing the map
+Right-to-left languages
+Synchronous loading
+Custom map projections
+Signed-in Maps
+Signed-in Maps
+Default Save Control
+Custom Save Widget
+Events
+Simple click event
+Using closures in event listeners
+Accessing arguments in UI events
+Getting properties with event handlers
+Listening to DOM events
+Controls
+Default controls
+Disabling the default UI
+Adding controls to the map
+Control options
+Control positioning
+Custom controls
+Adding state to controls
+Styles
+Simple styled maps
+Complex styled maps
+Drawing on the Map
+Simple markers
+Marker labels
+Removing markers
+Simple marker icons
+Complex marker icons
+Marker animations
+Marker animations with setTimeout()
+Info windows
+Info windows with maxWidth
+Simple polylines
+Removing polylines
+Deleting a vertex
+Complex polylines
+Simple polygons
+Polygon arrays
+Polygon auto-completion
+Circles
+Rectangles
+Rectangle zoom
+User-editable shapes
+Draggable polygons
+Listening to events
+Ground overlays
+Removing overlays
+Custom overlays
+Showing/hiding overlays
+Predefined marker symbols
+Custom marker symbols
+Animated symbols
+Arrows (symbols)
+Custom symbols on a line
+Dashed lines (symbols)
+Layers
+KML layers
+KML feature details
+Data layer: Simple
+Data layer: Styling
+Data layer: Event Handling
+Data layer: Dynamic Styling
+Data layer: Drag and Drop GeoJSON
+Data layer: Earthquakes
+Heatmaps
+Fusion Tables layers
+Fusion Tables queries
+Fusion Tables heatmaps
+Fusion Tables styling
+GeoRSS layers
+Traffic layer
+Transit layer
+Bicycle layer
+MapTypes
+Basic map types
+Overlay map types
+Image map types
+Overlaying an image map type
+45° imagery
+Rotating 45° imagery
+Services
+Geocoding service
+Reverse geocoding
+Reverse geocoding by Place ID
+Geocoding Component Restriction
+Region code biasing (ES)
+Region code biasing (US)
+Directions service
+Displaying text directions with setPanel()
+Directions service (complex)
+Travel modes in directions
+Waypoints in directions
+Draggable directions
+Distance Matrix service
+Elevation service
+Showing elevation along a path
+Street View
+Street View side-by-side
+Overlays within Street View
+Street View events
+Street View controls
+Directly accessing Street View data
+Custom Street View panoramas
+Custom Street View panorama tiles
+Maximum Zoom imagery service
+Libraries
+Drawing: Drawing tools
+Geometry: Navigation functions (heading)
+Geometry: Encoding methods
+Geometry: containsLocation()
+Places API
+Place searches
+Place details
+Place search pagination
+Search for up to 200 places with Radar Search
+Place Autocomplete
+Autocomplete address form
+Autocomplete hotel search
+Places search box
+Retrieving autocomplete predictions
+Place ID finder
+Place Autocomplete and Directions
+Place searches
+
+
+View this example full screen.
+
+// This example requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+    var map;
+    var infowindow;
+
+    function initMap() {
+        var pyrmont = {lat: -33.867, lng: 151.195};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: pyrmont,
+            zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: pyrmont,
+            radius: 500,
+            type: ['store']
+        }, callback);
+    }
+
+    function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                createMarker(results[i]);
+            }
+        }
+    }
+
+    function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+        });
+    }
+    <div id="map"></div>
+            html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #map {
+        height: 100%;
+    }
+    <!-- Replace the value of the key parameter with your own API key. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&libraries=places&callback=initMap" async defer></script>
+JAVASCRIPTJAVASCRIPT + HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+    <script>
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        var map;
+        var infowindow;
+
+        function initMap() {
+            var pyrmont = {lat: -33.867, lng: 151.195};
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: pyrmont,
+                zoom: 15
+            });
+
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: pyrmont,
+                radius: 500,
+                type: ['store']
+            }, callback);
+        }
+
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+    </script>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>
+</body>
+</html>

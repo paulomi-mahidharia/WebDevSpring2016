@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html ng-app="NoteSpace"> <!--<![endif]-->
+    <head>
+
+        <title>NoteSpace</title>
+
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="assets/img/fevicon.png">
+
+        <title>NoteSpace</title>
+        
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/transparent.css">
+        <link rel="stylesheet" href="assets/css/dashboard.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- scripts -->
+        <script type="text/javascript" src="assets/js/modernizr.custom.97074.js"></script>
+
+    </head>
+
+    <body background="assets/img/slider1.jpg">
+
+
+
+            <div ng-include="'views/header/header.view.html'"></div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div ng-include="'views/sidebar/sidebar.view.html'" ng-show="currentUser"></div>
+                    <div ng-view></div>
+                </div>
+            </div>
+
+
+
+        <!--  Necessary scripts  -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&signed_in=true&libraries=places"
+                    async defer></script>
+
+        <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+        <script type="text/javascript" src="assets/js/jquery.hoverdir.js"></script>
+
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/config.js"></script>
+
+        <script src="views/header/header.controller.js"></script>
+        <script src="views/home/home.controller.js"></script>
+
+        <script src="views/users/login.controller.js"></script>
+        <script src="views/users/profile.controller.js"></script>
+        <script src="views/users/register.controller.js"></script>
+
+        <script src="views/widgets/note/note.controller.js"></script>
+        <script src="views/widgets/fileupload/file.controller.js"></script>
+
+        <script src="views/widgets/text/text.controller.js"></script>
+
+        <script src="views/widgets/googlemap/map.controller.js"></script>
+        <script src="views/widgets/googlemap/map.autocomplete.directive.js"></script>
+
+        <script src="services/map.service.client.js"></script>
+        <script src="services/user.service.client.js"></script>
+
+        <script src="views/widgets/todoWidget/todoWidget.controller.js"></script>
+        <script src="views/widgets/imageWidget/imageWidget.controller.js"></script>
+        <script src="views/widgets/youtubeApiWidget/youtubeApiWidget.controller.js"></script>
+        <script src="views/widgets/notebook/notebook.controller.js"></script>
+
+
+        <!-- script for portfolio section using hoverdirection -->
+        <script type="text/javascript">
+            $(function() {
+
+                $('.portfolio-item > .item-image').each( function() { $(this).hoverdir({
+                    hoverDelay : 75
+                }); } );
+
+            });
+        </script>
+
+
+        <!-- script for twitter-feed using owl carousel-->
+        <script type="text/javascript">
+            $(document).ready(function() {
+ 
+                $("#twit").owlCarousel({
+                 
+                    navigation : true, // Show next and prev buttons
+                    slideSpeed : 100,
+                    paginationSpeed : 400,
+                    navigationText : false,
+                    singleItem: true,
+                    autoPlay: true,
+                    pagination: false
+                });
+ 
+            });
+        </script>
+
+
+        <!-- script for testimonial section using owl carousel -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+ 
+                $("#client-speech").owlCarousel({
+                 
+                    autoPlay: 5000, //Set AutoPlay to 3 seconds
+                    stopOnHover: true,
+                    singleItem:true
+                });
+ 
+            });
+        </script>
+
+
+    </body>
+</html>

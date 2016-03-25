@@ -73,6 +73,14 @@
                 controller: "RegisterController",
                 controllerAs : "model"
             })
+            .when("/favorites", {
+                templateUrl: "views/favorites/favorites.view.html",
+                controller: "FavoriteNotesController",
+                controllerAs : "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
 
             .otherwise({
                 redirectTo: "/home"

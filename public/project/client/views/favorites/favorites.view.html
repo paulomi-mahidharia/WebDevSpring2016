@@ -1,0 +1,28 @@
+<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
+     ng-controller="FavoriteNotesController as model">
+    <h1>Favorite Notes</h1>
+    <p>Showing favorite notes of currently logged in user...</p>
+
+
+    <div class="table-responsive darker padding-all-sides" >
+        <table class="table table-bordered table-striped"
+               border="3" style="border-collapse:collapse" >
+
+            <tbody>
+                <tr ng-repeat="note in model.notes">
+                    <td>
+                        <h3>{{note.name}}</h3>
+                    </td>
+                    <td><button class="btn btn-default" ng-click="model.deleteFavNote($index)">
+                                    <span
+                                            class="glyphicon glyphicon-minus-sign "
+                                            aria-hidden="true">
+                                    </span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

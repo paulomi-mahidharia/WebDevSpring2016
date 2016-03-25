@@ -1996,7 +1996,7 @@ Tags: responsive layout, multiple-page
 }
 
 .sidebar-nav > .sidebar-brand {
-	height: 65px;
+	height: 68px;
 	font-size: 18px;
 	line-height: 60px;
 }
@@ -2020,7 +2020,7 @@ Tags: responsive layout, multiple-page
 	}
 
 	#sidebar-wrapper {
-		width: 250px;
+		width: 200px;
 	}
 
 	#wrapper.toggled #sidebar-wrapper {
@@ -2028,8 +2028,7 @@ Tags: responsive layout, multiple-page
 	}
 
 	#page-content-wrapper {
-		padding: 20px;
-		position: relative;
+
 	}
 
 	#wrapper.toggled #page-content-wrapper {

@@ -1,0 +1,124 @@
+<div id="home-page">
+    <!-- header start -->
+    <header id="header" class="header-wrapper home-parallax home-fade">
+        <div class="header-overlay"></div>
+        <div class="header-wrapper-inner">
+
+            <div class="container">
+
+               <div id="wrapper">
+
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a href="#">
+                                Start Bootstrap
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#">Shortcuts</a>
+                        </li>
+                        <li>
+                            <a href="#">Overview</a>
+                        </li>
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Services</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="page-content-wrapper">
+                    <form>
+
+                        <div class="row">
+                            <div class="col-md-4 welcome-speech">
+                                <p><h2>Remember Everything</h2></p>
+                                <p><h5>Managing your daily data is just a click away</h5></p>
+                                <div class="form-group">
+                                    <input ng-model="model.user.username"
+                                           style="background: transparent"
+                                           name="username"
+                                           type="text"
+                                           class="form-control transparent"
+                                           id="username"
+                                           required="required"
+                                           placeholder="Username">
+                                </div>
+
+                                <div class="form-group">
+                                    <input ng-model="model.user.password"
+                                           style="background: transparent"
+                                           name="password"
+                                           type="password"
+                                           class="form-control transparent"
+                                           id="password"
+                                           required="required"
+                                           placeholder="Password">
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit"
+                                            id="submit"
+                                            name="submit"
+                                            class="form-control btn btn-orange left-align"
+                                            style="background-color: orange"
+                                            ng-click="model.login(model.user)">
+                                        Sign In
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <div><p>Do not have an account? <a href="#/register">SIGN UP</a></p></div>
+                                </div>
+                            </div>
+                            <div class="welcome-speech">
+                                <br/><br/><br/><br/><br/><br/><br/>
+                                <h1>Create your own Note space</h1>
+                                <p>“Organized notes are less perishable than gray matter”</p>
+
+                                <a href="https://drive.google.com/open?id=1_WaaUtvhjEDQP0_IlkQZmhm5HJjRG8obJFJvKsKfuUE" target="_blank" class="btn btn-white">
+                                    Project Documentation
+                                </a>
+                            </div><!-- /.intro -->
+                        </div>
+                    </form>
+                </div>
+               </div>
+
+
+            </div><!-- /.container -->
+
+        </div><!-- /.header-wrapper-inner -->
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
+    </header>
+    <!-- /#header -->
+
+
+
+    <footer>
+        <div class="container">
+
+            <h4><center>Designed by Paulomi and Anvita</center</h4>
+
+        </div>
+    </footer>
+
+</div>
+
+<!-- end of /#home-page -->

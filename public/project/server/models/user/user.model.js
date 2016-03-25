@@ -15,6 +15,7 @@ module.exports = function() {
         findUserById: findUserById,
         deleteUserById: deleteUserById,
         updateUser: updateUser
+        //userLikesNote: userLikesNote
     }
     return api;
 
@@ -86,4 +87,35 @@ module.exports = function() {
         return users;
     }
 
-}
+    /*function userLikesNote(userId, note){
+
+            var deferred = q.defer();
+
+            // find the user
+            UserModel.findUserById(userId, function (err, doc) {
+
+                // reject promise if error
+                if (err) {
+                    deferred.reject(err);
+                } else {
+
+                    // add note id to user likes
+                    doc.likes.push (note.id);
+
+                    // save user
+                    doc.save (function (err, doc) {
+
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+
+                            // resolve promise with user
+                            deferred.resolve (doc);
+                        }
+                    });
+                }
+            });
+
+            return deferred;
+        }*/
+    }
