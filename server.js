@@ -54,6 +54,13 @@ app.post('/upload/file', function (req, res) {
         res.send(200);
         //res.redirect("/#/" + username + "/profile");
     });
+<<<<<<< HEAD
+=======
+});
+
+app.listen(port, ipaddress, function () {
+    console.log("Server is listening on: " + ipaddress + ":" + port);
+>>>>>>> 7abc3a56cc919e77b84ee5ae96780cfce3f004c2
 });
 
 app.listen(port, ipaddress, function () {
