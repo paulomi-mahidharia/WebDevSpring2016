@@ -11,7 +11,8 @@ module.exports = function() {
         deleteNoteById: deleteNoteById,
         findAllNotesForUser: findAllNotesForUser,
         selectNoteById: selectNoteById,
-        updateNoteById: updateNoteById
+        updateNoteById: updateNoteById,
+        createNote: createNote
     };
 
     return api;
@@ -71,5 +72,9 @@ module.exports = function() {
                 return notes[noteObj];
             }
         }
+    }
+
+    function createNote(newNote){
+        notes.push(newNote);
     }
 };

@@ -2,7 +2,7 @@
  * Created by paulomimahidharia on 3/25/16.
  */
 "use strict";
-module.exports = function(app, NoteModel, NotebookModel) {
+module.exports = function(app, NoteModel, NotebookModel, uuid) {
     //app.post("/api/project/user/:userId/movie/:noteId", userLikesNote);
 
     //Note api calls
@@ -11,6 +11,7 @@ module.exports = function(app, NoteModel, NotebookModel) {
     app.get("/api/project/user/:userId/note", findAllNotesForUser);
     app.get("/api/project/note/:noteId", selectNoteById);
     app.put("/api/project/note/:noteId", updateNoteById);
+    app.post("/api/project/user/:userId/note", createNoteForUser);
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
@@ -48,5 +49,15 @@ module.exports = function(app, NoteModel, NotebookModel) {
         var noteId = req.params.noteId;
         var newNote = req.body;
         res.json(NoteModel.updateNoteById(noteId, newNote));
+    }
+
+    function createNoteForUser(req, res){
+        var userId = req.params.userId;
+        var newNote = req.body;
+        newNote.createdBy = userId;
+        newNote.id = parseInt(uuid.v4(), 16);
+
+        NoteModel.createNote(newNote);
+        res.json(NoteModel.findAllNotesForUser(userId));
     }
 };

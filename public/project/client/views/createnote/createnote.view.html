@@ -1,1 +1,45 @@
-<h1>CREATE NOTE</h1>
+<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
+     ng-controller="NoteController as model">
+
+    <h1>Create Note</h1>
+    <div style="float: right">
+        <button class="btn btn-default"
+                ng-click="model.addNote(model.widget)">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-default">
+            <a href="#/note">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            </a>
+        </button>
+    </div>
+
+
+    <p>A user can make note with multiple widgets...</p>
+    <br/>
+    <div class="table-responsive darker padding-all-sides" >
+        <table class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+
+            <tbody>
+
+                <td><b>Name :</b><br/> <input type="text" class="form-control"
+                                                   ng-model = "model.widget.name"
+                                                   id="name" placeholder="Note Title">
+                    <br/>
+
+                    <b>Select notebook to which this note belongs:</b>
+
+                    <select ng-model="model.widget.notebook"
+                            class="form-control">
+
+                        <option ng-repeat="notebook in model.notebooks"
+                                value="{{notebook.name}}">
+                            {{notebook.name}}
+                        </option>
+
+                    </select>
+                </td>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -13,6 +13,8 @@
         vm.deleteNote = deleteNote;
         vm.selectNote = selectNote;
         vm.updateNote = updateNote;
+        vm.addNote = addNote;
+
 
         var selectedIndex = -1;
 
@@ -23,6 +25,9 @@
                 .then(function (foundNotes) {
                     //console.log(foundNotes);
                     vm.notes = foundNotes.data;
+                    /*for(var note in $rootScope.notes){
+                        vm.notes.push($rootScope.notes[note]);
+                    }*/
                     vm.$location = $location;
                 });
 
@@ -33,6 +38,8 @@
                 })
         }
         init();
+
+        // event handlers implementation
 
         function deleteNote($index){
             var noteId = vm.notes[$index].id;
@@ -82,28 +89,14 @@
             }
         }
 
+        function addNote(widget){
 
-
-
-        // event handlers implementation
-        /*function addNote(widget){
-            var  newID = (new Date).getTime();
-            var newNote =  {id: newID,
-                name: widget.name,
-                notebook: $scope.widget.selected};
-
-            $scope.widget ={};
-            $scope.notes.push(newNote);
-        }*/
-
-        /*function updateNote(widget)
-        {
-            var newNote = {id: $scope.selectedNote.id,
-                            name: widget.name,
-                            notebook: $scope.widget.selected};
-            $scope.notes[$scope.notes.indexOf($scope.selectedNote)] = newNote;
-            $scope.widget ={};
-        }*/
-
+            NoteService.createNoteForUser($rootScope.currentUser._id, widget)
+                .then(function(response) {
+                    vm.notes = response.data;
+                });
+            vm.notes = {};
+            $location.url("/note");
+        }
     }
 })();

@@ -16,6 +16,7 @@
             findAllNotesForUser: findAllNotesForUser,
             selectNoteById: selectNoteById,
             updateNoteById: updateNoteById,
+            createNoteForUser: createNoteForUser,
 
             //Notebook services
             findAllNoteBooksForUser: findAllNoteBooksForUser
@@ -50,8 +51,12 @@
         }
 
         function updateNoteById(noteId, newNote){
-            console.log(newNote);
+            //console.log(newNote);
             return $http.put("/api/project/note/"+noteId, newNote);
+        }
+
+        function createNoteForUser(userId, newNote){
+            return $http.post("/api/project/user/"+userId+"/note", newNote);
         }
 
     }

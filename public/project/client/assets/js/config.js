@@ -41,7 +41,7 @@
             })
             .when("/createnote", {
                 templateUrl: "views//createnote/createnote.view.html",
-                controller: "CreateNoteController",
+                controller: "NoteController",
                 controllerAs: "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn
