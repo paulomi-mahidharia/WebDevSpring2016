@@ -15,6 +15,12 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
+    app.delete("/api/project/notebook/:NBId", deleteNotebookById);
+    app.get("/api/project/notebook/:NBId", selectNoteBookById);
+    app.put("/api/project/notebook/:NBId", updateNoteBookById);
+    app.post("/api/project/user/:userId/notebook", addNoteBookForUser);
+
+    //Note functions
 
     function findAllNotesLikedByUser(req, res){
         var userId = req.params.userId;
@@ -59,5 +65,38 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
 
         NoteModel.createNote(newNote);
         res.json(NoteModel.findAllNotesForUser(userId));
+    }
+
+    //Notebook functions
+
+    function deleteNotebookById(req, res){
+        var NBId = req.params.NBId;
+        //console.log("In server");
+        //console.log(noteId);
+        res.send(NotebookModel.deleteNotebookById(NBId));
+        //res.send(200);
+    }
+
+    function selectNoteBookById(req, res){
+        var NBId = req.params.NBId;
+        res.send(NotebookModel.selectNoteBookById(NBId));
+    }
+
+    function updateNoteBookById(req, res){
+        //console.log("reached server side");
+        var NBId = req.params.NBId;
+        //console.log(NBId);
+        var newNB = req.body;
+        //console.log(newNB);
+        res.json(NotebookModel.updateNoteBookById(NBId, newNB));
+    }
+
+    function  addNoteBookForUser(req, res){
+        var userId = req.params.userId;
+        var newNB = req.body;
+        //console.log("server side add");
+        //console.log(userId);
+        //console.log(newNB);
+        res.json(NotebookModel.addNoteBookForUser(userId, newNB));
     }
 };

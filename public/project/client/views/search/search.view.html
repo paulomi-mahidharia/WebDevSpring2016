@@ -1,0 +1,43 @@
+<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
+     >
+    <h1>Search</h1>
+
+    <p>Search notes ny note name</p>
+
+
+
+    <div class="table-responsive darker padding-all-sides" >
+
+     <div>  <table> <tr><td width="100%"><input type="text" class="form-control"
+               ng-model = "model.key"
+               id="key" placeholder="search key"> </td>
+      <td>   <a
+                 ng-click="model.search(model.key)" >
+             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+         </a> </td></tr></table>
+     </div>
+
+        <table class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+
+            <tbody>
+
+
+            <tr ng-repeat="note in model.searchedNotes">
+                <td>
+                    <h3>{{note.name}}</h3>
+                    <br/>
+
+                </td>
+
+            </tr>
+
+
+
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+</div>

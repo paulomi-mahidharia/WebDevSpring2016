@@ -5,7 +5,11 @@ var notebooks = require("./notebook.mock.json");
 
 module.exports = function() {
     var api = {
-        findAllNoteBooksForUser: findAllNoteBooksForUser
+        findAllNoteBooksForUser: findAllNoteBooksForUser,
+        deleteNotebookById: deleteNotebookById,
+        selectNoteBookById: selectNoteBookById,
+        updateNoteBookById: updateNoteBookById,
+        addNoteBookForUser: addNoteBookForUser
     };
 
     return api;
@@ -22,4 +26,40 @@ module.exports = function() {
         //console.log(userNotes);
         return userNotebooks;
     }
+
+
+    function deleteNotebookById(NBId){
+        for (var nb in notebooks) {
+            if (notebooks[nb]._id == NBId) {
+                notebooks.splice(nb,1);
+                break;
+            }
+        }
+    }
+
+
+    function selectNoteBookById(NBId){
+        console.log("nbid:"+NBId);
+        for (var nb in notebooks) {
+            console.log("nb:"+nb);
+            if(notebooks[nb]._id == NBId) {
+                return notebooks[nb];
+            }
+        }
+        return null;
+    }
+
+    function updateNoteBookById(NBId, newNB){
+        for (var nb in notebooks) {
+            if (notebooks[nb]._id == NBId) {
+                notebooks[nb] = newNB;
+                return newNB;
+            }
+        }
+    }
+
+    function addNoteBookForUser(userId, newNB){
+        notebooks.push(newNB);
+    }
+
 };

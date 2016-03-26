@@ -19,9 +19,13 @@
             createNoteForUser: createNoteForUser,
 
             //Notebook services
+            deleteNotebookById: deleteNotebookById,
+            selectNoteBookById: selectNoteBookById,
+            updateNoteBookById: updateNoteBookById,
+            addNoteBookForUser: addNoteBookForUser,
             findAllNoteBooksForUser: findAllNoteBooksForUser
 
-        }
+        };
 
         return api;
 
@@ -57,6 +61,27 @@
 
         function createNoteForUser(userId, newNote){
             return $http.post("/api/project/user/"+userId+"/note", newNote);
+        }
+
+
+        ////////////////////////////////////////////////////////////////////
+        function deleteNotebookById(NBId){
+            console.log(NBId);
+            return $http.delete("/api/project/notebook/"+NBId);
+
+        }
+
+        function selectNoteBookById(NBId){
+            return $http.get("/api/project/notebook/"+NBId);
+        }
+
+        function updateNoteBookById(NBId, newNB){
+            return $http.put("/api/project/notebook/"+NBId, newNB);
+
+        }
+
+        function addNoteBookForUser(userId,newNB){
+            return $http.post("/api/project/user/"+userId+"/notebook/", newNB);
         }
 
     }
