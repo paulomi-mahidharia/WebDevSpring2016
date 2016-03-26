@@ -50,6 +50,7 @@
         }
 
         function updateNoteById(noteId, newNote){
+            console.log(newNote);
             return $http.put("/api/project/note/"+noteId, newNote);
         }
 

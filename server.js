@@ -59,7 +59,3 @@ app.post('/upload/file', function (req, res) {
 app.listen(port, ipaddress, function () {
     console.log("Server is listening on: " + ipaddress + ":" + port);
 });
-
-app.listen(port, ipaddress, function () {
-    console.log("Server is listening on: " + ipaddress + ":" + port);
-});

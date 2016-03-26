@@ -91,6 +91,7 @@
         }
 
         function updateNote(widget){
+            console.log(vm.widget);
             if (widget.name != null && selectedIndex != -1) {
 
                 var position = vm.notes[selectedIndex];
@@ -103,7 +104,7 @@
                 };
                 NoteService.updateNoteById(widget.id,newNote)
                     .then(function (response) {
-                        vm.notes[selectedIndex] = response;
+                        vm.notes[selectedIndex] = response.data;
                         vm.widget.name = null;
                         vm.selectedIndex = -1;
                     });

@@ -65,9 +65,10 @@ module.exports = function() {
 
     function updateNoteById(noteId, newNote){
         for (var noteObj in notes) {
-            if (notes[noteObj]._id == noteId) {
+            if (notes[noteObj].id == noteId) {
                 notes[noteObj] = newNote;
-                return newNote;
+                console.log(notes[noteObj]);
+                return notes[noteObj];
             }
         }
     }
