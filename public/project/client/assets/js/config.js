@@ -39,6 +39,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/createnote", {
+                templateUrl: "views//createnote/createnote.view.html",
+                controller: "CreateNoteController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/todo", {
                 templateUrl: "views/widgets/todoWidget/todoWidget.view.html",
                 controller: "toDoController"

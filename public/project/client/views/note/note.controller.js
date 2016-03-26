@@ -9,36 +9,6 @@
     function NoteController(NoteService, $rootScope, $location){
 
         var vm = this;
-        //var vm = this;
-        //vm.favorite = favorite;
-
-        //var currentUser = $rootScope.currentUser;
-
-        /*var noteBooks  = [
-            {"id": "000", "name": "notebook1"},
-            {"id": "001", "name": "notebook2"},
-            {"id": "002", "name": "notebook3"}
-        ];
-
-        var notes = [{"id": "01", "name":"note1", "notebook": "notebook1", "likedBy":["123", "234"]},
-            {"id": "02", "name":"note2", "notebook": "notebook2", "likedBy":["123"]},
-            {"id": "03", "name":"note3", "notebook": "notebook3", "likedBy":["456"]}];*/
-
-
-
-        //$scope.notebooks = noteBooks;
-        //$scope.notes = notes;
-
-        //$scope.selectedNote = null;
-
-
-        // event handlers decleration
-        //$scope.addNote = addNote;
-        //$scope.deleteNote = deleteNote;
-        //$scope.selectNote = selectNote;
-        //$scope.updateNote = updateNote;
-
-
 
         vm.deleteNote = deleteNote;
         vm.selectNote = selectNote;
