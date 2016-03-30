@@ -6,6 +6,7 @@ var multer        = require('multer');
 var uuid          = require('node-uuid');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
+var mongoose      = require("mongoose");
 
 app.use(express.static(__dirname + '/public'));
 
