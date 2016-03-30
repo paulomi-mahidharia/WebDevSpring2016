@@ -15,17 +15,26 @@
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html",
-                controller: "AdminController"
+                controller: "AdminController",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
                 controller: "FormController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/form-fields.view.html",
                 controller: "FormFieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/header", {
                 templateUrl: "views/header/header.view.html",
@@ -44,10 +53,10 @@
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",
-                controllerAs : "model"
-                /*resolve: {
+                controllerAs : "model",
+                resolve: {
                     checkLoggedIn: checkLoggedIn
-                }*/
+                }
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
@@ -59,7 +68,7 @@
             });
     }
 
-    /*function checkLoggedIn(UserService, $q, $location) {
+    function checkLoggedIn(UserService, $q, $location) {
 
         var deferred = $q.defer();
 
@@ -79,5 +88,5 @@
         });
 
         return deferred.promise;
-    }*/
+    }
 })();

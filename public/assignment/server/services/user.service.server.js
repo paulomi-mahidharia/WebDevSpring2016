@@ -1,10 +1,13 @@
 /**
  * Created by paulomimahidharia on 3/16/16.
  */
-module.exports = function(app, UserModel){
+module.exports = function(app, UserModel, uuid){
 
     //responds with an array of all users
     app.get("/api/assignment/user", findAllUsers);
+
+    //Return logged in user (possibly null)
+    app.get("/api/assignment/user/loggedin", loggedIn);
 
     //updates an existing user whose id property is equal to the id path parameter.
     //The new properties are set to the values in the user object embedded in the HTTP request. Responds with an array of all users
@@ -20,11 +23,8 @@ module.exports = function(app, UserModel){
     //responds with a single user whose id property is equal to the id path parameter
     app.get("/api/assignment/user/:id", findUserById);
 
-    //Return logged in user (possibly null)
-    //app.get("/api/assignment/user/loggedin", loggedIn);
-
     //Logout current user
-    //app.post("/api/assignment/user/logout", logout);
+    app.post("/api/assignment/user/logout", logout);
 
 
 
@@ -58,11 +58,7 @@ module.exports = function(app, UserModel){
         res.json(user);
     }
 
-    /*function loggedIn(req, res) {
-
-        if(!req.session.currentUser) {
-            req.session.currentUser = null;
-        }
+    function loggedIn(req, res) {
         res.json(req.session.currentUser);
     }
 
@@ -70,7 +66,7 @@ module.exports = function(app, UserModel){
 
         req.session.destroy();
         res.send(200);
-    }*/
+    }
 
     function findUserByUsername(req, res){
         var username = req.body;
@@ -106,4 +102,4 @@ module.exports = function(app, UserModel){
         usersAfterDeletion = UserModel.deleteUserById(userId);
         res.json(usersAfterDeletion);
     }
-}
+};
