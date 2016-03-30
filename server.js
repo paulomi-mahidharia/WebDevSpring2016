@@ -4,9 +4,16 @@ var app           = express();
 var bodyParser    = require('body-parser');
 var multer        = require('multer');
 var uuid          = require('node-uuid');
+var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
 var mongoose      = require("mongoose");
+
+// setup a local connection string
+var connectionString = 'mongodb://127.0.0.1:27017/assignment';
+
+//connect to database
+var db = mongoose.connect(connectionString);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -26,8 +33,12 @@ app.use(session({
 
 app.use(cookieParser());
 
+app.use(passport.initialize());
 
-require("./public/assignment/server/app.js")(app, uuid);
+app.use(passport.session());
+
+
+require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
 require("./public/project/server/app.js")(app, uuid);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

@@ -12,22 +12,31 @@
         var vm = this;
         vm.register = register;
 
-        function register(user){
-            var currentUser = {
-                    _id: (new Date).getTime(),
+        function register(user) {
+            if (user) {
+                var newUser = {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     username: user.username,
                     password: user.password,
                     roles: user.roles,
-                    email: user.email
+                    email: [user.email],
+                    phones: []
                 };
 
-            UserService.createUser(currentUser)
-                .then(function (newUser){
-                    UserService.setCurrentUser(newUser.config.data);
-                    $location.url("/profile/");
+                UserService.createUser(newUser)
+                    .then(function (newUser) {
+                        var currentUser = newUser.config.data;
+                        console.log(currentUser);
+                        if(currentUser!=null){
+                            UserService.setCurrentUser(currentUser);
+                            $location.url("/profile/");
+                        }
                     });
+            }
+            else {
+                alert("Please fill the required fields!");
+            }
         }
     }
 })();

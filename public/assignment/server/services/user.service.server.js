@@ -53,9 +53,22 @@ module.exports = function(app, UserModel, uuid){
 
     function findUserByCredentials(credentials, req ,res){
 
-        var user = UserModel.findUserByCredentials(credentials);
-        req.session.currentUser = user;
-        res.json(user);
+        //var user = UserModel.findUserByCredentials(credentials);
+        //req.session.currentUser = user;
+        //res.json(user);
+
+        var user = UserModel.findUserByCredentials(credentials)
+            .then(
+                function (doc) {
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                });
+        //var deferred = q.defer();
+
     }
 
     function loggedIn(req, res) {
@@ -92,8 +105,23 @@ module.exports = function(app, UserModel, uuid){
 
     function createUser(req,res){
         var user = req.body;
-        var currentUser = UserModel.createUser(user);
-        res.json(currentUser);
+        console.log(user);
+        /*var currentUser = UserModel.createUser(user);
+        res.json(currentUser);*/
+
+        user = UserModel.createUser(user)
+            // handle model promise
+            .then(
+                // login user if promise resolved
+                function ( doc ) {
+                    req.session.currentUser = doc;
+                    res.json(user);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteUserById(req, res){
