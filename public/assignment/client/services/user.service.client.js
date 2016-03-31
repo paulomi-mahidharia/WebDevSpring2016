@@ -31,6 +31,10 @@
             $rootScope.currentUser = user;
         }
 
+        /*function getProfile(userId){
+            return $http.get("/api/assignment/profile/"+userId);
+        }*/
+
         function findUserByCredentials(username, password){
             return $http.get("/api/assignment/user?username="+username+"&password="+password);
         }

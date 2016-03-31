@@ -24,14 +24,6 @@ module.exports = function(db, mongoose) {
     return api;
 
     function findUserByCredentials(credentials){
-        /*for(var user in users){
-            if(users[user].username == credentials.username && users[user].password == credentials.password){
-                var foundUser = users[user];
-                return foundUser;
-                break;
-            }
-        }
-        return noUser;*/
 
         var deferred = q.defer();
 
@@ -59,13 +51,19 @@ module.exports = function(db, mongoose) {
     }
 
     function findUserByUsername(username){
-        for(var user in users){
-            if(users[user].username == username){
-                var foundUser = users[user];
-                break;
+
+        var deferred = q.defer();
+
+        User.findOne({username: username}, function (err,doc) {
+            if (err) {
+                deferred.reject(err);
             }
-        }
-        return foundUser;
+            else {
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise;
     }
 
     function findAllUsers(){
@@ -74,41 +72,35 @@ module.exports = function(db, mongoose) {
 
     function updateUser(userId, user){
 
-         for(var value in users){
-             var obj = users[value];
-             var id = obj._id;
-             if(id === userId){
-                 users[value] = user;
-                 return users[value];
-             }
-         }
-         return null;
-    }
-
-    function findUserById(UserId){
-        /*for(var value in users){
-            var obj = users[value];
-            var id = obj._id;
-            if(id === UserId){
-                return users[value];
-            }
-        }
-        return null;*/
-
         var deferred = q.defer();
-        UserModel.findById(userId, function (err, doc) {
+
+        User.findByIdAndUpdate(userId, user, function (err,doc){
             if (err) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(doc);
             }
         });
+
+        return deferred.promise;
+    }
+
+    function findUserById(UserId){
+
+        var deferred = q.defer();
+
+        User.findById(UserId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+
         return deferred.promise;
     }
 
     function createUser(user){
-         /*users.push(user);
-         return user;*/
 
         // use q to defer the response
         var deferred = q.defer();
@@ -131,17 +123,18 @@ module.exports = function(db, mongoose) {
     }
 
     function deleteUserById(UserId){
-        var userIndex = -1;
-        for (var user in users){
-            if(user._id === UserId) {
-                userIndex = users.indexOf(user);
-                break;
+
+        var deferred = q.defer();
+
+        User.findByIdAndRemove(UserId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        if(userIndex >= 0){
-            users.splice(userIndex, 1);
-        }
-        return users;
+        });
+
+        return deferred.promise;
     }
 
-}
+};
