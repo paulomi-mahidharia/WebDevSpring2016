@@ -4,8 +4,16 @@
 "use strict";
 
 var forms = require("./form.mock.json");
+var q = require("q");
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
+
+    var FormSchema = require("./form.schema.server.js")(mongoose);
+    var Form = mongoose.model('Form', FormSchema);
+
+    var FieldSchema = require("./field.schema.server.js")(mongoose);
+    var Field = mongoose.model('Field', FieldSchema);
+
     var api = {
 
         //Functionalities for Form
@@ -28,62 +36,80 @@ module.exports = function() {
 
     function createForm(form) {
 
-        forms.push(form);
+        //forms.push(form);
+
+        // insert new user with mongoose user model's create()
+        return Form.create(form)
     }
 
     function findFormById(formId) {
-        for (var formObj in forms) {
+        /*for (var formObj in forms) {
             if(forms[formObj]._id == formId) {
                 return forms[formObj];
             }
         }
-        return null;
+        return null;*/
+
+        return Form.findById(formId);
     }
 
     function findAllForms() {
-        return forms;
+        //return forms;
+
+        return Form.find();
     }
 
     function updateFormById(formId, newForm) {
         // find the object in the collection with id formId
-        for (var formObj in forms) {
+        /*for (var formObj in forms) {
             if (forms[formObj]._id == formId) {
                 forms[formObj] = newForm;
                 return newForm;
             }
-        }
+        }*/
+
+        return Form.findByIdAndUpdate(formId, newForm)
     }
 
     function deleteFormById(formId) {
-        for (var formObj in forms) {
+        /*for (var formObj in forms) {
             if (forms[formObj]._id == formId) {
                 forms.splice(formObj,1);
                 break;
             }
         }
 
-        return forms;
+        return forms;*/
+
+        return Form.findByIdAndRemove(formId)
     }
 
     function findFormByTitle(formTitle) {
-        for (var formObj in forms) {
+        /*for (var formObj in forms) {
             if (forms[formObj].title == formTitle) {
 
                 return forms[formObj];
             }
         }
-        return null;
+        return null;*/
+        return Form.findOne({title: formTitle});
     }
 
     function findAllFormsByUserId(userId) {
 
-        var userForms = [];
+        /*var userForms = [];
         for (var formObj in forms) {
             if (forms[formObj].userId == userId) {
                 userForms.push(forms[formObj]);
             }
         }
-        return userForms;
+        return userForms;*/
+
+
+        // insert new user with mongoose user model's create()
+        return Form.find({userId: userId});
+
+
     }
 
     function createFieldForForm(formId, field) {
@@ -147,4 +173,4 @@ module.exports = function() {
         }
     }
 
-}
+};

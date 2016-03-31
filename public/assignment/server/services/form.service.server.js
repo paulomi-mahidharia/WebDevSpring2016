@@ -28,43 +28,101 @@ module.exports = function(app, FormModel, uuid) {
     function createForm (req, res) {
 
         var form = req.body;
-        var userId = parseInt(req.params.userId);
+        var userId = req.params.userId;
 
         form.userId = userId;
-        form._id = parseInt(uuid.v4(), 16);
+        //form._id = parseInt(uuid.v4(), 16);
 
-        FormModel.createForm(form);
-        res.json(FormModel.findAllFormsByUserId(userId));
+        FormModel.createForm(form)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
+        //res.json(FormModel.findAllFormsByUserId(userId));
     }
 
     function findAllformsForUser(req, res) {
-        var userId = parseInt(req.params.userId);
-        res.json(FormModel.findAllFormsByUserId(userId));
+
+        var userId = req.params.userId;
+
+        FormModel.findAllFormsByUserId(userId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllForms(req, res) {
 
-        res.json(FormModel.findAllForms());
+        FormModel.findAllForms()
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findFormById(req, res) {
 
         var formId = req.params.formId;
-        res.json(FormModel.findFormById(formId));
+
+        FormModel.findFormById(formId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateFormById(req, res) {
 
         var formId = req.params.formId;
         var form = req.body;
-        var forms = FormModel.updateFormById(formId, form);
-        res.json(forms);
+        //var forms = FormModel.updateFormById(formId, form);
+        //res.json(forms);
+
+        FormModel.updateFormById(formId, form)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteFormById(req, res) {
 
         var formId = req.params.formId;
-        FormModel.deleteFormById(formId);
-        res.send(200);
+        FormModel.deleteFormById(formId)
+            .then(
+                function (doc) {
+                    res.send(200);
+                },
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
-}
+};
