@@ -13,18 +13,11 @@
         vm.register = register;
 
         function register(user) {
-            if (user) {
-                var newUser = {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    username: user.username,
-                    password: user.password,
-                    roles: user.roles,
-                    email: [user.email],
-                    phones: []
-                };
+           if (user) {
 
-                UserService.createUser(newUser)
+               user.emails = contructArrayOfEmails(user.emails);
+
+                UserService.createUser(user)
                     .then(function (newUser) {
 
                         var currentUser = newUser.config.data;
@@ -38,6 +31,10 @@
             else {
                 alert("Please fill the required fields!");
             }
+        }
+
+        function contructArrayOfEmails(emails){
+            return emails.trim().split(",");
         }
     }
 })();
