@@ -6,8 +6,4 @@ module.exports = function(app, uuid) {
     var NotebookModel = require("./models/notebook/notebook.model.js")();
     var NoteService = require("./services/note.service.server.js")(app, NoteModel, NotebookModel, uuid);
 
-    //var FormModel = require("./models/form/form.model.js")();
-    //var FormService = require("./services/form.service.server.js")(app, FormModel, uuid);
-
-    //var FieldService = require("./services/field.service.server.js")(app, FormModel, uuid);
 }
