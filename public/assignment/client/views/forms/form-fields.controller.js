@@ -244,7 +244,8 @@ angular.module('FormBuilderApp').controller('popupCtrl', function ($scope, $uibM
 
         if($scope.field.type != "DATE") {
             if($scope.newPlaceholder) {
-                if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA") {
+                if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA" ||
+                    $scope.field.type === "EMAIL" || $scope.field.type === "PASSWORD"){
                     $scope.field.placeholder = $scope.newPlaceholder;
                 } else {
                     OtherFields();
