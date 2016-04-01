@@ -109,7 +109,6 @@
             FieldService.createFieldForForm(formId, vm.field)
                 .then(function (response) {
                     vm.fields = response.data.fields;
-                    //$scope.fields = vm.fields;
                     init();
                     vm.field = {};
                 });
