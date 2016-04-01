@@ -38,9 +38,10 @@
             //Service to create the form for a given user
 
             FormService.createFormForUser($rootScope.currentUser._id, form)
-                .then(function(response) {
+                .then(
+                    function(response) {
 
-                    return FormService.findAllFormsForUser($rootScope.currentUser._id)
+                        return FormService.findAllFormsForUser($rootScope.currentUser._id)
                 })
                 .then(
                     function (response){
@@ -61,13 +62,14 @@
                 };
 
                 FormService.updateFormById(form._id,newForm)
-                    .then(function (response) {
+                    .then(
+                        function (response) {
 
-                        return FormService.findFormById(form._id)
+                            return FormService.findFormById(form._id)
                     })
                     .then(
                         function (response) {
-                            /*vm.forms[selectedIndex] = response.data;*/
+
                             vm.forms[selectedIndex] = response.data;
 
                             vm.selectedIndex = -1;
@@ -77,11 +79,14 @@
             }}
 
         //Function to delete a form for a particular user
+
         function deleteForm($index) {
 
             var formId = vm.forms[$index]._id;
+
             FormService.deleteFormById(formId)
-                .then(function(response) {
+                .then(
+                    function(response) {
 
                     if(response.data == "OK") {
                         init();
@@ -90,14 +95,18 @@
         }
 
         //Function to select a form for a particular user
+
         function selectForm($index) {
+
             vm.form = {};
             var selectedForm = vm.forms[$index];
+
             vm.form = {
                 _id: selectedForm._id,
                 title: selectedForm.title,
                 userId: selectedForm.userId
             };
+
             selectedIndex = $index;
         }
     }

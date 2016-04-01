@@ -3,7 +3,7 @@
  */
 "use strict";
 
-module.exports = function (app, FormModel, uuid) {
+module.exports = function (app, FieldModel, uuid) {
 
     //creates a new field whose properties are the same as the field object embedded in the request's body and
     // the field belongs to a form whose id is equal to the formId path parameter.
@@ -35,8 +35,16 @@ module.exports = function (app, FormModel, uuid) {
 
         //field._id = parseInt(uuid.v4(), 16);
 
-        return FormModel.createFieldForForm(formId, field);
+        FieldModel.createFieldForForm(formId, field)
+            .then(
+                function(fields){
+                    res.json (fields)
+                },
 
+                function(err){
+                    res.send(400);
+                }
+            );
 
         //res.json(FormModel.findAllFieldsForForm(formId));
     }
@@ -44,8 +52,18 @@ module.exports = function (app, FormModel, uuid) {
     function findAllFieldsForForm(req, res) {
 
         var formId = req.params.formId;
+        //console.log(formId);
 
-        return FormModel.findAllFieldsForForm(formId)
+        FieldModel.findAllFieldsForForm(formId)
+            .then(
+                  function(fields){
+                      res.json (fields)
+                  },
+
+                function(err){
+                    res.send(400);
+                }
+            );
 
 
         //res.json(FormModel.findAllFieldsForForm(formId));
@@ -56,7 +74,7 @@ module.exports = function (app, FormModel, uuid) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
 
-        FormModel.findFieldByFieldIdAndFormId(formId, fieldId)
+        FieldModel.findFieldByFieldIdAndFormId(formId, fieldId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -74,7 +92,7 @@ module.exports = function (app, FormModel, uuid) {
         var fieldId = req.params.fieldId;
         var field = req.body;
 
-        FormModel.updateFieldByFieldIdAndFormId
+        FieldModel.updateFieldByFieldIdAndFormId
             .then(
                 function (doc) {
                     res.json(doc);
@@ -90,7 +108,7 @@ module.exports = function (app, FormModel, uuid) {
         var formId = req.params.formId;
         var fieldId = preq.params.fieldId;
 
-        FormModel.deleteFieldByFieldIdAndFormId(formId, fieldId)
+        FieldModel.deleteFieldByFieldIdAndFormId(formId, fieldId)
             .then(
                 function (doc) {
                     if(doc){

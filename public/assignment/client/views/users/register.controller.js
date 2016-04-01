@@ -26,8 +26,9 @@
 
                 UserService.createUser(newUser)
                     .then(function (newUser) {
+
                         var currentUser = newUser.config.data;
-                        console.log(currentUser);
+
                         if(currentUser!=null){
                             UserService.setCurrentUser(currentUser);
                             $location.url("/profile/");

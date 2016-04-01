@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
             type: String,
             enum: ['TEXT', 'TEXTAREA', 'EMAIL', 'PASSWORD', 'OPTIONS', 'DATE', 'RADIOS', 'CHECKBOXES'],
             default: 'TEXT'},
-        placeholder: [String],
+        placeholder: String,
         options: [{label:String,
                     value: {type:String, uppercase: true}
         }]

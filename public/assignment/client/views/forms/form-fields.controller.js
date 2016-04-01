@@ -8,7 +8,7 @@
         .module("FormBuilderApp")
         .controller("FormFieldsController", FormFieldsController);
 
-    function FormFieldsController(FieldService, $routeParams, $location, $scope, $uibModal, $log) {
+    function FormFieldsController(FieldService, $routeParams, $location, $uibModal, $log) {
 
         var vm = this;
 
@@ -29,13 +29,16 @@
             if($routeParams.formId) {
                 formId = $routeParams.formId;
 
+                //console.log("In Init");
+                //console.log(formId);
+
                 FieldService.getFieldsForForm(formId)
 
                     .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
 
-                        vm.fields = response.data;
-                        $scope.fields = vm.fields;
+                        vm.fields = response.data.fields;
+                        //$scope.fields = vm.fields;
                 });
 
             }
@@ -104,7 +107,8 @@
 
             FieldService.createFieldForForm(formId, vm.field)
                 .then(function (response) {
-                    vm.fields = response.data;
+                    console.log(response);
+                    vm.fields = response.data.fields;
                     //$scope.fields = vm.fields;
                     init();
                     vm.field = {};
@@ -115,7 +119,6 @@
         function createSingleLineField() {
 
             var field = {
-                _id: null,
                 label: "New Text Field",
                 type: "TEXT",
                 placeholder: "New Single-line Field"
@@ -127,7 +130,6 @@
         function createMultiLineField() {
 
             var field = {
-                _id: null,
                 label: "New Text Field",
                 type: "TEXTAREA",
                 rows: "5",
@@ -140,7 +142,6 @@
         function createDateField() {
 
             var field = {
-                _id: null,
                 label: "New Date Field",
                 type: "DATE"
             };
@@ -150,7 +151,7 @@
 
         function createDropDownField() {
 
-            var field = {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
+            var field = {"label": "New Dropdown", "type": "OPTIONS", "options": [
                 {"label": "Option 1", "value": "OPTION_1"},
                 {"label": "Option 2", "value": "OPTION_2"},
                 {"label": "Option 3", "value": "OPTION_3"}
@@ -161,7 +162,7 @@
 
         function createCheckboxField() {
 
-            var field = {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
+            var field = {"label": "New Checkboxes", "type": "CHECKBOXES", "options": [
                 {"label": "Option A", "value": "OPTION_A"},
                 {"label": "Option B", "value": "OPTION_B"},
                 {"label": "Option C", "value": "OPTION_C"}
@@ -172,7 +173,7 @@
 
         function createRadioField() {
 
-            var field = {"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
+            var field = {"label": "New Radio Buttons", "type": "RADIOS", "options": [
                 {"label": "Option X", "value": "OPTION_X"},
                 {"label": "Option Y", "value": "OPTION_Y"},
                 {"label": "Option Z", "value": "OPTION_Z"}
