@@ -33,19 +33,6 @@ module.exports = function(db, mongoose, FormModel) {
 
     function findAllFieldsForForm (formId) {
 
-        /*Form.findById(formId)
-            .then(
-                function (form){
-                    return form.fields;
-                },
-
-                function (err){
-                    return null;
-                }
-            );*/
-
-        //console.log(formId);
-
         return Form.findById(formId).select("fields");
 
     }
