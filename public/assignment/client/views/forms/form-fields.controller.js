@@ -47,7 +47,9 @@
                 {name: "Date Field", value: "date"},
                 {name: "Dropdown Field", value: "dropdown"},
                 {name: "Checkboxes Field", value: "checkbox"},
-                {name: "Radio Buttons Field", value: "radio"}
+                {name: "Radio Buttons Field", value: "radio"},
+                {name: "Email", value: "email"},
+                {name: "Password", value: "password"}
             ];
         }
         init();
@@ -92,6 +94,14 @@
 
                 case "radio":
                     vm.field = createRadioField();
+                    break;
+
+                case "email":
+                    vm.field = createEmailField();
+                    break;
+
+                case "password":
+                    vm.field = createPasswordField();
                     break;
 
             }
@@ -168,6 +178,22 @@
                 {"label": "Option Y", "value": "OPTION_Y"},
                 {"label": "Option Z", "value": "OPTION_Z"}
             ]};
+
+            return field;
+        }
+
+        function createEmailField(){
+            var field = {label: "New Email Field",
+                type: "EMAIL",
+                placeholder: "New Email Field"};
+
+            return field;
+        }
+
+        function createPasswordField(){
+            var field = {label: "New Password Field",
+                type: "EMAIL",
+                placeholder: "New Password Field"};
 
             return field;
         }
