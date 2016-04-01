@@ -19,16 +19,8 @@ module.exports = function(db, mongoose, FormModel) {
 
     function createFieldForForm(formId, field) {
 
-        return Form.findById(formId)
-            .then(
-                function(form) {
-                    form.fields.push(field);
-                    return form.save();
-                },
-                function(err){
-                    return null;
-                }
-            );
+        return Form.findById(formId);
+
     }
 
     function findAllFieldsForForm (formId) {
@@ -58,40 +50,18 @@ module.exports = function(db, mongoose, FormModel) {
 
     function updateFieldByFieldIdAndFormId(formId, fieldId, field) {
 
-        Form.findById(formId)
-            .then(
-                function (form){
-                    for (var i in form.fields) {
-                        if (form.fields[i]._id === fieldId) {
-                            form.fields[i] = field;
-                            return field;
-
-                        }
-                    }
-                },
-
-                function (err){
-                    return null;
-                }
-            );
+        return Form.update(
+            { _id: formId ,
+                "fields._id" :fieldId} ,
+            {$set : {"fields.$" : field}
+            }
+        );
     }
     function deleteFieldByFieldIdAndFormId(formId, fieldId) {
 
-        Form.findById(formId)
-            .then(
-                function (form){
-                    for (var i in form.fields) {
-                        if (form.fields[i]._id === fieldId) {
-                            form.fields[i].remove();
-                            break;
-                        }
-                    }
-                    return form.save();
-                },
-
-                function (err){
-                    return null;
-                }
-            );
+        return Form.update(
+            { _id: formId },
+            { $pull: { 'fields': { _id : fieldId } } }
+        );
     }
 };

@@ -33,16 +33,22 @@ module.exports = function (app, FieldModel, uuid) {
         var field = req.body;
         var formId = req.params.formId;
 
-        //field._id = parseInt(uuid.v4(), 16);
-
         FieldModel.createFieldForForm(formId, field)
             .then(
-                function(fields){
-                    res.json (fields)
+                function(form) {
+                    form.fields.push(field);
+                    return form.save();
                 },
-
                 function(err){
-                    res.send(400);
+                    return null;
+                }
+            )
+            .then(
+                function (doc){
+                    res.status(200).send("Created");
+                },
+                function (err){
+                    res.status(400).send(err);
                 }
             );
 
@@ -92,7 +98,7 @@ module.exports = function (app, FieldModel, uuid) {
         var fieldId = req.params.fieldId;
         var field = req.body;
 
-        FieldModel.updateFieldByFieldIdAndFormId
+        FieldModel.updateFieldByFieldIdAndFormId(formId, fieldId, field)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -106,18 +112,12 @@ module.exports = function (app, FieldModel, uuid) {
     function deleteFieldByFieldIdAndFormId (req, res) {
 
         var formId = req.params.formId;
-        var fieldId = preq.params.fieldId;
+        var fieldId = req.params.fieldId;
 
         FieldModel.deleteFieldByFieldIdAndFormId(formId, fieldId)
             .then(
                 function (doc) {
-                    if(doc){
-                        res.send(200).send("Deleted");
-                    }
-                    else{
-                        res.send(400).send("Error");
-                    }
-
+                    res.send(200);
                 },
                 // send error if promise rejected
                 function ( err ) {

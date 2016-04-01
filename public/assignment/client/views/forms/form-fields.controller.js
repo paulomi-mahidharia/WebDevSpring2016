@@ -29,16 +29,11 @@
             if($routeParams.formId) {
                 formId = $routeParams.formId;
 
-                //console.log("In Init");
-                //console.log(formId);
-
                 FieldService.getFieldsForForm(formId)
 
                     .then(function (response) {
-                        //console.log(response);
 
                         vm.fields = response.data.fields;
-                        //$scope.fields = vm.fields;
                 });
 
             }
@@ -60,17 +55,13 @@
         function removeField($index) {
 
             var fieldId = vm.fields[$index]._id;
-            FieldService.deleteFieldFromForm(formId, fieldId).then(function (response) {
 
-                if(response === "OK") {
-
-                    FieldService.getFieldsForForm(formId)
-                        .then(function (response) {
-                            vm.fields = response;
-                            $scope.fields = vm.fields;
-                        });
-                }
-            });
+            FieldService.deleteFieldFromForm(formId, fieldId)
+                .then(function (response) {
+                    if (response.data == "OK") {
+                        vm.fields.splice($index, 1);
+                    }
+                });
         }
 
         function addField() {
@@ -107,7 +98,6 @@
 
             FieldService.createFieldForForm(formId, vm.field)
                 .then(function (response) {
-                    console.log(response);
                     vm.fields = response.data.fields;
                     //$scope.fields = vm.fields;
                     init();
@@ -193,7 +183,7 @@
             resolve: {
                 field: function () {
 
-                    console.log(vm.editTheField);
+                    //console.log(vm.editTheField);
 
                     return vm.editTheField;
                 }
@@ -203,20 +193,15 @@
 
         modalInstance.result
             .then(function (field) {
-                console.log(field);
+
                 return FieldService.updateField(formId, field._id, field);
 
             })
             .then(function (response) {
-                if (response === "OK") {
-                    return FieldService.getFieldsForForm(formId);
+                if (response.data === "OK") {
+                    init();
 
                 }
-            })
-            .then(function (response) {
-                vm.fields = response;
-
-
             });
     }
 }
