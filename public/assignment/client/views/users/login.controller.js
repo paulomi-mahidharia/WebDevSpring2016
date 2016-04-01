@@ -35,7 +35,6 @@
                         // When the response has a valid user data existing in the database
 
                         else if (response) {
-                            console.log(response.data);
                             UserService.setCurrentUser(response.data);
                             $location.url("/profile");
                         }

@@ -22,76 +22,27 @@
 
         function createFieldForForm(formId, field) {
 
-            var deferred = $q.defer();
-
-            var url = "/api/assignment/form/:formId/field";
-            url = url.replace(":formId", formId);
-
-            $http.post(url, field).success(function(response) {
-                deferred.resolve(response);
-            });
-
-            return deferred.promise;
+            return $http.post("/api/assignment/form/"+formId+"/field", field);
         }
 
         function getFieldsForForm(formId) {
 
-            var deferred = $q.defer();
-
-            var url = "/api/assignment/form/:formId/field";
-            url = url.replace(":formId", formId);
-
-            $http.get(url).success(function(response) {
-                deferred.resolve(response);
-            });
-
-            return deferred.promise;
+            return $http.get("/api/assignment/form/"+formId+"/field");
         }
 
         function getFieldForForm(formId, fieldId) {
 
-            var deferred = $q.defer();
-
-            var url = "/api/assignment/form/:formId/field/:fieldId";
-            url = url.replace(":formId", formId);
-            url = url.replace(":fieldId", fieldId);
-
-            $http.get(url).success(function(response) {
-                deferred.resolve(response);
-            });
-
-            return deferred.promise;
+            return $http.get("/api/assignment/form/"+formId+"/field/"+fieldId);
         }
 
         function deleteFieldFromForm(formId, fieldId) {
 
-            var deferred = $q.defer();
-
-            var url = "/api/assignment/form/:formId/field/:fieldId";
-            url = url.replace(":formId", formId);
-            url = url.replace(":fieldId", fieldId);
-
-            $http.delete(url).success(function(response) {
-                deferred.resolve(response);
-            });
-
-            return deferred.promise;
+            return $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
         }
 
         function updateField(formId, fieldId, field) {
 
-            var deferred = $q.defer();
-
-            var url = "/api/assignment/form/:formId/field/:fieldId";
-            url = url.replace(":formId", formId);
-            url = url.replace(":fieldId", fieldId);
-
-            $http.put(url, field).success(function(response) {
-                deferred.resolve(response);
-            });
-
-            return deferred.promise;
+            return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId, field);
         }
-
     }
 })();

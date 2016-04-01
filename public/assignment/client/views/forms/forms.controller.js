@@ -15,7 +15,6 @@
 
             FormService.findAllFormsForUser($rootScope.currentUser._id)
                 .then(function (response) {
-                    console.log(response);
                         vm.forms = response.data;
                         //console.log(vm.forms);
                         vm.$location = $location;

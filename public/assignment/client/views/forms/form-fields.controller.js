@@ -29,13 +29,17 @@
             if($routeParams.formId) {
                 formId = $routeParams.formId;
 
-                FieldService.getFieldsForForm(formId).then(function (response) {
+                FieldService.getFieldsForForm(formId)
 
-                    vm.fields = response;
-                    $scope.fields = vm.fields;
+                    .then(function (response) {
+                        console.log(response);
+
+                        vm.fields = response.data;
+                        $scope.fields = vm.fields;
                 });
 
-            }  else {
+            }
+            else {
                 $location.url("/forms");
             }
 
@@ -100,8 +104,9 @@
 
             FieldService.createFieldForForm(formId, vm.field)
                 .then(function (response) {
-                    vm.fields = response;
-                    $scope.fields = vm.fields;
+                    vm.fields = response.data;
+                    //$scope.fields = vm.fields;
+                    init();
                     vm.field = {};
                 });
 
