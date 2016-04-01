@@ -31,7 +31,7 @@ module.exports = function(app, FormModel, uuid) {
         var userId = req.params.userId;
 
         form.userId = userId;
-        //form._id = parseInt(uuid.v4(), 16);
+        form.created = Date.now();
 
         FormModel.createForm(form)
             .then(
@@ -43,7 +43,6 @@ module.exports = function(app, FormModel, uuid) {
                     res.status(400).send(err);
                 }
             );
-        //res.json(FormModel.findAllFormsByUserId(userId));
     }
 
     function findAllformsForUser(req, res) {
@@ -96,8 +95,7 @@ module.exports = function(app, FormModel, uuid) {
 
         var formId = req.params.formId;
         var form = req.body;
-        //var forms = FormModel.updateFormById(formId, form);
-        //res.json(forms);
+        form.updated = Date.now();
 
         FormModel.updateFormById(formId, form)
             .then(
