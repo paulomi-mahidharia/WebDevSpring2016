@@ -21,6 +21,7 @@ module.exports = function(db, mongoose) {
         deleteUserById: deleteUserById,
         updateUser: updateUser
     };
+
     return api;
 
     function findUserByCredentials(credentials){
@@ -67,6 +68,7 @@ module.exports = function(db, mongoose) {
     }
 
     function findAllUsers(){
+
         return users;
     }
 
@@ -90,6 +92,7 @@ module.exports = function(db, mongoose) {
         var deferred = q.defer();
 
         User.findById(UserId, function (err, doc) {
+
             if (err) {
                 deferred.reject(err);
             } else {
@@ -127,6 +130,7 @@ module.exports = function(db, mongoose) {
         var deferred = q.defer();
 
         User.findByIdAndRemove(UserId, function (err, doc) {
+
             if (err) {
                 deferred.reject(err);
             } else {

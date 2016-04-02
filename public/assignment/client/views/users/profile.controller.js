@@ -34,7 +34,9 @@
 
 
         function update(user) {
+
             var updatedContent = {
+
                 _id: $rootScope.currentUser._id,
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -47,7 +49,9 @@
 
 
             UserService.updateUser($rootScope.currentUser._id, updatedContent)
+
                 .then(function (user){
+
                     $rootScope.currentUser = user.config.data;
                 });
         }

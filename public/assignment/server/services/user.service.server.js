@@ -36,6 +36,7 @@ module.exports = function(app, UserModel, uuid){
         // If both username and password are provided for credentials
 
         if(username != null && password!= null) {
+
             var credentials = {username: username, password: password};
             findUserByCredentials(credentials, req, res);
         }
@@ -43,6 +44,7 @@ module.exports = function(app, UserModel, uuid){
         //If only username is provided for credentials
 
         else if(username != null){
+
             findUserByUsername(username, req, res)
         }
 
@@ -53,8 +55,10 @@ module.exports = function(app, UserModel, uuid){
             var user = UserModel.findAllUsers()
                 .then(
                     function (doc) {
+
                         res.json(doc);
                     },
+
                     // send error if promise rejected
                     function ( err ) {
                         res.status(400).send(err);
@@ -68,9 +72,11 @@ module.exports = function(app, UserModel, uuid){
         var user = UserModel.findUserByCredentials(credentials)
             .then(
                 function (doc) {
+
                     req.session.currentUser = doc;
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
                     res.status(400).send(err);
@@ -79,6 +85,7 @@ module.exports = function(app, UserModel, uuid){
     }
 
     function loggedIn(req, res) {
+
         res.json(req.session.currentUser);
     }
 
@@ -94,10 +101,13 @@ module.exports = function(app, UserModel, uuid){
         var user = UserModel.findUserByUsername(username)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
             });
     }
@@ -109,10 +119,13 @@ module.exports = function(app, UserModel, uuid){
         var user = UserModel.findUserById(userId)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 });
 
@@ -125,10 +138,13 @@ module.exports = function(app, UserModel, uuid){
         var updatedUser = UserModel.updateUser(userId, user)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 });
     }
@@ -139,13 +155,17 @@ module.exports = function(app, UserModel, uuid){
         user = UserModel.createUser(user)
             // handle model promise
             .then(
+
                 // login user if promise resolved
                 function ( doc ) {
+
                     req.session.currentUser = doc;
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -159,10 +179,13 @@ module.exports = function(app, UserModel, uuid){
         user = UserModel.deleteUserById(userId)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
 
                 }

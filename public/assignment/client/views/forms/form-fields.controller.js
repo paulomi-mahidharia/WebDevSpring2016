@@ -14,19 +14,19 @@
 
         vm.fields = [];
         vm.field = {};
-
         vm.options = [];
+
+        vm.oldIndex = -1;
+        var formId = -1;
 
         vm.removeField = removeField;
         vm.addField = addField;
-
-        vm.oldIndex = -1;
-
-        var formId = -1;
+        vm.open = open;
 
         function init() {
 
             if($routeParams.formId) {
+
                 formId = $routeParams.formId;
 
                 FieldService.getFieldsForForm(formId)
@@ -54,17 +54,23 @@
         }
         init();
 
+        //Function to remove field
+
         function removeField($index) {
 
             var fieldId = vm.fields[$index]._id;
 
             FieldService.deleteFieldFromForm(formId, fieldId)
+
                 .then(function (response) {
+
                     if (response.data == "OK") {
                         vm.fields.splice($index, 1);
                     }
                 });
         }
+
+        //Function to add field
 
         function addField() {
 
@@ -107,7 +113,9 @@
             }
 
             FieldService.createFieldForForm(formId, vm.field)
+
                 .then(function (response) {
+
                     vm.fields = response.data.fields;
                     init();
                     vm.field = {};
@@ -182,6 +190,7 @@
         }
 
         function createEmailField(){
+
             var field = {label: "New Email Field",
                 type: "EMAIL",
                 placeholder: "New Email Field"};
@@ -190,6 +199,7 @@
         }
 
         function createPasswordField(){
+
             var field = {label: "New Password Field",
                 type: "EMAIL",
                 placeholder: "New Password Field"};
@@ -198,80 +208,92 @@
         }
 
 
+        //Function to open field
 
-        vm.open = open;
         function open($index){
-        vm.editTheField = vm.fields[$index];
-        var modalInstance = $uibModal.open({
-            templateUrl: 'popup.html',
-            controller: 'popupCtrl',
-            resolve: {
-                field: function () {
 
-                    //console.log(vm.editTheField);
+            vm.editTheField = vm.fields[$index];
 
-                    return vm.editTheField;
+            var modalInstance = $uibModal.open({
+
+                templateUrl: 'popup.html',
+                controller: 'popupCtrl',
+                resolve: {
+                    field: function () {
+
+                        return vm.editTheField;
+                    }
                 }
-            }
 
-        });
-
-        modalInstance.result
-            .then(function (field) {
-
-                return FieldService.updateField(formId, field._id, field);
-
-            })
-            .then(function (response) {
-                if (response.data === "OK") {
-                    init();
-
-                }
             });
+
+            modalInstance.result
+                .then(function (field) {
+
+                    return FieldService.updateField(formId, field._id, field);
+
+                })
+                .then(function (response) {
+
+                    if (response.data === "OK") {
+                        init();
+                    }
+                });
+        }
     }
-}
 
 
-angular.module('FormBuilderApp').controller('popupCtrl', function ($scope, $uibModalInstance, field) {
+    angular.module('FormBuilderApp').controller('popupCtrl', function ($scope, $uibModalInstance, field) {
 
-    $scope.field = field;
-    $scope.ok = function () {
+        $scope.field = field;
+        $scope.ok = function () {
 
-        if($scope.newLabel) {
-            $scope.field.label = $scope.newLabel;
-        }
+            if($scope.newLabel) {
 
-        if($scope.field.type != "DATE") {
-            if($scope.newPlaceholder) {
-                if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA" ||
-                    $scope.field.type === "EMAIL" || $scope.field.type === "PASSWORD"){
-                    $scope.field.placeholder = $scope.newPlaceholder;
-                } else {
-                    OtherFields();
+                $scope.field.label = $scope.newLabel;
+            }
+
+            if($scope.field.type != "DATE") {
+
+                if($scope.newPlaceholder) {
+
+                    if($scope.field.type === "TEXT" || $scope.field.type === "TEXTAREA" ||
+                        $scope.field.type === "EMAIL" || $scope.field.type === "PASSWORD"){
+
+                        $scope.field.placeholder = $scope.newPlaceholder;
+
+                    } else {
+
+                        OtherFields();
+                    }
                 }
+
             }
 
-        }
+            function OtherFields() {
 
-        function OtherFields() {
-            var content = $scope.newPlaceholder;
-            content = content.trim();
-            var rawOptions = content.split("\n");
-            var options = [];
-            for (var i in rawOptions) {
-                var rawField = rawOptions[i].split(":");
-                var option = {label: rawField[0], value: rawField[1]};
-                options.push(option);
+                var content = $scope.newPlaceholder;
+                content = content.trim();
+
+                var rawOptions = content.split("\n");
+                var options = [];
+
+                for (var i in rawOptions) {
+
+                    var rawField = rawOptions[i].split(":");
+                    var option = {label: rawField[0], value: rawField[1]};
+                    options.push(option);
+                }
+
+                $scope.field.options = options;
             }
-            $scope.field.options = options;
-        }
-        $uibModalInstance.close($scope.field);
-    };
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
+            $uibModalInstance.close($scope.field);
+        };
 
+        $scope.cancel = function () {
 
+            $uibModalInstance.dismiss('cancel');
+        };
+    });
 })();

@@ -1,66 +1,103 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
     <script type="text/ng-template" id="popup.html">
+
         <div class="modal-header" ng-switch on="field.type">
+
             <h3 class="modal-title" ng-switch-default>
                 Single Line Field
             </h3>
+
             <h3 class="modal-title" ng-switch-when="TEXTAREA">
                 Multiple Lines Field
             </h3>
+
             <h3 class="modal-title" ng-switch-when="DATE">
                 Date Field
             </h3>
+
             <h3 class="modal-title" ng-switch-when="OPTIONS">
                 Dropdown Field
             </h3>
+
             <h3 class="modal-title"  ng-switch-when="CHECKBOXES">
                 Checkbox Field
             </h3>
+
             <h3 class="modal-title" ng-switch-when="RADIOS">
                 Radio Button Field
             </h3>
+
             <h3 class="modal-title" ng-switch-when="EMAIL">
                 Email Field
             </h3>
+
             <h3 class="modal-title" ng-switch-when="PASSWORD">
                 Password Field
             </h3>
+
         </div>
 
         <form class="modal-body form" ng-switch on="field.type">
+
             <div class="row" ng-switch-when="TEXT">
+
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="fieldlabel">Label</label>
-                    <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
+                    <input type="text"
+                           id="fieldlabel"
+                           class="form-control"
+                           ng-model="$parent.newLabel">
+
                 </div>
 
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="placeholderForField">Placeholder</label>
-                    <input type="text" id="placeholderForField" class="form-control" ng-model="$parent.newPlaceholder">
+                    <input type="text"
+                           id="placeholderForField"
+                           class="form-control"
+                           ng-model="$parent.newPlaceholder">
 
                 </div>
 
             </div>
 
             <div class="row" ng-switch-when="DATE">
+
                 <div class="form-group col-md-12 col-sm-12">
+
                     <label for="fieldlabel">Label</label>
-                    <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
+                    <input type="text"
+                           id="fieldlabel"
+                           class="form-control"
+                           ng-model="$parent.newLabel">
+
                 </div>
 
             </div>
 
             <div class="row" ng-switch-when="TEXTAREA">
+
                 <div class="form-group col-md-12">
+
                     <label for="fieldlabel">Label</label>
-                    <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
+                    <input type="text"
+                           id="fieldlabel"
+                           class="form-control"
+                           ng-model="$parent.newLabel">
+
                 </div>
 
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="placeholderForField">Placeholder</label>
-                    <textarea type="text" id="placeholderForField" class="form-control"
-                              ng-model="$parent.newPlaceholder" rows="3">
+                    <textarea type="text"
+                              id="placeholderForField"
+                              class="form-control"
+                              ng-model="$parent.newPlaceholder"
+                              rows="3">
 
                     </textarea>
 
@@ -69,28 +106,48 @@
             </div>
 
             <div class="row" ng-switch-when="EMAIL">
+
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="fieldlabel">Label</label>
-                    <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
+                    <input type="text"
+                           id="fieldlabel"
+                           class="form-control"
+                           ng-model="$parent.newLabel">
+
                 </div>
 
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="placeholderForField">Placeholder</label>
-                    <input type="text" id="placeholderForField" class="form-control" ng-model="$parent.newPlaceholder">
+                    <input type="text"
+                           id="placeholderForField"
+                           class="form-control"
+                           ng-model="$parent.newPlaceholder">
 
                 </div>
 
             </div>
 
             <div class="row" ng-switch-when="PASSWORD">
+
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="fieldlabel">Label</label>
-                    <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
+                    <input type="text"
+                           id="fieldlabel"
+                           class="form-control"
+                           ng-model="$parent.newLabel">
+
                 </div>
 
                 <div class="form-group col-sm-12 col-md-12">
+
                     <label for="placeholderForField">Placeholder</label>
-                    <input type="text" id="placeholderForField" class="form-control" ng-model="$parent.newPlaceholder">
+                    <input type="text"
+                           id="placeholderForField"
+                           class="form-control"
+                           ng-model="$parent.newPlaceholder">
 
                 </div>
 
@@ -101,7 +158,10 @@
                 <div class="form-group col-md-12">
 
                     <label for="fieldlabel">Label</label>
-                    <input type="text" id="fieldlabel" class="form-control" ng-model="$parent.newLabel">
+                    <input type="text"
+                           id="fieldlabel"
+                           class="form-control"
+                           ng-model="$parent.newLabel">
 
                 </div>
 
@@ -109,7 +169,10 @@
 
                     <label for="optionsForField">Options</label>
 
-                    <textarea name="" id="optionsForField" rows="3" class="form-control"
+                    <textarea name=""
+                              id="optionsForField"
+                              rows="3"
+                              class="form-control"
                               ng-model="$parent.newPlaceholder">
 
                     </textarea>
@@ -121,29 +184,43 @@
         </form>
 
         <div class="modal-footer">
+
             <button class="btn btn-success" ng-click="ok()">Update</button>
             <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+
         </div>
+
     </script>
 
     <h1 class="page-header">Forms</h1>
+
     <ul class="nav nav-pills">
+
         <li role="presentation">
+
             <a href="#/forms">
                 Forms
             </a>
+
         </li>
 
         <li role="presentation" class="active">
+
             <a href="#/fields">
                 Fields
             </a>
+
         </li>
+
     </ul>
+
     <div class="container border span12">
+
         <div class="row" id="forms-container">
             <br/>
+
             <form action="" id="my-form" field-sortable field-axis="y">
+
                 <div class="row" ng-repeat="field in model.fields">
 
                     <div class="col-sm-4 col-md-4" ng-switch on="field.type">
@@ -151,31 +228,32 @@
                         <div ng-switch-default>
 
                             <label for="{{field._id}}">{{field.label}} : </label>
-                            <input type="{{field.type}}" class="form-control"
+                            <input type="{{field.type}}"
+                                   class="form-control"
                                    placeholder="{{field.placeholder}}"
                                    id="{{field._id}}">
                             <br/>
-
                         </div>
 
                         <div ng-switch-when="TEXTAREA">
 
                             <label for="{{field._id}}">{{field.label}} : </label>
-                            <textarea type="{{field.type}}" class="form-control"
+                            <textarea type="{{field.type}}"
+                                      class="form-control"
                                       placeholder="{{field.placeholder}}"
                                       rows="{{field.row}}"
                                       id="{{field._id}}"></textarea>
                             <br/>
                         </div>
 
-
-
                         <!--For dropdown fields-->
                         <div ng-switch-when="OPTIONS">
 
                             <label for="{{field._id}}">{{field.label}}</label>
 
-                            <select name="{{field.label}}" id="{{field._id}}" class="form-control">
+                            <select name="{{field.label}}"
+                                    id="{{field._id}}"
+                                    class="form-control">
 
                                 <option ng-repeat = "option in field.options"
                                         value="{{option.value}}">{{option.label}}</option>
@@ -220,7 +298,8 @@
                         <div ng-switch-when="EMAIL">
 
                             <label for="{{field._id}}">{{field.label}} : </label>
-                            <input type="{{field.type}}" class="form-control"
+                            <input type="{{field.type}}"
+                                   class="form-control"
                                       placeholder="{{field.placeholder}}"
                                       id="{{field._id}}"></input>
                             <br/>
@@ -230,17 +309,26 @@
                         <div ng-switch-when="PASSWORD">
 
                             <label for="{{field._id}}">{{field.label}} : </label>
-                            <input type="{{field.type}}" class="form-control"
-                                      placeholder="{{field.placeholder}}"
-                                      id="{{field._id}}"></input>
+                            <input type="{{field.type}}"
+                                   class="form-control"
+                                   placeholder="{{field.placeholder}}"
+                                   id="{{field._id}}"></input>
                             <br/>
                         </div>
-
                     </div>
+
                     <div class="col-md-4 col-sm-4 col-md-offset-2 edit text-center align-icons">
-                        <span class="glyphicon glyphicon-pencil btn btn-default hover" ng-click="model.open($index)" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-remove btn btn-default hover" ng-click="model.removeField($index)" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-align-justify btn btn-default hover" aria-hidden="true"></span>
+
+                        <span class="glyphicon glyphicon-pencil btn btn-default hover"
+                              ng-click="model.open($index)"
+                              aria-hidden="true"></span>
+
+                        <span class="glyphicon glyphicon-remove btn btn-default hover"
+                              ng-click="model.removeField($index)"
+                              aria-hidden="true"></span>
+
+                        <span class="glyphicon glyphicon-align-justify btn btn-default hover"
+                              aria-hidden="true"></span>
                     </div>
                     <br/>
                     <br/>
@@ -254,7 +342,9 @@
 
                     <label>Add new field:</label>
 
-                    <select name="new-field" id="new-field" class="form-control"
+                    <select name="new-field"
+                            id="new-field"
+                            class="form-control"
                             ng-model="model.fieldType"
                             ng-options="option.name for option in model.options track by option.value"
                             ng-init="model.options[0]">
@@ -266,9 +356,15 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-md-offset-2 edit text-center align-icons">
-                    <span class="glyphicon glyphicon-plus btn btn-default hover" ng-click="model.addField()" aria-hidden="true"></span>
+
+                    <span class="glyphicon glyphicon-plus btn btn-default hover"
+                          ng-click="model.addField()"
+                          aria-hidden="true"></span>
+
                     <span class="glyphicon glyphicon-plus btn btn-default hover non-visible"></span>
+
                     <span class="glyphicon glyphicon-plus btn btn-default hover non-visible"></span>
+
                 </div>
             </div>
         </div>

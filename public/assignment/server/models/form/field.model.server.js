@@ -34,8 +34,11 @@ module.exports = function(db, mongoose, FormModel) {
         Form.findById(formId)
             .then(
                 function (form){
+
                     for (var i in form.fields) {
+
                         if (form.fields[i]._id === fieldId) {
+
                             return form.fields[i];
 
                         }
@@ -43,6 +46,7 @@ module.exports = function(db, mongoose, FormModel) {
                 },
 
                 function (err){
+
                     return null;
                 }
             );
@@ -53,8 +57,7 @@ module.exports = function(db, mongoose, FormModel) {
         return Form.update(
             { _id: formId ,
                 "fields._id" :fieldId} ,
-            {$set : {"fields.$" : field}
-            }
+            {$set : {"fields.$" : field}}
         );
     }
     function deleteFieldByFieldIdAndFormId(formId, fieldId) {

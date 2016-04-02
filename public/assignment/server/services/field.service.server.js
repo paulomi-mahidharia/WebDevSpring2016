@@ -36,43 +36,43 @@ module.exports = function (app, FieldModel, uuid) {
         FieldModel.createFieldForForm(formId, field)
             .then(
                 function(form) {
+
                     form.fields.push(field);
                     return form.save();
                 },
                 function(err){
+
                     return null;
                 }
             )
             .then(
                 function (doc){
+
                     res.status(200).send("Created");
                 },
                 function (err){
+
                     res.status(400).send(err);
                 }
             );
-
-        //res.json(FormModel.findAllFieldsForForm(formId));
     }
 
     function findAllFieldsForForm(req, res) {
 
         var formId = req.params.formId;
-        //console.log(formId);
 
         FieldModel.findAllFieldsForForm(formId)
             .then(
                   function(fields){
+
                       res.json (fields)
                   },
 
                 function(err){
+
                     res.send(400);
                 }
             );
-
-
-        //res.json(FormModel.findAllFieldsForForm(formId));
     }
 
     function findFieldByFieldIdAndFormId(req, res) {
@@ -83,10 +83,13 @@ module.exports = function (app, FieldModel, uuid) {
         FieldModel.findFieldByFieldIdAndFormId(formId, fieldId)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -101,10 +104,13 @@ module.exports = function (app, FieldModel, uuid) {
         FieldModel.updateFieldByFieldIdAndFormId(formId, fieldId, field)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -117,10 +123,13 @@ module.exports = function (app, FieldModel, uuid) {
         FieldModel.deleteFieldByFieldIdAndFormId(formId, fieldId)
             .then(
                 function (doc) {
+
                     res.send(200);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );

@@ -14,7 +14,9 @@
         function init() {
 
             FormService.findAllFormsForUser($rootScope.currentUser._id)
+
                 .then(function (response) {
+
                         vm.forms = response.data;
                         //console.log(vm.forms);
                         vm.$location = $location;
@@ -26,6 +28,7 @@
         var selectedIndex = -1;
 
         //Event handler declarations
+
         vm.addForm = addForm;
         vm.updateForm = updateForm;
         vm.selectForm = selectForm;
@@ -45,8 +48,10 @@
                 })
                 .then(
                     function (response){
+
                         vm.forms = response.data;
                 });
+
             vm.form = {};
         }
 
@@ -57,6 +62,7 @@
             if (form.title != null && selectedIndex != -1) {
 
                 var position = vm.forms[selectedIndex];
+
                 var newForm = {
                     "title": form.title
                 };
@@ -71,7 +77,6 @@
                         function (response) {
 
                             vm.forms[selectedIndex] = response.data;
-
                             vm.selectedIndex = -1;
                         }
                     );
@@ -89,6 +94,7 @@
                     function(response) {
 
                     if(response.data == "OK") {
+
                         init();
                 }
             });

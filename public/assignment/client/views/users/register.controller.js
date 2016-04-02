@@ -13,6 +13,7 @@
         vm.register = register;
 
         function register(user) {
+
            if (user) {
 
                user.emails = contructArrayOfEmails(user.emails);
@@ -23,17 +24,20 @@
                         var currentUser = newUser.config.data;
 
                         if(currentUser!=null){
+
                             UserService.setCurrentUser(currentUser);
                             $location.url("/profile/");
                         }
                     });
             }
             else {
+
                 alert("Please fill the required fields!");
             }
         }
 
         function contructArrayOfEmails(emails){
+
             return emails.trim().split(",");
         }
     }

@@ -36,10 +36,13 @@ module.exports = function(app, FormModel, uuid) {
         FormModel.createForm(form)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -52,10 +55,13 @@ module.exports = function(app, FormModel, uuid) {
         FormModel.findAllFormsByUserId(userId)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -66,10 +72,13 @@ module.exports = function(app, FormModel, uuid) {
         FormModel.findAllForms()
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -82,10 +91,13 @@ module.exports = function(app, FormModel, uuid) {
         FormModel.findFormById(formId)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -100,10 +112,13 @@ module.exports = function(app, FormModel, uuid) {
         FormModel.updateFormById(formId, form)
             .then(
                 function (doc) {
+
                     res.json(doc);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
@@ -112,13 +127,17 @@ module.exports = function(app, FormModel, uuid) {
     function deleteFormById(req, res) {
 
         var formId = req.params.formId;
+
         FormModel.deleteFormById(formId)
             .then(
                 function (doc) {
+
                     res.send(200);
                 },
+
                 // send error if promise rejected
                 function ( err ) {
+
                     res.status(400).send(err);
                 }
             );
