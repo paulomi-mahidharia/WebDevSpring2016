@@ -4,8 +4,13 @@
 "use strict";
 
 var notes = require("./note.mock.json");
+var q = require("q");
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
+
+    var NoteSchema = require("./note.schema.server.js")(mongoose);
+    var Note = mongoose.model('Note', NoteSchema);
+
     var api = {
         findAllNotesLikedByUser: findAllNotesLikedByUser,
         deleteNoteById: deleteNoteById,
@@ -43,7 +48,7 @@ module.exports = function() {
     }
 
     function findAllNotesForUser(userId){
-        var userNotes = [];
+        /*var userNotes = [];
         for(var i in notes){
             var noteObj = notes[i];
             //console.log(noteObj.createdBy);
@@ -52,7 +57,9 @@ module.exports = function() {
             }
         }
         //console.log(userNotes);
-        return userNotes;
+        return userNotes;*/
+
+        return Note.find();
     }
 
     function selectNoteById(noteId){
@@ -75,6 +82,31 @@ module.exports = function() {
     }
 
     function createNote(newNote){
-        notes.push(newNote);
+
+
+        // use q to defer the response
+        var deferred = q.defer();
+
+        // insert new user with mongoose user model's create()
+        Note.create(newNote, function (err, doc) {
+
+            if (err) {
+                // reject promise if error
+                deferred.reject(err);
+            } else {
+                // resolve promise
+                console.log(doc);
+                deferred.resolve(doc);
+            }
+
+        });
+
+        // return a promise
+        return deferred.promise;
+
+        /*var note = Note.create(newNote);
+        console.log(note);
+        return note;*/
     }
+
 };

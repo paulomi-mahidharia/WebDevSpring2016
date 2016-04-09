@@ -13,16 +13,23 @@
             {"_id": "010", "notetext":"Meet Nikita Khanna at Boston house of pizza at 6.00pm."},
             {"_id": "020", "notetext": "Next job shift on Monday 2 to 8 pm."}
         ];
-        $scope.widgets = widgets;
+
+        var vm = this;
+        vm.widgets = widgets;
 
         // event handlers decleration
         $scope.addText = addText;
         $scope.deleteText = deleteText;
         $scope.selectText = selectText;
         $scope.updateText = updateText;
+        vm.trustAsHtml    = trustAsHtml;
 
 
         // event handlers implementation
+        function trustAsHtml(html) {
+            return $sce.trustAsHtml(html);
+        }
+
         function addText(widget){
             var newId = (new Date).getTime();
             var newText =  {_id: newId,

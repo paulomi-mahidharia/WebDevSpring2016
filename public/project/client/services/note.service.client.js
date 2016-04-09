@@ -60,6 +60,7 @@
         }
 
         function createNoteForUser(userId, newNote){
+            //console.log("gcdng");
             return $http.post("/api/project/user/"+userId+"/note", newNote);
         }
 

@@ -24,17 +24,20 @@
             <tbody>
             <tr>
                 <td>
-                        <textarea  type="text"
+                        <!--<textarea  type="text"
                                    rows="3"
                                    class="form-control"
                                    ng-model = "widget.notetext"
                                    id="text" placeholder="Start writing notes...">
 
-                        </textarea>
+                        </textarea>-->
+                    <div text-angular
+                         ng-model="model.widget.html.text">
+                    </div>
                 </td>
                 <td>
                     <span ng-click="addText(widget)" class="glyphicon glyphicon-plus btn btn-default" aria-hidden="true"></span>
-                    <span ng-click="updateText(widget)" class="glyphicon glyphicon-ok btn btn-default" aria-hidden="true"></span>
+                    <span ng-click="updateText(model.widget)" class="glyphicon glyphicon-ok btn btn-default" aria-hidden="true"></span>
                 </td>
             </tr>
             <tr ng-repeat="widget in widgets">

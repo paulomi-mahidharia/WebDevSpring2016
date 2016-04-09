@@ -40,8 +40,16 @@
                 }
             })
             .when("/createnote", {
-                templateUrl: "views//createnote/createnote.view.html",
-                controller: "NoteController",
+                templateUrl: "views/createnote/createnote.view.html",
+                controller: "CreateNoteController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/editnote/:noteId", {
+                templateUrl: "views/createnote/editnote.view.html",
+                controller: "EditNoteController",
                 controllerAs: "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn

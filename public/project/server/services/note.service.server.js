@@ -38,7 +38,21 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
     function findAllNotesForUser(req, res){
         var userId = req.params.userId;
         //console.log(userId);
-        res.json(NoteModel.findAllNotesForUser(userId));
+        //res.json(NoteModel.findAllNotesForUser(userId));
+
+        NoteModel.findAllNotesForUser(userId)
+            .then(
+                function (doc) {
+                    console.log(doc);
+                    res.json(doc);
+                },
+
+                // send error if promise rejected
+                function ( err ) {
+
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function selectNoteById(req, res){
@@ -58,13 +72,26 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
     }
 
     function createNoteForUser(req, res){
-        var userId = req.params.userId;
-        var newNote = req.body;
-        newNote.createdBy = userId;
-        newNote.id = parseInt(uuid.v4(), 16);
 
-        NoteModel.createNote(newNote);
-        res.json(NoteModel.findAllNotesForUser(userId));
+        var note = req.body;
+        var userId = req.params.userId;
+
+        note.createdBy = userId;
+        note.created = Date.now();
+
+         NoteModel.createNote(note)
+            .then(
+                function (doc) {
+                    console.log(doc);
+                    res.json(doc);
+                },
+
+                // send error if promise rejected
+                function ( err ) {
+
+                    res.status(400).send(err);
+                }
+            );
     }
 
     //Notebook functions

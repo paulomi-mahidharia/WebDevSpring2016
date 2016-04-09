@@ -13,7 +13,7 @@
         vm.deleteNote = deleteNote;
         vm.selectNote = selectNote;
         vm.updateNote = updateNote;
-        vm.addNote = addNote;
+        //vm.addNote = addNote;
 
 
         var selectedIndex = -1;
@@ -23,7 +23,7 @@
 
             NoteService.findAllNotesForUser($rootScope.currentUser._id)
                 .then(function (foundNotes) {
-                    //console.log(foundNotes);
+                    console.log(foundNotes.data);
                     vm.notes = foundNotes.data;
                     /*for(var note in $rootScope.notes){
                         vm.notes.push($rootScope.notes[note]);
@@ -89,7 +89,7 @@
             }
         }
 
-        function addNote(widget){
+        /*function addNote(widget){
 
             NoteService.createNoteForUser($rootScope.currentUser._id, widget)
                 .then(function(response) {
@@ -97,6 +97,6 @@
                 });
             vm.notes = {};
             $location.url("/note");
-        }
+        }*/
     }
 })();
