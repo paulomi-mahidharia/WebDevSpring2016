@@ -5,6 +5,8 @@
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 
+var bcrypt = require("bcrypt-nodejs");
+
 module.exports = function(app, UserModel, uuid){
 
     var auth = authorized;
@@ -21,7 +23,7 @@ module.exports = function(app, UserModel, uuid){
     app.put("/api/assignment/user/:id",auth, updateUser);
 
     //creates a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/assignment/user",auth, createUser);
+    app.post("/api/assignment/user", createUser);
 
     //removes an existing user whose id property is equal to the id path parameter.
     // Responds with an array of all users
@@ -45,11 +47,14 @@ module.exports = function(app, UserModel, uuid){
 
     function localStrategy(username, password, done) {
         UserModel
-            .findUserByCredentials({username: username, password: password})
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
-                    return done(null, user);
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                        } else {
+                        return done(null, false);
+                        }
                 },
                 function(err) {
                     if (err) { return done(err); }
@@ -238,6 +243,8 @@ module.exports = function(app, UserModel, uuid){
                     if(user) {
                         res.json(null);
                     } else {
+                        // encrypt the password when registering
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return UserModel.createUser(newUser);
                     }
                 },
