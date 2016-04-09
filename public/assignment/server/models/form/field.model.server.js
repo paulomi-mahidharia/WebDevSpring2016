@@ -12,10 +12,29 @@ module.exports = function(db, mongoose, FormModel) {
         findAllFieldsForForm: findAllFieldsForForm,
         findFieldByFieldIdAndFormId: findFieldByFieldIdAndFormId,
         updateFieldByFieldIdAndFormId: updateFieldByFieldIdAndFormId,
-        deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId
+        deleteFieldByFieldIdAndFormId: deleteFieldByFieldIdAndFormId,
+        sortFields: sortFields
     };
 
     return api;
+
+
+    function sortFields(formId, startIndex, endIndex) {
+        return Form
+            .findById(formId)
+            .then(
+                function(form) {
+                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+
+                    // notify mongoose 'pages' field changed
+                    form.markModified("fields");
+
+                    form.save();
+                }
+            );
+    }
+
+
 
     function createFieldForForm(formId, field) {
 

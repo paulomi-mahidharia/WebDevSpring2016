@@ -22,6 +22,7 @@
         vm.removeField = removeField;
         vm.addField = addField;
         vm.open = open;
+        vm.sortFields = sortFields;
 
         function init() {
 
@@ -53,6 +54,21 @@
             ];
         }
         init();
+
+
+        //Function to sort fields
+
+        function sortFields(start, end) {
+            FieldService
+                .sortFields(formId, start, end)
+                .then(
+                    function (response) {
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
+        }
 
         //Function to remove field
 

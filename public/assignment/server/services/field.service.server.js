@@ -28,6 +28,33 @@ module.exports = function (app, FieldModel, uuid) {
     // belonging to a form object whose id is equal to the formId path parameter
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByFieldIdAndFormId);
 
+    app.put("/api/assignment/form/:formId/field", sortFields);
+
+
+    function sortFields(req, res){
+        var formId = req.params.formId;
+        var startIndex = req.query.startIndex;
+        var endIndex = req.query.endIndex;
+
+        if(startIndex && endIndex){
+
+            FieldModel.sortFields(formId, startIndex, endIndex)
+
+                .then(
+                    function (stat) {
+
+                        return res.json(200);
+                        },
+                    function (err) {
+
+                        res.status(400).send(err);
+                        }
+                );
+        }
+
+    }
+
+
     function createFormField (req, res) {
 
         var field = req.body;
