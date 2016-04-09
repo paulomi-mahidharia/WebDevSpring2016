@@ -23,6 +23,7 @@
 
 
         function sortFields(formId, startIndex, endIndex) {
+
             return $http.put("/api/assignment/form/"+formId+"/field?startIndex="+startIndex+"&endIndex="+endIndex);
         }
 

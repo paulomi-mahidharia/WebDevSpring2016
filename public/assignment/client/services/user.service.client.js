@@ -18,7 +18,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            login: login
         };
 
         return api;
@@ -66,6 +67,10 @@
         function findUserById(userId){
 
             return $http.get("/api/assignment/user/"+userId);
+        }
+
+        function login(user) {
+            return $http.post("/api/assignment/login", user);
         }
 
     }
