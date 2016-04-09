@@ -18,7 +18,7 @@
 
                user.emails = contructArrayOfEmails(user.emails);
 
-                UserService.createUser(user)
+                UserService.register(user)
                     .then(function (newUser) {
 
                         var currentUser = newUser.config.data;

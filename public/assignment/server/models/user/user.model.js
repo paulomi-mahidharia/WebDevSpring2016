@@ -19,7 +19,8 @@ module.exports = function(db, mongoose) {
         createUser: createUser,
         findUserById: findUserById,
         deleteUserById: deleteUserById,
-        updateUser: updateUser
+        updateUser: updateUser,
+        register: register
     };
 
     return api;
@@ -72,6 +73,10 @@ module.exports = function(db, mongoose) {
         return User.find();
     }
 
+    function createUser(user) {
+        return User.create(user);
+    }
+
     function updateUser(userId, user){
 
         var deferred = q.defer();
@@ -103,7 +108,7 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
-    function createUser(user){
+    function register(user){
 
         // use q to defer the response
         var deferred = q.defer();

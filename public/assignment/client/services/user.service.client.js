@@ -19,7 +19,8 @@
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            login: login
+            login: login,
+            register: register
         };
 
         return api;
@@ -48,6 +49,11 @@
         function findUserByUsername(username){
 
             return $http.get("/api/assignemnt/user?username="+username);
+        }
+
+        function register(user){
+
+            return $http.post("/api/assignment/register",user);
         }
 
         function createUser(user){

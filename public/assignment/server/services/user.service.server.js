@@ -22,7 +22,10 @@ module.exports = function(app, UserModel, uuid){
     //The new properties are set to the values in the user object embedded in the HTTP request. Responds with an array of all users
     app.put("/api/assignment/user/:id",auth, updateUser);
 
-    //creates a new user embedded in the body of the request, and responds with an array of all users
+    //registers a new user embedded in the body of the request, and responds with an array of all users
+    app.post("/api/assignment/register", register);
+
+    //admin creates a new user embedded in the body of the request, and responds with an array of all users
     app.post("/api/assignment/user", createUser);
 
     //removes an existing user whose id property is equal to the id path parameter.
@@ -87,12 +90,19 @@ module.exports = function(app, UserModel, uuid){
         else {
 
             if (isAdmin(req.user)) {
+                var users =[];
 
                 var user = UserModel.findAllUsers()
                     .then(
                         function (doc) {
 
-                            res.json(doc);
+                            for(var i in doc){
+                                if(doc[i].roles.indexOf("admin") == -1){
+                                    users.push(doc[i]);
+                                }
+                            }
+
+                            res.json(users);
                         },
 
                         // send error if promise rejected
@@ -176,18 +186,6 @@ module.exports = function(app, UserModel, uuid){
         var userId = req.params.id;
         var newUser = req.body;
 
-        /*var updatedUser = UserModel.updateUser(userId, user)
-            .then(
-                function (doc) {
-
-                    res.json(doc);
-                },
-
-                // send error if promise rejected
-                function ( err ) {
-
-                    res.status(400).send(err);
-                });*/
         if(!isAdmin(req.user)) {
             delete newUser.roles;
         }
@@ -215,27 +213,9 @@ module.exports = function(app, UserModel, uuid){
             );
     }
 
-    function createUser(req,res){
+    function register(req,res){
         var newUser = req.body;
         newUser.roles = ['student'];
-
-        /*user = UserModel.createUser(user)
-            // handle model promise
-            .then(
-
-                // login user if promise resolved
-                function ( doc ) {
-
-                    req.session.currentUser = doc;
-                    res.json(doc);
-                },
-
-                // send error if promise rejected
-                function ( err ) {
-
-                    res.status(400).send(err);
-                }
-            );*/
 
         UserModel.findUserByUsername(newUser.username)
             .then(
@@ -245,7 +225,7 @@ module.exports = function(app, UserModel, uuid){
                     } else {
                         // encrypt the password when registering
                         newUser.password = bcrypt.hashSync(newUser.password);
-                        return UserModel.createUser(newUser);
+                        return UserModel.register(newUser);
                     }
                 },
                 function(err){
@@ -270,25 +250,57 @@ module.exports = function(app, UserModel, uuid){
             );
     }
 
+    function createUser(req, res) {
+        var newUser = req.body;
+        console.log(newUser);
+        if(newUser.roles && newUser.roles.length > 1) {
+            newUser.roles = newUser.roles.split(",");
+        } else {
+            newUser.roles = ["student"];
+        }
+
+        // first check if a user already exists with the username
+        UserModel
+            .findUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    // if the user does not already exist
+                    if(user == null) {
+                        // create a new user
+                        newUser.password = bcrypt.hashSync(newUser.password);
+                        return UserModel.createUser(newUser)
+                            .then(
+                                // fetch all the users
+                                function(){
+                                    return UserModel.findAllUsers();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                        // if the user already exists, then just fetch all the users
+                    } else {
+                        return UserModel.findAllUsers();
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(){
+                    res.status(400).send(err);
+                }
+            )
+    }
+
     function deleteUserById(req, res){
 
         //var user = req.body;
         var userId = req.params.id;
-
-        /*user = UserModel.deleteUserById(userId)
-            .then(
-                function (doc) {
-
-                    res.json(doc);
-                },
-
-                // send error if promise rejected
-                function ( err ) {
-
-                    res.status(400).send(err);
-
-                }
-            );*/
 
         if(isAdmin(req.user)) {
 

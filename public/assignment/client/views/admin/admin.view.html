@@ -13,6 +13,9 @@
                     </th>
 
                      <th>
+                         <a href="" class="btn btn-default" style="visibility: hidden">
+                             <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                         </a>
                          Password
                      </th>
                     <th>
@@ -29,13 +32,14 @@
                     </th>
 
                     <th>
+                        <a href="" class="btn btn-default" style="visibility: hidden">
+                            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                        </a>
                         Role
                     </th>
 
                     <th>
-                        <a href="" class="btn btn-default">
-                            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                        </a>
+
                         Action
                     </th>
                 </tr>
@@ -44,27 +48,47 @@
             <tbody>
                 <tr>
                     <td>
-                        <input type="text" class="form-control" id="inputUsername" placeholder="username"/>
+                        <input type="text"
+                               class="form-control"
+                               id="inputUsername"
+                               placeholder="username"
+                               ng-model="model.user.username"/>
                     </td>
                     <td>
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="password">
+                        <input type="password"
+                               class="form-control"
+                               id="inputPassword2"
+                               placeholder="password"
+                               ng-model="model.user.password">
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="firstName" placeholder="First Name"/>
+                        <input type="text"
+                               class="form-control"
+                               id="firstName"
+                               placeholder="First Name"
+                               ng-model="model.user.firstName"/>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="lastName" placeholder="Last Name"/>
+                        <input type="text"
+                               class="form-control"
+                               id="lastName"
+                               placeholder="Last Name"
+                               ng-model="model.user.lastName"/>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" id="inputRole" placeholder="role1,role2"/>
+                        <input type="text"
+                               class="form-control"
+                               id="inputRole"
+                               placeholder="role1,role2"
+                               ng-model="model.user.roles"/>
                     </td>
                     <td>
-                        <a href="" class="btn btn-default" aria-label="Left Align">
+                        <a ng-click="model.addUser(model.user)" class="btn btn-default" aria-label="Left Align">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
 
-                        <a href="" class="btn btn-default">
+                        <a ng-click="model.updateUser(model.user)" class="btn btn-default">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </a>
                     </td>
@@ -89,6 +113,18 @@
 
                 <td>
                     <input type="text" class="form-control" ng-model="user.roles"/>
+                </td>
+                <td>
+                        <span ng-click="model.deleteUser($index)"
+                              class="glyphicon glyphicon-remove btn btn-default"
+                              aria-hidden="true">
+                        </span>
+
+                        <span ng-click="model.selectUser($index)"
+                              class="glyphicon glyphicon-pencil btn btn-default"
+                              aria-hidden="true">
+                        </span>
+
                 </td>
 
             </tr>
