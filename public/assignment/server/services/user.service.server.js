@@ -86,7 +86,7 @@ module.exports = function(app, UserModel, uuid){
 
         else {
 
-            if (!isAdmin(req.user)) {
+            if (isAdmin(req.user)) {
 
                 var user = UserModel.findAllUsers()
                     .then(

@@ -69,7 +69,7 @@ module.exports = function(db, mongoose) {
 
     function findAllUsers(){
 
-        return users;
+        return User.find();
     }
 
     function updateUser(userId, user){
