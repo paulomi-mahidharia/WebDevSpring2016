@@ -12,18 +12,31 @@
 
         vm.addUser = addUser;
         vm.deleteUser = deleteUser;
+        vm.selectUser = selectUser;
+        vm.updateUser = updateUser;
 
-        (function init() {
+        function init() {
+
+            var newUsers =[];
 
             UserService.findAllUsers()
                 .then(
-                    function(allUsers){
-                        console.log(allUsers);
-                        vm.users = allUsers.data;
+                    function(response){
+
+                        var allUsers = response.data;
+
+                        for(var i in allUsers){
+                            if(allUsers[i].roles.indexOf("admin") == -1){
+                                newUsers.push(allUsers[i]);
+                            }
+                        }
+
+                        vm.users = newUsers;
                     }
                 );
 
-        })();
+        }
+        init();
 
         function addUser(user){
 
@@ -32,17 +45,7 @@
                 .then(
                     function(response){
 
-                        var users = response.data;
-
-                        // Display users except Admin
-
-                        for(var i in users){
-                            if(users[i].roles.indexOf("admin") == -1){
-                                newUsers.push(users[i]);
-                            }
-                        }
-
-                        vm.users = newUsers;
+                        init();
                     }
                 );
             vm.user = {};
@@ -55,12 +58,44 @@
             UserService.deleteUserById(userId)
                 .then(
                     function(users){
-                        vm.users = users.data;
+
+                        init();
 
                     }
                 );
         }
 
+        function selectUser($index){
+
+            var userId = vm.users[$index]._id;
+
+            UserService.findUserById(userId)
+                .then(
+                    function(response){
+
+                        var user = response.data;
+
+                        vm.user = user;
+                    }
+                );
+        }
+
+        function updateUser(user){
+
+            var userId = user._id;
+
+            var newUsers=[];
+
+            UserService.updateUser(userId, user)
+                .then(
+                    function(response){
+
+                        init();
+                        vm.user = {};
+
+                    }
+                );
+        }
 
     }
 })();
