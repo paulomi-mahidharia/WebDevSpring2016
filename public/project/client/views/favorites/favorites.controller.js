@@ -7,7 +7,7 @@
         .module("NoteSpace")
         .controller("FavoriteNotesController", FavoriteNotesController);
 
-    function FavoriteNotesController($location, NoteService, $rootScope) {
+    function FavoriteNotesController($location, NoteService, $rootScope, UserService) {
 
         var vm = this;
 
@@ -15,12 +15,14 @@
 
         function init() {
 
+            UserService.findNoteLikes($rootScope.currentUser._id)
 
-            NoteService.findAllNotesLikedByUser($rootScope.currentUser._id)
-                .then(function (foundNotes) {
-                    vm.notes = foundNotes.data;
-                    vm.$location = $location;
-                });
+                .then(
+                    function(response){
+
+                        vm.notes = response.data.likesNotes;
+                    }
+                );
         }
         init();
 

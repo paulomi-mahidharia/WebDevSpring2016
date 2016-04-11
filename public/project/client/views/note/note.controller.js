@@ -12,6 +12,7 @@
 
         vm.deleteNote = deleteNote;
         vm.editNote = editNote;
+        vm.favorite = favorite;
         //vm.selectNote = selectNote;
         //vm.updateNote = updateNote;
         //vm.addNote = addNote;
@@ -24,11 +25,9 @@
 
             NoteService.findAllNotesForUser($rootScope.currentUser._id)
                 .then(function (foundNotes) {
-                    console.log(foundNotes.data);
+
                     vm.notes = foundNotes.data;
-                    /*for(var note in $rootScope.notes){
-                        vm.notes.push($rootScope.notes[note]);
-                    }*/
+
                     vm.$location = $location;
                 });
 
@@ -61,6 +60,27 @@
             var noteId = vm.notes[$index]._id;
 
             $location.url("/editnote/"+noteId);
+        }
+
+        function favorite($index){
+            var noteId = vm.notes[$index]._id;
+            console.log(noteId);
+
+            NoteService.findNoteById(noteId)
+                .then(function(response){
+                    if(response) {
+                        //console.log(response);
+                        var note = response.data;
+                        note.likes.push($rootScope.currentUser._id);
+                        //console.log(note);
+                        /*NoteService.updateNoteById(noteId, note)
+                            .then(function(response){
+                                console.log(response);
+                            });*/
+                        NoteService
+                            .userLikesNote($rootScope.currentUser._id, note);
+                    }
+                })
         }
 
         /*function selectNote($index){

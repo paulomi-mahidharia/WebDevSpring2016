@@ -1,7 +1,7 @@
 /**
  * Created by paulomimahidharia on 3/16/16.
  */
-module.exports = function(app, UserModel, uuid){
+module.exports = function(app, UserModel, NoteModel, uuid){
 
     //responds with an array of all users
     app.get("/api/project/user", findAllUsers);
@@ -25,6 +25,39 @@ module.exports = function(app, UserModel, uuid){
 
     //Logout current user
     app.post("/api/project/user/logout", logout);
+
+    //Find notes liked by user
+    app.get("/api/project/user/:userId/notes", findNoteLikes);
+
+    function findNoteLikes(req, res){
+        var userId = req.params.userId;
+
+        var user;
+
+        UserModel.findUserById(userId)
+            .then (
+                function (doc) {
+                    user = doc;
+                    if (doc) {
+                        return NoteModel.findNotesByIds(user.likes);
+                    } else {
+                        res.json ({});
+                    }
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then (
+                function (notes) {
+                    user.likesNotes = notes;
+                    res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
 
 

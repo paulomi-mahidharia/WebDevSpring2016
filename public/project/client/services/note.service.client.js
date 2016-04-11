@@ -30,8 +30,10 @@
 
         return api;
 
+
+
         function userLikesNote(userId, note){
-            return $http.post("/api/project/user/"+userId+"/note/"+note.id, note);
+            return $http.post("/api/project/user/"+userId+"/note/"+note._id, note);
         }
 
         function findAllNotesLikedByUser(userId){

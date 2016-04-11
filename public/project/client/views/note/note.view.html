@@ -98,11 +98,11 @@
                     </button>
 
                     <button class="btn btn-default" ng-show="showStar==1"
-                            ng-click="model.favorite(model.note)">
+                            ng-click="model.favorite($index)">
 
-                            <span ng-show="note.likes.indexOf(currentUser._id) > -1"
+                            <span ng-show="model.note.likes.indexOf(currentUser._id) > -1"
                                   class="glyphicon glyphicon-star "></span>
-                            <span ng-show="!note || !note.likes || note.likes.indexOf(currentUser._id) == -1"
+                            <span ng-show="!model.note || !model.note.likes || model.note.likes.indexOf(currentUser._id) == -1"
                                   class="glyphicon glyphicon-star-empty "></span>
 
                     </button>

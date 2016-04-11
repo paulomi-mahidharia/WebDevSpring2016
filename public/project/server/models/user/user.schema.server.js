@@ -3,6 +3,8 @@
  */
 module.exports = function(mongoose) {
 
+    var NoteSchema = require("../note/note.schema.server.js")(mongoose);
+
     // use mongoose to declare a user schema
     var UserSchema = mongoose.Schema({
         username: String,
@@ -10,7 +12,11 @@ module.exports = function(mongoose) {
         firstName: String,
         lastName: String,
         emails: [String],
-        phones: [String]
+        phones: [String],
+        // note ids of notes this user likes
+        likes: [String],
+        // movies this user likes
+        likesNotes: [NoteSchema]
         // collection property sets
         // collection name to 'user'
     }, {collection: 'project.user'});

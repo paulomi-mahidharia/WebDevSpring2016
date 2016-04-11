@@ -18,7 +18,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            findNoteLikes: findNoteLikes
         };
 
         return api;
@@ -66,6 +67,11 @@
         function findUserById(userId){
 
             return $http.get("/api/project/user/"+userId);
+        }
+
+        function findNoteLikes(userId){
+
+            return $http.get("/api/project/user/"+userId+"/notes", findNoteLikes);
         }
 
     }

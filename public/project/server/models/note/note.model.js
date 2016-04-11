@@ -12,28 +12,65 @@ module.exports = function(db, mongoose) {
     var Note = mongoose.model('Note', NoteSchema);
 
     var api = {
-        findAllNotesLikedByUser: findAllNotesLikedByUser,
+
         deleteNoteById: deleteNoteById,
         findAllNotesForUser: findAllNotesForUser,
         findNoteById: findNoteById,
         updateNoteById: updateNoteById,
-        createNote: createNote
+        createNote: createNote,
+        userLikesNote: userLikesNote,
+        findNotesByIds: findNotesByIds
     };
 
     return api;
 
-    function findAllNotesLikedByUser(userId) {
-        var userNotes = [];
-        for (var i in notes) {
-            var noteObj = notes[i];
-            for(var j in noteObj.likedBy){
-                if(noteObj.likedBy[j] == userId){
-                    userNotes.push(noteObj);
+    function userLikesNote(userId, note){
+        var deferred = q.defer();
 
+        // find the note by noteId
+        Note.findOne({_id: note._id},
+
+            function (err, doc) {
+
+                // reject promise if error
+                if (err) {
+                    deferred.reject(err);
                 }
+
+                // if there's a note
+                if (doc) {
+                    // add user to likes
+                    doc.likes.push (userId);
+                    // save changes
+                    doc.save(function(err, doc){
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function findNotesByIds(noteIds){
+
+        var deferred = q.defer();
+
+        // find all users in array of user IDs
+        Note.find({
+            _id: {$in: noteIds}
+        }, function (err, notes) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(notes);
             }
-        }
-        return userNotes;
+        });
+
+        return deferred.promise;
     }
 
     function deleteNoteById(noteId){
@@ -47,12 +84,6 @@ module.exports = function(db, mongoose) {
     }
 
     function findNoteById(noteId){
-        /*for (var noteObj in notes) {
-            if(notes[noteObj].id == noteId) {
-                return notes[noteObj];
-            }
-        }
-        return null;*/
 
         return Note.findById(noteId);
     }

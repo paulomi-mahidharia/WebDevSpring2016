@@ -2,7 +2,7 @@
  * Created by paulomimahidharia on 3/25/16.
  */
 "use strict";
-module.exports = function(app, NoteModel, NotebookModel, uuid) {
+module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     //app.post("/api/project/user/:userId/movie/:noteId", userLikesNote);
 
     //Note api calls
@@ -12,6 +12,7 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
     app.get("/api/project/note/:noteId", findNoteById);
     app.put("/api/project/note/:noteId", updateNoteById);
     app.post("/api/project/user/:userId/note", createNoteForUser);
+    app.post("/api/project/user/:userId/note/:noteId", userLikesNote);
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
@@ -22,9 +23,53 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
 
     //Note functions
 
+    function userLikesNote(req, res) {
+        var note  = req.body;
+        var userId = req.params.userId;
+        var noteId = req.params.noteId;
+        var newNote;
+
+        NoteModel
+            .userLikesNote(userId, note)
+            // add user to note likes
+            .then(
+                function (note) {
+                    return UserModel.userLikesNote(userId, note);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            // add movie to user likes
+            .then(
+                function (user) {
+                    res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+
+
     function findAllNotesLikedByUser(req, res){
         var userId = req.params.userId;
         res.json(NoteModel.findAllNotesLikedByUser(userId));
+
+
+        //var user = null;
+
+        /*UserModel.findUserById(userId)
+            .then(function(doc){
+                user = doc;
+                //console.log(user);
+                if(user){
+
+                }
+            })*/
+
+
     }
 
     function deleteNoteById(req, res){
@@ -89,7 +134,21 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
     function updateNoteById(req, res){
         var noteId = req.params.noteId;
         var newNote = req.body;
-        res.json(NoteModel.updateNoteById(noteId, newNote));
+        //res.json(NoteModel.updateNoteById(noteId, newNote));
+
+        NoteModel.updateNoteById(noteId, newNote)
+            .then(
+                function (doc) {
+                    //console.log(doc);
+                    res.json(doc);
+                },
+
+                // send error if promise rejected
+                function ( err ) {
+
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function createNoteForUser(req, res){

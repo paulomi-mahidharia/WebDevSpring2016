@@ -19,10 +19,44 @@ module.exports = function(db, mongoose) {
         createUser: createUser,
         findUserById: findUserById,
         deleteUserById: deleteUserById,
-        updateUser: updateUser
+        updateUser: updateUser,
+        userLikesNote: userLikesNote
+        //getFavoriteNotes: getFavoriteNotes
     };
 
     return api;
+
+    function userLikesNote (userId, note) {
+
+        var deferred = q.defer();
+
+        // find the user
+        User.findById(userId, function (err, doc) {
+
+            // reject promise if error
+            if (err) {
+                deferred.reject(err);
+            } else {
+
+                // add movie id to user likes
+                doc.likes.push (note._id);
+
+                // save user
+                doc.save (function (err, doc) {
+
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+
+                        // resolve promise with user
+                        deferred.resolve (doc);
+                    }
+                });
+            }
+        });
+
+        return deferred;
+    }
 
     function findUserByCredentials(credentials){
 
