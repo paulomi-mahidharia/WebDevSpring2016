@@ -9,7 +9,7 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
     app.get("/api/project/user/:userId/note/liked", findAllNotesLikedByUser);
     app.delete("/api/project/note/:noteId", deleteNoteById);
     app.get("/api/project/user/:userId/note", findAllNotesForUser);
-    app.get("/api/project/note/:noteId", selectNoteById);
+    app.get("/api/project/note/:noteId", findNoteById);
     app.put("/api/project/note/:noteId", updateNoteById);
     app.post("/api/project/user/:userId/note", createNoteForUser);
 
@@ -29,21 +29,11 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
 
     function deleteNoteById(req, res){
         var noteId = req.params.noteId;
-        //console.log("In server");
-        //console.log(noteId);
-        res.send(NoteModel.deleteNoteById(noteId));
-        //res.send(200);
-    }
 
-    function findAllNotesForUser(req, res){
-        var userId = req.params.userId;
-        //console.log(userId);
-        //res.json(NoteModel.findAllNotesForUser(userId));
-
-        NoteModel.findAllNotesForUser(userId)
+        NoteModel.deleteNoteById(noteId)
             .then(
                 function (doc) {
-                    console.log(doc);
+
                     res.json(doc);
                 },
 
@@ -55,9 +45,40 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
             );
     }
 
-    function selectNoteById(req, res){
+    function findAllNotesForUser(req, res){
+        var userId = req.params.userId;
+
+        NoteModel.findAllNotesForUser(userId)
+            .then(
+                function (doc) {
+
+                    res.json(doc);
+                },
+
+                // send error if promise rejected
+                function ( err ) {
+
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findNoteById(req, res){
         var noteId = req.params.noteId;
-        res.send(NoteModel.selectNoteById(noteId));
+        //res.send(NoteModel.selectNoteById(noteId));
+        NoteModel.findNoteById(noteId)
+            .then(
+                function (doc) {
+
+                    res.json(doc);
+                },
+
+                // send error if promise rejected
+                function ( err ) {
+
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findAllNoteBooksForUser(req, res){
@@ -82,7 +103,7 @@ module.exports = function(app, NoteModel, NotebookModel, uuid) {
          NoteModel.createNote(note)
             .then(
                 function (doc) {
-                    console.log(doc);
+                    //console.log(doc);
                     res.json(doc);
                 },
 

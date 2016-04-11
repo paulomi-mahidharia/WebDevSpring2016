@@ -11,8 +11,9 @@
         var vm = this;
 
         vm.deleteNote = deleteNote;
-        vm.selectNote = selectNote;
-        vm.updateNote = updateNote;
+        vm.editNote = editNote;
+        //vm.selectNote = selectNote;
+        //vm.updateNote = updateNote;
         //vm.addNote = addNote;
 
 
@@ -42,10 +43,12 @@
         // event handlers implementation
 
         function deleteNote($index){
-            var noteId = vm.notes[$index].id;
-            //console.log(noteId);
+            var noteId = vm.notes[$index]._id;
+
             NoteService.deleteNoteById(noteId)
                 .then(function(response) {
+
+
 
                     if(response) {
                         vm.notes = response;
@@ -54,7 +57,13 @@
             });
         }
 
-        function selectNote($index){
+        function editNote($index){
+            var noteId = vm.notes[$index]._id;
+
+            $location.url("/editnote/"+noteId);
+        }
+
+        /*function selectNote($index){
             var noteId = vm.notes[$index].id;
             NoteService.selectNoteById(noteId)
                 .then(function(response){
@@ -87,7 +96,7 @@
                     });
 
             }
-        }
+        }*/
 
         /*function addNote(widget){
 

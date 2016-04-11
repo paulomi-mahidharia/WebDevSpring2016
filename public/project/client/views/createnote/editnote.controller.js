@@ -9,12 +9,21 @@
         .module("NoteSpace")
         .controller("EditNoteController", EditNoteController);
 
-    function EditNoteController(NoteService, $rootScope, $location) {
+    function EditNoteController(NoteService, $routeParams, $location) {
 
         var vm = this;
 
         function init() {
 
+            var noteId = $routeParams.noteId;
+
+            NoteService.findNoteById(noteId)
+                .then(
+                    function(response){
+                        //console.log(response);
+                        vm.widget = response.data;
+                    }
+                );
         }
         init();
 

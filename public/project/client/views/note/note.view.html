@@ -41,7 +41,7 @@
         <table class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
 
             <tbody>
-            <tr ng-show="showTable==1">
+            <!--<tr ng-show="showTable==1">
                 <td><b>Name :</b><br/> <input type="text" class="form-control"
                                 ng-model = "model.widget.title"
                                 id="name" placeholder="Note Title">
@@ -60,9 +60,7 @@
                     </select>
                 </td>
                 <td>
-                    <!--<button class="btn btn-default" ng-click="addNote(widget)">
-                        <span  class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>-->
+
                     <button class="btn btn-default" ng-click="model.updateNote(model.widget);
                                                               showTable = 2;
                                                               showPencil = 2;
@@ -72,7 +70,7 @@
                         <span  class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     </button>
                 </td>
-            </tr>
+            </tr>-->
 
             <tr ng-repeat="note in model.notes">
                 <td>
@@ -91,7 +89,7 @@
                     </button>
 
                     <button class="btn btn-default"
-                            ng-click="model.selectNote($index)"
+                            ng-click="model.editNote($index)"
                             ng-show="showPencil==1">
                         <span
                               class="glyphicon glyphicon-pencil"

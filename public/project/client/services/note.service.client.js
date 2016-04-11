@@ -14,9 +14,10 @@
             findAllNotesLikedByUser: findAllNotesLikedByUser,
             deleteNoteById: deleteNoteById,
             findAllNotesForUser: findAllNotesForUser,
-            selectNoteById: selectNoteById,
+            //selectNoteById: selectNoteById,
             updateNoteById: updateNoteById,
             createNoteForUser: createNoteForUser,
+            findNoteById: findNoteById,
 
             //Notebook services
             deleteNotebookById: deleteNotebookById,
@@ -38,7 +39,7 @@
         }
 
         function deleteNoteById(noteId) {
-           // console.log(noteId);
+           //console.log(noteId);
            return $http.delete("/api/project/note/"+noteId);
         }
 
@@ -46,7 +47,7 @@
             return $http.get("/api/project/user/"+userId+"/note");
         }
 
-        function selectNoteById(noteId){
+        function findNoteById(noteId){
             return $http.get("/api/project/note/"+noteId);
         }
 
@@ -63,6 +64,7 @@
             //console.log("gcdng");
             return $http.post("/api/project/user/"+userId+"/note", newNote);
         }
+
 
 
         ////////////////////////////////////////////////////////////////////
