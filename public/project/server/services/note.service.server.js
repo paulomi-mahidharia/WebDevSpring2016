@@ -13,6 +13,7 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     app.put("/api/project/note/:noteId", updateNoteById);
     app.post("/api/project/user/:userId/note", createNoteForUser);
     app.post("/api/project/user/:userId/note/:noteId", userLikesNote);
+    app.delete("/api/project/user/:userId/note/:noteId", removeLikedNote);
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
@@ -22,6 +23,48 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     app.post("/api/project/user/:userId/notebook", addNoteBookForUser);
 
     //Note functions
+
+    function removeLikedNote(req, res) {
+        var note  = req.body;
+        var userId = req.params.userId;
+        //console.log(userId);
+        var noteId = req.params.noteId;
+        var newNote;
+
+        /*NoteModel
+            .removeLikedNote(userId, note)
+            // add user to note likes
+            .then(
+                function (note) {
+                    var notes = NoteModel.find();
+                    //console.log(notes);
+                    return UserModel.removeLikedNote(userId, note, notes);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            // add movie to user likes
+            .then(
+                function (user) {
+                    res.json(user);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );*/
+
+        NoteModel.removeLikedNote(userId, noteId)
+            .then(
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
 
     function userLikesNote(req, res) {
         var note  = req.body;

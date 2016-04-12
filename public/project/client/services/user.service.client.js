@@ -19,10 +19,16 @@
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            findNoteLikes: findNoteLikes
+            findNoteLikes: findNoteLikes,
+            removeLikedNote: removeLikedNote
+
         };
 
         return api;
+
+        function removeLikedNote(userId, noteId){
+            return $http.delete("/api/project/user/"+userId+"/note/"+noteId);
+        }
 
         function getCurrentUser() {
 
@@ -73,6 +79,8 @@
 
             return $http.get("/api/project/user/"+userId+"/notes", findNoteLikes);
         }
+
+
 
     }
 })();

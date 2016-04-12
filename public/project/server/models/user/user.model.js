@@ -20,11 +20,21 @@ module.exports = function(db, mongoose) {
         findUserById: findUserById,
         deleteUserById: deleteUserById,
         updateUser: updateUser,
-        userLikesNote: userLikesNote
-        //getFavoriteNotes: getFavoriteNotes
+        userLikesNote: userLikesNote,
+        removeLikedNote: removeLikedNote
     };
 
     return api;
+
+    function removeLikedNote (userId, noteId) {
+
+        return User.update(
+            { _id: userId },
+            { $pull: { 'likes': { $in: [noteId]} } }
+        );
+    }
+
+
 
     function userLikesNote (userId, note) {
 

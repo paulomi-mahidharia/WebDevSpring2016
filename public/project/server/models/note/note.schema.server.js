@@ -12,10 +12,6 @@ module.exports = function(mongoose) {
         createdBy: String,
         // ids of users that like this note
         likes: [String],
-        // list of users that like this note
-        userLikes: [
-            {username: String}
-            ],
         createdDate: String,
         updatedDate: String,
         widgets: [WidgetSchema]

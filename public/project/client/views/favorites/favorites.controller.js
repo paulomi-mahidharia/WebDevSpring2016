@@ -27,17 +27,41 @@
         init();
 
         function deleteFavNote($index){
-            var noteId = vm.notes[$index].id;
-            //console.log(noteId);
-            NoteService.deleteNoteById(noteId)
-                .then(function(response) {
+            var noteId = vm.notes[$index]._id;
 
-                if(response) {
-                    vm.notes = response;
-                    init();
-                }
-                //console.log("No");
-            });
+            /*NoteService.findNoteById(noteId)
+                .then(function(response){
+                    if(response) {
+
+
+                        var note = response.data;
+                        //console.log(note);
+
+
+
+                        NoteService
+                            .removeLikedNote(note.likes.indexOf($rootScope.currentUser._id), note);
+                    }
+                })*/
+
+            UserService.removeLikedNote($rootScope.currentUser._id, noteId)
+                .then(function(response){
+                    if(response.data == "OK"){
+                        vm.notes.splice($index,1);
+
+                        NoteService.removeLikedNote($rootScope.currentUser._id, noteId)
+                            .then(function(response){
+                                if(response.data == "OK"){
+                                    //vm.notes.splice($index,1);
+                                    console.log("Done");
+                                }
+                            });
+
+                    }
+                })
+
+
+
         }
     }
 })();
