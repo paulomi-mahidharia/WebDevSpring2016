@@ -27,6 +27,14 @@
                         vm.widget = response.data;
                     }
                 );
+
+            WidgetService.getWidgets(noteId)
+                .then(
+                    function(response){
+                        console.log(response);
+
+                    }
+                );
         }
         init();
 

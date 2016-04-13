@@ -8,8 +8,8 @@
 
     function WidgetService($http) {
         var api = {
-            addWidget: addWidget
-            //getWidgets: getWidgets,
+            addWidget: addWidget,
+            getWidgets: getWidgets
             //findWidgetById: findWidgetById,
             //updateWidget: updateWidget,
             //removeWidget: removeWidget,
@@ -20,6 +20,10 @@
 
         function addWidget(noteId, widget) {
             return $http.post("/api/project/note/" + noteId + "/widget", widget);
+        }
+
+        function getWidgets(noteId) {
+            return $http.get("/api/application/note/"+noteId+"/widgets");
         }
     }
 })();

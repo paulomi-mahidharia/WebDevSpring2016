@@ -41,16 +41,6 @@
                 )
         }
 
-        /*function addText(widget){
-            var newId = (new Date).getTime();
-            var newText =  {_id: newId,
-                            notetext: widget.notetext};
-            $scope.widgets.push(newText);
-            $scope.widget ={};
-
-            //WidgetService.addWidget()
-        }*/
-
         /*function cancelText(widget){
             var index = $scope.widgets.indexOf(widget);
             $scope.widgets.splice(index, 1);

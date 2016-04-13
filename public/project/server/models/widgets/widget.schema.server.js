@@ -17,7 +17,7 @@ module.exports = function(mongoose) {
         widgetType: {
             type: String,
             enum: ['TEXT', 'MAP', 'IMAGE', 'YOUTUBE', 'UPLOAD', 'TODO']},
-        text:TextSchema,
+        html:TextSchema,
         map:MapSchema,
         image:ImageSchema,
         youtube: YoutubeSchema,

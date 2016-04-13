@@ -8,7 +8,9 @@ module.exports = function (app, NoteModel) {
     var multer  = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
-    app.post ("/api/project/note/:noteId/widget", createWidget);
+    app.post("/api/project/note/:noteId/widget", createWidget);
+
+    app.get("/api/application/note/:noteId/widgets", getWidgets);
 
     function createWidget(req, res) {
         var noteId = req.params.noteId;
@@ -29,5 +31,21 @@ module.exports = function (app, NoteModel) {
                 }
             )
     }
+
+    function getWidgets(req, res) {
+        var noteId = req.params.noteId;
+
+        NoteModel
+            .findNoteById(noteId)
+            .then(
+                function(note) {
+                    res.json(note.widgets);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
 
 };
