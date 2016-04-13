@@ -15,6 +15,15 @@
         vm.selectUser = selectUser;
         vm.updateUser = updateUser;
 
+        vm.predicate = 'age';
+        vm.reverse = true;
+        vm.order = function(predicate) {
+            vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+            vm.predicate = predicate;
+        };
+
+
+
         function init() {
 
             var newUsers =[];
@@ -32,6 +41,7 @@
                         }
 
                         vm.users = newUsers;
+                        //$scope.users = vm.users;
                     }
                 );
 
@@ -51,11 +61,11 @@
             vm.user = {};
         }
 
-        function deleteUser($index){
+        function deleteUser(user){
 
-            var userId = vm.users[$index]._id;
 
-            UserService.deleteUserById(userId)
+
+            UserService.deleteUserById(user._id)
                 .then(
                     function(users){
 
@@ -65,11 +75,11 @@
                 );
         }
 
-        function selectUser($index){
+        function selectUser(user){
 
-            var userId = vm.users[$index]._id;
+            //var userId = vm.users[$index]._id;
 
-            UserService.findUserById(userId)
+            UserService.findUserById(user._id)
                 .then(
                     function(response){
 
