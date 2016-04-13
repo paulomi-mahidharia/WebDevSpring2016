@@ -18,17 +18,20 @@
 
             <thead>
                 <tr>
-                    <th>
-                        <a href="" class="btn btn-default">
-                            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                        </a>
+                    <th ng-click="model.order('formName')">
+
+                            <span ng-show="model.predicate === 'formName' && model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+
+                            <span ng-show="model.predicate === 'formName' && !model.reverse"
+                                  ng-class="{reverse:model.reverse}"
+                                  class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+
                         Form Name
                     </th>
 
                     <th>
-                        <a href="" class="btn btn-default">
-                            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                        </a>
                         Action
                     </th>
                 </tr>
@@ -56,7 +59,7 @@
                     </td>
                 </tr>
 
-                <tr ng-repeat="form in model.forms">
+                <tr ng-repeat="form in model.forms | orderBy:model.predicate:model.reverse">
                     <td>
                         <a  href="#/form/{{form._id}}/fields">
                             {{form.title}}
@@ -64,12 +67,12 @@
                     </td>
 
                     <td>
-                        <span ng-click="model.deleteForm($index)"
+                        <span ng-click="model.deleteForm(form)"
                               class="glyphicon glyphicon-remove btn btn-default"
                               aria-hidden="true">
                         </span>
 
-                        <span ng-click="model.selectForm($index)"
+                        <span ng-click="model.selectForm(form)"
                               class="glyphicon glyphicon-pencil btn btn-default"
                               aria-hidden="true">
                         </span>

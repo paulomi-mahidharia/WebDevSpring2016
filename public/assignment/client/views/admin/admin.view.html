@@ -5,6 +5,7 @@
 
         <table class="table table-striped table-bordered users">
             <thead>
+
                 <tr>
                     <th ng-click="model.order('username')">
 
@@ -16,17 +17,12 @@
                                   ng-class="{reverse:model.reverse}"
                               class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                             User Name
-
-
                     </th>
 
                      <th>
-
-
-                             Password
-
-
+                         Password
                      </th>
+
                     <th ng-click="model.order('firstName')">
 
                             <span ng-show="model.predicate === 'firstName'&& model.reverse"
@@ -38,9 +34,8 @@
                                   class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
 
                             First Name
-
-
                     </th>
+
                     <th ng-click="model.order('lastName')">
 
                             <span ng-show="model.predicate === 'lastName'&& model.reverse"
@@ -52,18 +47,13 @@
                                   class=" sortorder glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
 
                             Last Name
-
-
                     </th>
 
                     <th>
-
-                            Role
-
+                        Role
                     </th>
 
                     <th>
-
                         Action
                     </th>
                 </tr>
@@ -118,14 +108,13 @@
                     </td>
                 </tr>
 
-            <tr ng-repeat="user in model.users | orderBy:model.predicate:model.reverse">
+                <tr ng-repeat="user in model.users | orderBy:model.predicate:model.reverse">
                 <td>
                     {{user.username}}
                 </td>
 
                 <td>
                     <input type="password" class="form-control" ng-model="user.password"/>
-
                 </td>
 
                 <td>
@@ -139,6 +128,7 @@
                 <td>
                     {{user.roles.join(',')}}
                 </td>
+
                 <td>
                         <span ng-click="model.deleteUser(user)"
                               class="glyphicon glyphicon-remove btn btn-default"
@@ -153,7 +143,6 @@
                 </td>
 
             </tr>
-
             </tbody>
         </table>
     </div>

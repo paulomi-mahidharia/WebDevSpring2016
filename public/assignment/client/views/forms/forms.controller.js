@@ -34,6 +34,13 @@
         vm.selectForm = selectForm;
         vm.deleteForm = deleteForm;
 
+        vm.predicate = 'age';
+        vm.reverse = true;
+        vm.order = function(predicate) {
+            vm.reverse = (vm.predicate === predicate) ? !vm.reverse : false;
+            vm.predicate = predicate;
+        };
+
         //Function to add a form to the table for a particular user
 
         function addForm(form) {
@@ -85,11 +92,11 @@
 
         //Function to delete a form for a particular user
 
-        function deleteForm($index) {
+        function deleteForm(form) {
 
-            var formId = vm.forms[$index]._id;
+            //var formId = vm.forms[$index]._id;
 
-            FormService.deleteFormById(formId)
+            FormService.deleteFormById(form._id)
                 .then(
                     function(response) {
 
@@ -102,18 +109,18 @@
 
         //Function to select a form for a particular user
 
-        function selectForm($index) {
+        function selectForm(form) {
 
             vm.form = {};
-            var selectedForm = vm.forms[$index];
+
 
             vm.form = {
-                _id: selectedForm._id,
-                title: selectedForm.title,
-                userId: selectedForm.userId
+                _id: form._id,
+                title: form.title,
+                userId: form.userId
             };
 
-            selectedIndex = $index;
+            selectedIndex = vm.forms.indexOf(form);
         }
     }
 })();
