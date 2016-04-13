@@ -74,7 +74,7 @@
 
             <tr ng-repeat="note in model.notes">
                 <td>
-                    <h3>{{note.title}}</h3>
+                    <h3><a href="#/editnote/{{note._id}}">{{note.title}}</a></h3>
                     <br/>
                     Notebook of {{note.title}} : {{note.notebook}}
                 </td>

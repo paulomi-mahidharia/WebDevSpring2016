@@ -9,13 +9,16 @@
         .module("NoteSpace")
         .controller("EditNoteController", EditNoteController);
 
-    function EditNoteController(NoteService, $routeParams, $location) {
+    function EditNoteController(NoteService, $routeParams, $location, $sce) {
 
         var vm = this;
+
+        vm.trustAsHtml = trustAsHtml;
 
         function init() {
 
             var noteId = $routeParams.noteId;
+            vm.noteId = noteId;
 
             NoteService.findNoteById(noteId)
                 .then(
@@ -26,6 +29,10 @@
                 );
         }
         init();
+
+        function trustAsHtml(html) {
+            return $sce.trustAsHtml(html);
+        }
 
     }
 })();

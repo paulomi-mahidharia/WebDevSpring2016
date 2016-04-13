@@ -20,7 +20,8 @@ module.exports = function(db, mongoose) {
         createNote: createNote,
         userLikesNote: userLikesNote,
         findNotesByIds: findNotesByIds,
-        removeLikedNote: removeLikedNote
+        removeLikedNote: removeLikedNote,
+        getMongooseModel: getMongooseModel
     };
 
     return api;
@@ -140,4 +141,8 @@ module.exports = function(db, mongoose) {
 
     }
 
+    function getMongooseModel() {
+
+        return Note
+    }
 };

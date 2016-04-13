@@ -14,7 +14,7 @@ module.exports = function(mongoose) {
     // use mongoose to declare a user schema
     var WidgetSchema = mongoose.Schema({
 
-        type: {
+        widgetType: {
             type: String,
             enum: ['TEXT', 'MAP', 'IMAGE', 'YOUTUBE', 'UPLOAD', 'TODO']},
         text:TextSchema,

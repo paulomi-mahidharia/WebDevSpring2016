@@ -19,9 +19,10 @@
                 controller: "HeaderController",
                 controllerAs : "model"
             })
-            .when("/text", {
+            .when("/text/:noteId", {
                 templateUrl: "views/widgets/text/text.view.html",
-                controller: "TextEditorController"
+                controller: "TextEditorController",
+                controllerAs : "model"
             })
             .when("/map", {
                 templateUrl: "views/widgets/googlemap/map.view.html",

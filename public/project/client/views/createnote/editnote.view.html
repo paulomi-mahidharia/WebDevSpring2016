@@ -48,7 +48,7 @@
             <tr>
                 <td>
                     <button class="btn btn-default">
-                        <a href="#/text">
+                        <a href="#/text/{{model.noteId}}">
                             <span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>
                         </a>
                     </button>
@@ -83,4 +83,27 @@
             </tbody>
         </table>
     </div>
+
+
+    <div>
+        <div ng-repeat="widget in model.widgets">
+            <div ng-switch="widget.widgetType">
+
+                <div ng-switch-when="HTML">
+                    HTML
+                    <!-- use textangular directive to render a WYSIWYG HTML editor -->
+                    <div ng-switch-when="HTML">
+                        <div ng-bind-html="model.trustAsHtml(widget.html.text)">
+                        </div>
+                    </div>
+                </div>
+             </div>
+         </div>
+    </div>
+
+
+
+
+    </div>
+
 </div>
