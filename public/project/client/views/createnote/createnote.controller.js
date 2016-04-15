@@ -21,6 +21,7 @@
         vm.addNote = addNote;
 
         function addNote(note){
+
             NoteService.createNoteForUser($rootScope.currentUser._id, note)
                 .then(
                     function(response) {
