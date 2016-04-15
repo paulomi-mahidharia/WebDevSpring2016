@@ -97,7 +97,7 @@
                         </span>
                     </button>
 
-                    <button class="btn btn-default" ng-click="model.favorite($index)">
+                    <button class="btn btn-default" ng-click="model.toggleFavorite($index)">
 
                     <span ng-class="{'glyphicon-star': note.likes.indexOf(currentUser._id) >= 0,
                         'glyphicon-star-empty': note.likes.indexOf(currentUser._id) == -1}"

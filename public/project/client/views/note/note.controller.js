@@ -12,7 +12,7 @@
 
         vm.deleteNote = deleteNote;
         vm.editNote = editNote;
-        vm.favorite = favorite;
+        vm.toggleFavorite = toggleFavorite;
         vm.isNoteInFavourites = isNoteInFavourites;
 
         function init() {
@@ -62,9 +62,10 @@
             $location.url("/editnote/"+noteId);
         }
 
-        function favorite($index){
+        //Like and dislike notes by clicking on it alternatively
+        function toggleFavorite($index){
 
-            var note = vm.notes[$index]
+            var note = vm.notes[$index];
             var noteId = note._id;
 
             var currentUser = $rootScope.currentUser;
