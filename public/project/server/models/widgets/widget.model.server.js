@@ -50,6 +50,17 @@ module.exports = function(db, mongoose, NoteModel) {
                     }
                 }
 
+                if(widget.widgetType === "MAP"){
+                    if(newWidget.map){
+                        widget.map = {
+                            lat : newWidget.map.lat,
+                            lng : newWidget.map.lng,
+                            location : newWidget.map.location,
+                            placeId : newWidget.map.placeId
+                        }
+                    }
+                }
+
                 return note.save();
             }
         );

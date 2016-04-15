@@ -37,10 +37,7 @@
                 .then(
                     function(response){
 
-                        console.log(response.data);
-
                         vm.widgets = response.data;
-
 
                     }
                 );
@@ -58,6 +55,11 @@
 
                 $location.url("/note/"+noteId+"/text/"+widget._id);
             }
+
+            if(widget.widgetType == "MAP"){
+
+                $location.url("/note/"+noteId+"/map/"+widget._id);
+            }
         }
 
         function deleteWidget(widget){
@@ -74,6 +76,7 @@
                     },
 
                     function(error) {
+
                         vm.error = error;
                     }
                 );

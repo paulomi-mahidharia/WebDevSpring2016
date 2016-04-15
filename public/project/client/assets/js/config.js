@@ -43,6 +43,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/note/:noteId/map/:widgetId", {
+                templateUrl: "views/widgets/googlemap/editmap.view.html",
+                controller: "MapController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/fileupload", {
                 templateUrl: "views/widgets/fileupload/fileupload.view.html",
                 controller: "myCtrl"
