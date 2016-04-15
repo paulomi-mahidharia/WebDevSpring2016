@@ -25,9 +25,6 @@
             NoteService.createNoteForUser($rootScope.currentUser._id, note)
                 .then(
                     function(response) {
-                        //console.log("oyee");
-
-                        console.log(response.data._id);
 
                         $location.url("/editnote/"+response.data._id);
                         //return FormService.findAllFormsForUser($rootScope.currentUser._id)
