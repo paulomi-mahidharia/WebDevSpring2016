@@ -6,8 +6,7 @@ module.exports = function(mongoose) {
     // use mongoose to declare a user schema
     var MapSchema = mongoose.Schema({
         lat: String,
-        lng: String,
-        zoom: String
+        lng: String
         // collection property sets
         // collection name to 'user'
     }, {collection: 'project.map'});

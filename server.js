@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.bodyParser({ uploadDir: './public/uploads' }));
+app.use(express.bodyParser({ uploadDir: './public/uploads', keepExtensions: true }));
 
 app.use(multer());
 
@@ -51,6 +51,7 @@ app.use(passport.session());
 
 require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
 require("./public/project/server/app.js")(app, uuid, db, mongoose);
+
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
