@@ -13,12 +13,15 @@
     function EditTextEditorController($routeParams, WidgetService, $location) {
         var vm = this;
 
+        var noteId;
+        var widgetId;
+
         vm.updateText = updateText;
 
         function init(){
-            var noteId = $routeParams.noteId;
+            noteId = $routeParams.noteId;
 
-            var widgetId = $routeParams.widgetId;
+            widgetId = $routeParams.widgetId;
             //console.log(widgetId);
             if(widgetId){
                 WidgetService.getWidgetById(noteId, widgetId)
@@ -32,8 +35,18 @@
         }
         init();
 
-        function updateText(){
+        function updateText(widget){
 
+            WidgetService
+                .updateWidget(noteId, widgetId, widget)
+                .then(
+                    function(response) {
+                        $location.url("/editnote/"+noteId);
+                    },
+                    function(error) {
+                        vm.error = error;
+                    }
+                );
         }
 
 // event handlers decleration

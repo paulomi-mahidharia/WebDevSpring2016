@@ -9,53 +9,50 @@ module.exports = function(db, mongoose, NoteModel) {
     var api = {
         createWidget: createWidget,
         findNoteById: findNoteById,
-        getWidgetById: getWidgetById
+        updateWidget: updateWidget
         //removeWidget: removeWidget,
         //sortWidget  : sortWidget
     };
     return api;
 
-function createWidget(noteId, widget) {
-    return Note.findById(noteId)
-        .then(
-            function(note) {
+    function createWidget(noteId, widget) {
 
-                note.widgets.push(widget);
+        return Note.findById(noteId)
+            .then(
+                function(note) {
+
+                    note.widgets.push(widget);
+
+                    return note.save();
+                }
+            );
+    }
+    function findNoteById(noteId){
+
+        return Note.findById(noteId);
+    }
+
+    function updateWidget(noteId, widgetId, newWidget){
+
+        delete newWidget._id;
+
+        return Note
+            .findById(noteId)
+            .then(function (note){
+
+                var widget = note.widgets.id(widgetId);
+
+                if(widget.widgetType === "TEXT") {
+                    if (newWidget.html) {
+                        widget.html = {
+                            text: newWidget.html.text
+                        };
+                    }
+                }
 
                 return note.save();
             }
         );
     }
-    function findNoteById(noteId){
-        return Note.findById(noteId);
-    }
 
-    function getWidgetById(noteId, widgetId){
-
-        return Note
-            .findById(noteId);
-
-        //console.log(note);
-        //
-        //if(note){
-        //    for(var i in note.widgets){
-        //        if(note.widgets[i]._id == widgetId){
-        //            return note.widgets[i];
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
-        //else{
-        //    return null;
-        //}
-
-
-
-
-
-        //return Note.findOne({_id:noteId, 'widgets':{$in: [widgetId]}})
-    }
 };
