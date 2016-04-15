@@ -150,6 +150,9 @@
                     );
 
             }
+            else {
+                alert("You first need to search this place!");
+            }
         }
 
         function cancelMap(){

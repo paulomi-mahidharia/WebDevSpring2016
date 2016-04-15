@@ -12,35 +12,27 @@
 
         // event handlers decleration
 
-       vm.addText = addText;
+        vm.addText = addText;
+        vm.updateText = updateText;
+        vm.cancelText = cancelText;
+
+        var noteId = $routeParams.noteId;
+
+        var widgetId = $routeParams.widgetId;
 
         function init(){
-            var noteId = $routeParams.noteId;
 
-            var widgetId = $routeParams.widgetId;
-            //console.log(widgetId);
             if(widgetId){
-
-               // var hideAddButton = Document.getElementById("add");
-               // hideAddButton.style.display = "none";
 
                 WidgetService.getWidgetById(noteId, widgetId)
                     .then(
 
                       function(response){
 
-                          console.log("Got widget");
                          vm.widget = response.data;
                       }
                     );
             }
-            /*else {
-
-                var b = Document.getElementById("update");
-                b.style.display = "none";
-
-                vm.widget = null;
-            }*/
         }
         init();
 
@@ -48,18 +40,43 @@
 
         function addText(widget){
 
-            console.log(widget);
+            console.log(widget.html.text);
 
-            var noteId = $routeParams.noteId;
-            widget.widgetType = 'TEXT';
+            if(widget.html.text !== ""){
+                widget.widgetType = 'TEXT';
 
-            WidgetService.addWidget(noteId, widget)
+                WidgetService.addWidget(noteId, widget)
+                    .then(
+                        function (response) {
+
+                            $location.url("/editnote/"+noteId);
+                        }
+                    );
+            }
+            else{
+                alert("Enter text to continue");
+            }
+        }
+
+        // event handlers decleration
+
+        function updateText(widget){
+
+            WidgetService
+                .updateWidget(noteId, widgetId, widget)
                 .then(
-                    function (response) {
-                        console.log(response);
+                    function(response) {
                         $location.url("/editnote/"+noteId);
+                    },
+                    function(error) {
+                        vm.error = error;
                     }
                 );
+        }
+
+        function cancelText(){
+
+            $location.url("/editnote/"+noteId);
         }
 
     }

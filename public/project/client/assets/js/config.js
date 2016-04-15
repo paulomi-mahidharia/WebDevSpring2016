@@ -29,7 +29,7 @@
             })
             .when("/note/:noteId/text/:widgetId", {
                 templateUrl: "views/widgets/text/edittext.view.html",
-                controller: "EditTextEditorController",
+                controller: "TextEditorController",
                 controllerAs : "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn
