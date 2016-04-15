@@ -32,7 +32,6 @@
         return api;
 
 
-
         function removeLikedUser(userId, noteId){
 
             return $http.delete("/api/project/note/"+noteId+"/user/"+userId);

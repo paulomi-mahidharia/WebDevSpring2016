@@ -13,8 +13,9 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     app.put("/api/project/note/:noteId", updateNoteById);
     app.post("/api/project/user/:userId/note", createNoteForUser);
     app.post("/api/project/user/:userId/note/:noteId", userLikesNote);
-//    app.delete("/api/project/user/:userId/note/:noteId", removeLikedUser);
     app.delete("/api/project/note/:noteId/user/:userId", removeLikedUser);
+
+
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);

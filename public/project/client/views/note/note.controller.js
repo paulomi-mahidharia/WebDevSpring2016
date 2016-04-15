@@ -64,38 +64,63 @@
 
         function favorite($index){
 
-            //var noteId = vm.notes[$index]._id;
-            //
-            //var userFav = $rootScope.currentUser.likes;
-            //for(var index in userFav){
-            //    if(userFav[index] === noteId){
-            //        alert("Already added to favourites");
-            //        return;
-            //    }
-            //}
+            var note = vm.notes[$index]
+            var noteId = note._id;
 
-            var l = vm.note.likes.indexOf(currentUser._id);
-            if(l >= 0) {
-                vm.note.likes.splice(l, 1);
+            var currentUser = $rootScope.currentUser;
+            var currentUserId = currentUser._id;
+
+            var userLikesNote = note.likes.indexOf(currentUserId);
+
+            if(userLikesNote >= 0) {
+
+                //If note is liked, dislike it
+
+                //Remove the given note from note likes
+                note.likes.splice(userLikesNote, 1);
+
+                //Remove the given note from user likes
+                currentUser.likes.splice($index, 1);
+
+                //Save all changes to the databases
+                UserService.removeLikedNote(currentUserId, noteId)
+                    .then(function(response){
+
+                        //console.log(response);
+                        if(response.data == "OK"){
+
+                            return NoteService.removeLikedUser(currentUserId, noteId);
+                        }
+                    })
+                    .then(function(response){
+                        if(response.data == "OK"){
+
+                            console.log("Done");
+                        }
+                    });
+
+
             } else {
-                vm.note.likes.push($rootScope.currentUser._id);
+
+                //If note is not liked
+
+                //Push the given note from note likes
+                note.likes.push(currentUserId);
+
+                //Push the given note from user likes
+                currentUser.likes.push(noteId);
+
+                NoteService.findNoteById(noteId)
+                    .then(function(response){
+                        if(response) {
+
+                            var foundNote = response.data;
+
+                            NoteService
+                                .userLikesNote(currentUserId, foundNote);
+                        }
+                    });
             }
-
-            $rootScope.currentUser.likes.push(vm.notes[$index]._id);
-
-            NoteService.findNoteById(noteId)
-                .then(function(response){
-                    if(response) {
-
-                        var note = response.data;
-                        vm.notes[$index].likes.push($rootScope.currentUser._id);
-
-                        NoteService
-                            .userLikesNote($rootScope.currentUser._id, note);
-                    }
-                });
-
-
         }
     }
 
