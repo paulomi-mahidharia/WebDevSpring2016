@@ -16,6 +16,7 @@
         vm.trustAsHtml = trustAsHtml;
         vm.editWidget = editWidget;
         vm.deleteWidget = deleteWidget;
+        vm.getSrc = getSrc;
 
         var noteId;
 
@@ -36,7 +37,11 @@
                 .then(
                     function(response){
 
+                        console.log(response.data);
+
                         vm.widgets = response.data;
+
+
                     }
                 );
         }
@@ -74,6 +79,12 @@
                 );
 
         }
+
+        function getSrc(src){
+
+            return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&q="+src);
+        }
+
 
     }
 })();

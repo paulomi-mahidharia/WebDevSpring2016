@@ -35,9 +35,10 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
-            .when("/map", {
+            .when("/note/:noteId/map", {
                 templateUrl: "views/widgets/googlemap/map.view.html",
                 controller: "MapController",
+                controllerAs: "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn
                 }

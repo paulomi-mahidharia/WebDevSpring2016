@@ -59,27 +59,8 @@
                         console.log(response);
                         $location.url("/editnote/"+noteId);
                     }
-                )
+                );
         }
-
-        /*function cancelText(widget){
-            var index = $scope.widgets.indexOf(widget);
-            $scope.widgets.splice(index, 1);
-
-        }*/
-
-        /*function  selectText(widget)
-        {
-            $scope.selectedTextIndex = $scope.widgets.indexOf(widget);
-            $scope.widget = {_id: widget._id,
-                notetext: widget.notetext};
-        }
-
-        function  updateText(widget)
-        {
-            $scope.widgets[$scope.selectedTextIndex] = widget;
-            $scope.widget={};
-        }*/
 
     }
 })();

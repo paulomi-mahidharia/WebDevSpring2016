@@ -6,10 +6,19 @@
         .module("NoteSpace")
         .controller("MapController", MapController);
 
-    function MapController($scope, MapService, $http){
+    function MapController($scope, MapService, WidgetService, $routeParams, $location){
+
+        var vm = this;
+
         $scope.search = search;
+        vm.addMap = addMap;
 
         var searchedLocation;
+
+        var lat;
+        var lng;
+        var noteId = $routeParams.noteId;
+        var placeId;
 
 
         var input = document.getElementById('Autocomplete');
@@ -20,9 +29,21 @@
         function search(){
 
             searchedLocation = document.getElementById('Autocomplete').value;
+            //console.log(searchedLocation);
+
             MapService.findPlaceByName(searchedLocation, function(response){
                 //console.log(response);
                 $scope.data = response.results;
+
+
+                lat = response.results[0].geometry.location.lat;
+                lng = response.results[0].geometry.location.lng;
+                placeId = response.results[0].place_id;
+
+                console.log(placeId);
+
+                //console.log(lat);
+                //console.log(lng);
 
                 var myLatLng = {lat: response.results[0].geometry.location.lat,
                     lng: response.results[0].geometry.location.lng};
@@ -32,8 +53,8 @@
                     center: myLatLng
                 });
 
-                console.log(map);
-                console.log(myLatLng);
+                //console.log(map);
+                //console.log(myLatLng);
 
                 $scope.map = map;
                 $scope.myLatLng = myLatLng;
@@ -47,14 +68,31 @@
         }
 
         function addMap(){
-            if(searchedLocation){
+
+            if(lat && lng && searchedLocation){
+
+                console.log("in map");
+
                 var widget = {
                     widgetType : "MAP",
-                    map: searchedLocation
+                    map : {
+                        lat : lat,
+                        lng : lng,
+                        location : searchedLocation,
+                        placeId : placeId
+                    }
                 };
+
+                console.log(widget);
 
 
                 WidgetService.addWidget(noteId, widget)
+                    .then(
+                        function (response) {
+                            console.log(response);
+                            $location.url("/editnote/"+noteId);
+                        }
+                    );
             }
         }
 
