@@ -1,7 +1,16 @@
-<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2" ng-controller = "myCtrl">
-    <input type="file" file-model="myfile"/>
-    <button ng-click="uploadFile()">upload me</button>
-    <h2>Results</h2>
+<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2" ng-controller = "myCtrl as model">
+
+    <form action="/api/upload"
+          method="post"
+          enctype="multipart/form-data">
+        <input name="noteId" value="{{model.noteId}}" style="display: none"/>
+        <input name="widgetId" value="{{model.widgetId}}" style="display: none"/>
+        <input  type="file" name="myFile"/>
+
+        <button ng-click="model.uploadFile()">Upload to Note</button>
+
+
+    <!--<h2>Results</h2>
     <div class="table-responsive darker padding-all-sides" >
         <table class="table table-bordered table-striped">
             <thead>
@@ -30,5 +39,5 @@
             </tr>
             </tbody>
         </table>
-    </div>
+    </div>-->
 </div>

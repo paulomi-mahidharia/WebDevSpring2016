@@ -19,14 +19,28 @@
                 controller: "HeaderController",
                 controllerAs : "model"
             })
-            .when("/text/:noteId", {
+            .when("/note/:noteId/text", {
                 templateUrl: "views/widgets/text/text.view.html",
                 controller: "TextEditorController",
-                controllerAs : "model"
+                controllerAs : "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/note/:noteId/text/:widgetId", {
+                templateUrl: "views/widgets/text/edittext.view.html",
+                controller: "EditTextEditorController",
+                controllerAs : "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/map", {
                 templateUrl: "views/widgets/googlemap/map.view.html",
-                controller: "MapController"
+                controller: "MapController",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/fileupload", {
                 templateUrl: "views/widgets/fileupload/fileupload.view.html",

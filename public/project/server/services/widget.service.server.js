@@ -12,6 +12,8 @@ module.exports = function (app, NoteModel) {
 
     app.get("/api/application/note/:noteId/widgets", getWidgets);
 
+    app.get("/api/project/note/:noteId/widget/:widgetId", getWidgetById);
+
     function createWidget(req, res) {
         var noteId = req.params.noteId;
 
@@ -40,6 +42,24 @@ module.exports = function (app, NoteModel) {
             .then(
                 function(note) {
                     res.json(note.widgets);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function getWidgetById(req, res){
+
+        var noteId = req.params.noteId;
+        var widgetId = req.params.widgetId;
+
+        NoteModel
+            .getWidgetById(noteId, widgetId)
+            .then(
+                function(note) {
+                    var widget = note.widgets.id(widgetId);
+                    res.json(widget);
                 },
                 function(err) {
                     res.status(400).send(err);

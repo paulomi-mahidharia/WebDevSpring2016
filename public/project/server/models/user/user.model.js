@@ -21,10 +21,18 @@ module.exports = function(db, mongoose) {
         deleteUserById: deleteUserById,
         updateUser: updateUser,
         userLikesNote: userLikesNote,
-        removeLikedNote: removeLikedNote
+        removeLikedNote: removeLikedNote,
+        isNoteFavForUser: isNoteFavForUser
     };
 
     return api;
+
+    function isNoteFavForUser(userId, noteId){
+
+        return User.findOne({_id: userId, 'likes': {$in : [noteId]}}) ;
+    }
+
+
 
     function removeLikedNote (userId, noteId) {
 

@@ -27,38 +27,29 @@
         init();
 
         function deleteFavNote($index){
+
+
             var noteId = vm.notes[$index]._id;
 
-            /*NoteService.findNoteById(noteId)
-                .then(function(response){
-                    if(response) {
-
-
-                        var note = response.data;
-                        //console.log(note);
-
-
-
-                        NoteService
-                            .removeLikedNote(note.likes.indexOf($rootScope.currentUser._id), note);
-                    }
-                })*/
+            //console.log(noteId);
 
             UserService.removeLikedNote($rootScope.currentUser._id, noteId)
                 .then(function(response){
+
+                    //console.log(response);
                     if(response.data == "OK"){
-                        vm.notes.splice($index,1);
 
-                        NoteService.removeLikedNote($rootScope.currentUser._id, noteId)
-                            .then(function(response){
-                                if(response.data == "OK"){
-                                    //vm.notes.splice($index,1);
-                                    console.log("Done");
-                                }
-                            });
-
+                        return NoteService.removeLikedUser($rootScope.currentUser._id, noteId);
                     }
                 })
+                .then(function(response){
+                    if(response.data == "OK"){
+
+                        vm.notes.splice($index,1);
+
+                        //console.log("Done");
+                    }
+                });
 
 
 

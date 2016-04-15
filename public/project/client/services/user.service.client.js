@@ -20,13 +20,20 @@
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             findNoteLikes: findNoteLikes,
-            removeLikedNote: removeLikedNote
+            removeLikedNote: removeLikedNote,
+            isNoteFavForUser: isNoteFavForUser
 
         };
 
         return api;
 
+        function isNoteFavForUser(userId, noteId){
+
+            return $http.get("/api/project/user/"+userId+"/note/"+noteId+"/favorite");
+        }
+
         function removeLikedNote(userId, noteId){
+
             return $http.delete("/api/project/user/"+userId+"/note/"+noteId);
         }
 

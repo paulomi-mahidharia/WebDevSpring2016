@@ -9,7 +9,8 @@
     function WidgetService($http) {
         var api = {
             addWidget: addWidget,
-            getWidgets: getWidgets
+            getWidgets: getWidgets,
+            getWidgetById: getWidgetById
             //findWidgetById: findWidgetById,
             //updateWidget: updateWidget,
             //removeWidget: removeWidget,
@@ -24,6 +25,11 @@
 
         function getWidgets(noteId) {
             return $http.get("/api/application/note/"+noteId+"/widgets");
+        }
+
+        function getWidgetById(noteId, widgetId){
+
+            return $http.get("/api/project/note/"+noteId+"/widget/"+widgetId);
         }
     }
 })();

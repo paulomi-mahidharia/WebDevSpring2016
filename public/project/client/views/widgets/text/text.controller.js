@@ -13,16 +13,37 @@
         // event handlers decleration
 
        vm.addText = addText;
-        //$scope.deleteText = deleteText;
-        //$scope.selectText = selectText;
-        //$scope.updateText = updateText;
-        //vm.trustAsHtml    = trustAsHtml;
 
+        function init(){
+            var noteId = $routeParams.noteId;
 
-        // event handlers implementation
-        /*function trustAsHtml(html) {
-            return $sce.trustAsHtml(html);
-        }*/
+            var widgetId = $routeParams.widgetId;
+            //console.log(widgetId);
+            if(widgetId){
+
+               // var hideAddButton = Document.getElementById("add");
+               // hideAddButton.style.display = "none";
+
+                WidgetService.getWidgetById(noteId, widgetId)
+                    .then(
+
+                      function(response){
+
+                          console.log("Got widget");
+                         vm.widget = response.data;
+                      }
+                    );
+            }
+            /*else {
+
+                var b = Document.getElementById("update");
+                b.style.display = "none";
+
+                vm.widget = null;
+            }*/
+        }
+        init();
+
 
 
         function addText(widget){

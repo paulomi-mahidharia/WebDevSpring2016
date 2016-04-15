@@ -13,7 +13,8 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     app.put("/api/project/note/:noteId", updateNoteById);
     app.post("/api/project/user/:userId/note", createNoteForUser);
     app.post("/api/project/user/:userId/note/:noteId", userLikesNote);
-    app.delete("/api/project/user/:userId/note/:noteId", removeLikedNote);
+//    app.delete("/api/project/user/:userId/note/:noteId", removeLikedUser);
+    app.delete("/api/project/note/:noteId/user/:userId", removeLikedUser);
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
@@ -24,39 +25,19 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
 
     //Note functions
 
-    function removeLikedNote(req, res) {
+
+    function removeLikedUser(req, res) {
         var note  = req.body;
         var userId = req.params.userId;
         //console.log(userId);
         var noteId = req.params.noteId;
         var newNote;
 
-        /*NoteModel
-            .removeLikedNote(userId, note)
-            // add user to note likes
-            .then(
-                function (note) {
-                    var notes = NoteModel.find();
-                    //console.log(notes);
-                    return UserModel.removeLikedNote(userId, note, notes);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
-            // add movie to user likes
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );*/
-
-        NoteModel.removeLikedNote(userId, noteId)
+        NoteModel
+            .removeLikedUser(userId, noteId)
             .then(
                 function (stats) {
+                    console.log(stats);
                     res.send(200);
                 },
                 function (err) {
@@ -99,20 +80,6 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     function findAllNotesLikedByUser(req, res){
         var userId = req.params.userId;
         res.json(NoteModel.findAllNotesLikedByUser(userId));
-
-
-        //var user = null;
-
-        /*UserModel.findUserById(userId)
-            .then(function(doc){
-                user = doc;
-                //console.log(user);
-                if(user){
-
-                }
-            })*/
-
-
     }
 
     function deleteNoteById(req, res){
@@ -177,7 +144,6 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     function updateNoteById(req, res){
         var noteId = req.params.noteId;
         var newNote = req.body;
-        //res.json(NoteModel.updateNoteById(noteId, newNote));
 
         NoteModel.updateNoteById(noteId, newNote)
             .then(

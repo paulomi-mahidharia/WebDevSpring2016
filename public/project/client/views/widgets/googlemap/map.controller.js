@@ -9,6 +9,8 @@
     function MapController($scope, MapService, $http){
         $scope.search = search;
 
+        var searchedLocation;
+
 
         var input = document.getElementById('Autocomplete');
 
@@ -16,9 +18,11 @@
         var autocompleteOrigin = new google.maps.places.Autocomplete(input);
 
         function search(){
-            MapService.findPlaceByName(document.getElementById('Autocomplete').value, function(response){
-                console.log(response);
-                $scope.data = response;
+
+            searchedLocation = document.getElementById('Autocomplete').value;
+            MapService.findPlaceByName(searchedLocation, function(response){
+                //console.log(response);
+                $scope.data = response.results;
 
                 var myLatLng = {lat: response.results[0].geometry.location.lat,
                     lng: response.results[0].geometry.location.lng};
@@ -28,12 +32,30 @@
                     center: myLatLng
                 });
 
+                console.log(map);
+                console.log(myLatLng);
+
+                $scope.map = map;
+                $scope.myLatLng = myLatLng;
+
                 var marker = new google.maps.Marker({
                     position: myLatLng,
                     map: map,
-                    title: 'Hello World!'
+                    title: response.results[0].formatted_address
                 });
             })
+        }
+
+        function addMap(){
+            if(searchedLocation){
+                var widget = {
+                    widgetType : "MAP",
+                    map: searchedLocation
+                };
+
+
+                WidgetService.addWidget(noteId, widget)
+            }
         }
 
     }

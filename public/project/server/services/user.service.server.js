@@ -31,6 +31,26 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
     app.delete("/api/project/user/:userId/note/:noteId", removeLikedNote);
 
+    app.get("/api/project/user/:userId/note/:noteId/favorite", isNoteFavForUser);
+
+
+    function isNoteFavForUser(req,res){
+
+        var userId = req.params.userId;
+        var noteId = req.params.noteId;
+
+        UserModel.isNoteFavForUser(userId, noteId)
+            .then(
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+
     function removeLikedNote(req, res){
         var userId = req.params.userId;
         var noteId = req.params.noteId;

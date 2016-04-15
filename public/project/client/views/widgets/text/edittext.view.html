@@ -3,7 +3,7 @@
 
 
     <div class="table-responsive darker padding-all-sides" >
-        <table class="table table-bordered table-striped" ng-controller="TextEditorController as model">
+        <table class="table table-bordered table-striped" ng-controller="EditTextEditorController as model">
             <thead>
             <tr>
                 <th>
@@ -20,30 +20,22 @@
             <tbody>
             <tr>
                 <td>
-                        <!--<textarea  type="text"
-                                   rows="3"
-                                   class="form-control"
-                                   ng-model = "widget.notetext"
-                                   id="text" placeholder="Start writing notes...">
-
-                        </textarea>-->
                     <div text-angular
                          ng-model="model.widget.html.text">
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn-default" id="add">
-                        <span ng-click="model.addText(model.widget)"
-                              class="glyphicon glyphicon-plus"
+                    <button class="btn btn-default">
+                        <span ng-click="model.updateText(model.widget)"
+                              class="glyphicon glyphicon-ok"
                               aria-hidden="true">
                         </span>
                     </button>
-
                     <button ng-click="model.cancelText(model.widget)"
-                       class="btn btn-default">
+                            class="btn btn-default">
                         <span
-                              class="glyphicon glyphicon-remove "
-                              aria-hidden="true">
+                                class="glyphicon glyphicon-remove "
+                                aria-hidden="true">
                         </span>
                     </button>
                 </td>

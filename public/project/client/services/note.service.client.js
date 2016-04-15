@@ -18,8 +18,7 @@
             updateNoteById: updateNoteById,
             createNoteForUser: createNoteForUser,
             findNoteById: findNoteById,
-            removeLikedNote: removeLikedNote,
-
+            removeLikedUser: removeLikedUser,
 
             //Notebook services
             deleteNotebookById: deleteNotebookById,
@@ -32,11 +31,11 @@
 
         return api;
 
-        function removeLikedNote(userId, noteId){
-            //console.log(userId);
-            //console.log(note._id);
 
-            return $http.delete("/api/project/user/"+userId+"/note/"+noteId);
+
+        function removeLikedUser(userId, noteId){
+
+            return $http.delete("/api/project/note/"+noteId+"/user/"+userId);
         }
 
         function userLikesNote(userId, note){

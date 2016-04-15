@@ -13,4 +13,6 @@ module.exports = function(app, uuid, db, mongoose) {
 
     var WidgetService = require("./services/widget.service.server.js")(app, WidgetModel, uuid);
 
+
+
 };

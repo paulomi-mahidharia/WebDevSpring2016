@@ -20,44 +20,14 @@ module.exports = function(db, mongoose) {
         createNote: createNote,
         userLikesNote: userLikesNote,
         findNotesByIds: findNotesByIds,
-        removeLikedNote: removeLikedNote,
+        removeLikedUser: removeLikedUser,
         getMongooseModel: getMongooseModel
+
     };
 
     return api;
 
-    function removeLikedNote(userId, noteId){
-        /*var deferred = q.defer();
-        //console.log("In here");
-
-        // find the note by noteId
-        Note.findOne({_id: note._id},
-
-            function (err, doc) {
-
-                // reject promise if error
-                if (err) {
-                    deferred.reject(err);
-                }
-
-                // if there's a note
-                if (doc) {
-                    // add user to likes
-                    console.log("In doc");
-                    console.log(userId);
-                    doc.likes.splice(userId, 1);
-                    // save changes
-                    doc.save(function(err, doc){
-                        if (err) {
-                            deferred.reject(err);
-                        } else {
-                            deferred.resolve(doc);
-                        }
-                    });
-                }
-            });
-
-        return deferred.promise;*/
+    function removeLikedUser(userId, noteId){
 
         return Note.update(
             { _id: noteId },
@@ -145,4 +115,6 @@ module.exports = function(db, mongoose) {
 
         return Note
     }
+
+
 };

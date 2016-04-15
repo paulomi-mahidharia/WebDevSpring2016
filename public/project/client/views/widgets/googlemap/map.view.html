@@ -1,5 +1,18 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="MapController">
     <h1>Search Location</h1><br>
+    <div style="float: right">
+        <button class="btn btn-default"
+                ng-click="addMap()">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+        <button ng-click="model.cancelMap(model.widget)"
+                class="btn btn-default">
+                        <span
+                                class="glyphicon glyphicon-remove "
+                                aria-hidden="true">
+                        </span>
+        </button>
+        </div>
     <div>
         <label for="Autocomplete">Autocomplete Search</label>
         <i class="glyphicon glyphicon-map-marker left"></i>
@@ -9,12 +22,12 @@
     </div>
     <br/>
 
-    <div id="map" style="height:300px; width: 1200px;"></div>
+    <div id="map" style="height:300px; width: 375px"></div>
 
 
     <div class="table-responsive">
         <table class="table table-stripped">
-            <tr ng-repeat="address in data.results">
+            <tr ng-repeat="address in data">
                 <td>
                     <center><h3>{{address.formatted_address}}</h3><br/>
                     <ul>
