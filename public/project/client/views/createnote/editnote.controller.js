@@ -15,6 +15,7 @@
 
         vm.trustAsHtml = trustAsHtml;
         vm.editWidget = editWidget;
+        vm.deleteWidget = deleteWidget;
 
         var noteId;
 
@@ -26,7 +27,7 @@
             NoteService.findNoteById(noteId)
                 .then(
                     function(response){
-                        //console.log(response);
+
                         vm.widget = response.data;
                     }
                 );
@@ -34,6 +35,7 @@
             WidgetService.getWidgets(noteId)
                 .then(
                     function(response){
+
                         vm.widgets = response.data;
                     }
                 );
@@ -41,16 +43,36 @@
         init();
 
         function trustAsHtml(html) {
+
             return $sce.trustAsHtml(html);
         }
 
         function editWidget(widget){
-            //console.log(widget);
+
             if(widget.widgetType == "TEXT"){
 
-                //console.log("in text");
                 $location.url("/note/"+noteId+"/text/"+widget._id);
             }
+        }
+
+        function deleteWidget(widget){
+
+            var widgetIndex = vm.widgets.indexOf(widget);
+
+            WidgetService
+                .removeWidget(noteId, widget._id)
+                .then(
+
+                    function(response) {
+
+                        vm.widgets.splice(widgetIndex, 1);
+                    },
+
+                    function(error) {
+                        vm.error = error;
+                    }
+                );
+
         }
 
     }

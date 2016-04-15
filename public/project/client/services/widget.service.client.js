@@ -12,8 +12,8 @@
             getWidgets: getWidgets,
             getWidgetById: getWidgetById,
             //findWidgetById: findWidgetById,
-            updateWidget: updateWidget
-            //removeWidget: removeWidget,
+            updateWidget: updateWidget,
+            removeWidget: removeWidget
             //sortWidget: sortWidget
         };
 
@@ -37,6 +37,11 @@
         function updateWidget(noteId, widgetId, widget){
 
             return $http.put("/api/project/note/"+noteId+"/widget/"+widgetId, widget);
+        }
+
+        function removeWidget(noteId, widgetId){
+
+            return $http.delete("/api/project/note/"+noteId+"/widget/"+widgetId);
         }
     }
 })();

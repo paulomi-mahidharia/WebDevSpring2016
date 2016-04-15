@@ -9,8 +9,8 @@ module.exports = function(db, mongoose, NoteModel) {
     var api = {
         createWidget: createWidget,
         findNoteById: findNoteById,
-        updateWidget: updateWidget
-        //removeWidget: removeWidget,
+        updateWidget: updateWidget,
+        removeWidget: removeWidget
         //sortWidget  : sortWidget
     };
     return api;
@@ -54,5 +54,19 @@ module.exports = function(db, mongoose, NoteModel) {
             }
         );
     }
+
+    function removeWidget(noteId, widgetId) {
+
+        return Note
+            .findById(noteId)
+            .then(
+                function(note) {
+
+                    note.widgets.remove(widgetId);
+                    return note.save();
+                }
+            );
+    }
+
 
 };

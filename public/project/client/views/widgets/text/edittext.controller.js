@@ -17,6 +17,7 @@
         var widgetId;
 
         vm.updateText = updateText;
+        vm.cancelText = cancelText;
 
         function init(){
             noteId = $routeParams.noteId;
@@ -35,6 +36,8 @@
         }
         init();
 
+        // event handlers decleration
+
         function updateText(widget){
 
             WidgetService
@@ -49,6 +52,9 @@
                 );
         }
 
-// event handlers decleration
+        function cancelText(){
+
+            $location.url("/editnote/"+noteId);
+        }
     }
 })();

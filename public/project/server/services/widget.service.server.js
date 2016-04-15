@@ -16,6 +16,8 @@ module.exports = function (app, NoteModel) {
 
     app.put("/api/project/note/:noteId/widget/:widgetId", updateWidget);
 
+    app.delete("/api/project/note/:noteId/widget/:widgetId", removeWidget);
+
     function createWidget(req, res) {
         var noteId = req.params.noteId;
 
@@ -89,6 +91,22 @@ module.exports = function (app, NoteModel) {
 
     }
 
+    function removeWidget(req, res) {
 
+        var noteId = req.params.noteId;
+
+        var widgetId = req.params.widgetId;
+
+        NoteModel
+            .removeWidget(noteId, widgetId)
+            .then(
+                function(response) {
+                    res.send(200);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
 };
