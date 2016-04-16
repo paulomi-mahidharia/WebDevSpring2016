@@ -2,7 +2,7 @@ var express       = require('express');
 var app           = express();
 
 var bodyParser    = require('body-parser');
-var multer        = require('multer');
+//var multer        = require('multer');
 var uuid          = require('node-uuid');
 var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
@@ -32,9 +32,9 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.bodyParser({ uploadDir: './public/uploads', keepExtensions: true }));
+//app.use(express.bodyParser({ uploadDir: './public/uploads', keepExtensions: true }));
 
-app.use(multer());
+//app.use(multer());
 
 app.use(session({
     resave: true,

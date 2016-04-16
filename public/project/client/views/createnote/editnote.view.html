@@ -58,7 +58,7 @@
                         </a>
                     </button>
                     <button class="btn btn-default">
-                        <a href="#/fileupload">
+                        <a href=#/note/{{model.noteId}}/fileupload>
                             <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
                         </a>
                     </button>
@@ -111,6 +111,14 @@
 
                                 </iframe>
 
+
+                            </div>
+
+                            <div ng-switch-when="UPLOAD">
+
+                                <a ng-href="/project/public/uploads/{{widget.upload.url}}" target="_blank">
+                                    <label>{{widget.upload.name}}</label>
+                                </a>
 
                             </div>
                         </div>

@@ -51,9 +51,13 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
-            .when("/fileupload", {
+            .when("/note/:noteId/fileupload", {
                 templateUrl: "views/widgets/fileupload/fileupload.view.html",
-                controller: "myCtrl"
+                controller: "myCtrl",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/note", {
                 templateUrl: "views/note/note.view.html",

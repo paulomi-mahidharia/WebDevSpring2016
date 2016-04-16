@@ -15,6 +15,7 @@ module.exports = function(db, mongoose, NoteModel) {
     };
     return api;
 
+
     function createWidget(noteId, widget) {
 
         return Note.findById(noteId)

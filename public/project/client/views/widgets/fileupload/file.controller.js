@@ -1,7 +1,24 @@
 /**
  * Created by paulomimahidharia on 3/4/16.
  */
-var myApp = angular.module('NoteSpace');
+
+
+(function() {
+    angular
+        .module("NoteSpace")
+        .controller("myCtrl", myCtrl);
+
+    function myCtrl($routeParams) {
+        var vm = this;
+
+        vm.noteId = $routeParams.noteId;
+
+        console.log(vm.noteId);
+    }
+})();
+
+
+/*var myApp = angular.module('NoteSpace');
 
 widgets = [];
 
@@ -55,4 +72,4 @@ myApp.controller('myCtrl', ['$scope', 'fileUpload', function($scope, fileUpload)
 
 
 
-}]);
+}]);*/

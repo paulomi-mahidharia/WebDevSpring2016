@@ -3,6 +3,7 @@
  */
 module.exports = function (app, NoteModel) {
 
+    var fs = require("fs");
     //var applicationModel = model.applicationModel;
 
     var multer  = require('multer');
@@ -17,6 +18,8 @@ module.exports = function (app, NoteModel) {
     app.put("/api/project/note/:noteId/widget/:widgetId", updateWidget);
 
     app.delete("/api/project/note/:noteId/widget/:widgetId", removeWidget);
+
+    app.post ("/api/upload", upload.single('myFile'), uploadFile);
 
     function createWidget(req, res) {
         var noteId = req.params.noteId;
@@ -102,6 +105,53 @@ module.exports = function (app, NoteModel) {
             .then(
                 function(response) {
                     res.send(200);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function uploadFile(req, res) {
+
+        var noteId        = req.body.noteId;
+
+        var widgetId      = req.body.widgetId;
+
+        var myFile        = req.file;
+
+        var destination   = myFile.destination;
+        var path          = myFile.path;
+
+        var originalname  = myFile.originalname;
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        var mimes = mimetype.split('/');
+        var extension = mimes[mimes.length - 1];
+
+        var filename      = myFile.filename;
+
+        var file = filename+"."+extension;
+
+        var newpath = path+"."+extension;
+
+        fs.rename(path, newpath);
+
+        var widget = {
+            widgetType : "UPLOAD",
+            upload : {
+                url : file, //originalname;
+                name : originalname
+            }
+        };
+
+        NoteModel
+            .createWidget(noteId, widget)
+            .then(
+                function(note) {
+
+                    res.redirect("/project/client/#/editnote/"+noteId);
                 },
                 function(err) {
                     res.status(400).send(err);

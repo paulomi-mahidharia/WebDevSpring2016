@@ -5,7 +5,8 @@ module.exports = function(mongoose) {
 
     // use mongoose to declare a user schema
     var UploadSchema = mongoose.Schema({
-        url: String
+        url: String,
+        name : String
         // collection property sets
         // collection name to 'user'
     }, {collection: 'project.upload'});
