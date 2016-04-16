@@ -1,21 +1,28 @@
-<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2" ng-controller = "myCtrl as model">
 
-    <div>URL</div>
-    <input ng-model="model.widget.upload.url" class="form-control"/><br/>
+    <div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
+         ng-controller = "FileUploadController as model">
 
-    <h1>OR</h1><br/>
+        <div id="fileEdit" style="display: none">
 
-    <form action="/api/upload"
-          method="post"
-          enctype="multipart/form-data">
+            <h3>Your current file is :</h3><br/>
+            <a ng-href="/project/public/uploads/{{widget.upload.url}}" target="_blank">
+                <label>{{model.widget.upload.name}}</label>
+            </a><br/>
+            <h3>Replace with :</h3>
 
-        <input name="noteId" value="{{model.noteId}}" style="display: none"/>
-        <input name="widgetId" value="{{model.widgetId}}" style="display: none"/>
+        </div>
 
-        <input  type="file" name="myFile" class="form-control"/><br/>
+        <form action="/api/upload"
+              method="post"
+              enctype="multipart/form-data">
 
-        <button type="submit" class="btn btn-block btn-orange">
-            Upload File
-        </button>
-    </form>
-</div>
+            <input name="noteId" value="{{model.noteId}}" style="display: none"/>
+            <input name="widgetId" value="{{model.widgetId}}" style="display: none"/>
+
+            <input  type="file" name="myFile" class="form-control"/><br/>
+
+            <button type="submit" class="btn btn-block btn-orange">
+                Upload File
+            </button>
+        </form>
+    </div>

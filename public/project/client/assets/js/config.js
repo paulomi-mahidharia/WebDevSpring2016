@@ -53,7 +53,15 @@
             })
             .when("/note/:noteId/fileupload", {
                 templateUrl: "views/widgets/fileupload/fileupload.view.html",
-                controller: "myCtrl",
+                controller: "FileUploadController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/note/:noteId/fileupload/:widgetId", {
+                templateUrl: "views/widgets/fileupload/fileupload.view.html",
+                controller: "FileUploadController",
                 controllerAs: "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn

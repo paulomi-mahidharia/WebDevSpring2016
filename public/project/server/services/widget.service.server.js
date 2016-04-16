@@ -146,17 +146,38 @@ module.exports = function (app, NoteModel) {
             }
         };
 
-        NoteModel
-            .createWidget(noteId, widget)
-            .then(
-                function(note) {
+        if(widgetId){
 
-                    res.redirect("/project/client/#/editnote/"+noteId);
-                },
-                function(err) {
-                    res.status(400).send(err);
-                }
-            );
+            //Edit mode
+
+            NoteModel
+                .updateWidget(noteId, widgetId, widget)
+                .then(
+                    function(note) {
+
+                        res.redirect("/project/client/#/editnote/"+noteId);
+                    },
+                    function(err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
+        else{
+
+            //Create mode
+
+            NoteModel
+                .createWidget(noteId, widget)
+                .then(
+                    function(note) {
+
+                        res.redirect("/project/client/#/editnote/"+noteId);
+                    },
+                    function(err) {
+                        res.status(400).send(err);
+                    }
+                );
+
+        }
     }
-
 };

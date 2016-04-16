@@ -60,6 +60,10 @@
 
                 $location.url("/note/"+noteId+"/map/"+widget._id);
             }
+            if(widget.widgetType == "UPLOAD"){
+
+                $location.url("/note/"+noteId+"/fileupload/"+widget._id);
+            }
         }
 
         function deleteWidget(widget){

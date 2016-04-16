@@ -62,6 +62,15 @@ module.exports = function(db, mongoose, NoteModel) {
                     }
                 }
 
+                if(widget.widgetType === "UPLOAD"){
+                    if(newWidget.upload){
+                        widget.upload = {
+                            url : newWidget.upload.url,
+                            name : newWidget.upload.name
+                        }
+                    }
+                }
+
                 return note.save();
             }
         );
