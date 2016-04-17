@@ -21,7 +21,8 @@
             getCurrentUser: getCurrentUser,
             findNoteLikes: findNoteLikes,
             removeLikedNote: removeLikedNote,
-            isNoteFavForUser: isNoteFavForUser
+            isNoteFavForUser: isNoteFavForUser,
+            login: login
 
         };
 
@@ -87,6 +88,10 @@
             return $http.get("/api/project/user/"+userId+"/notes", findNoteLikes);
         }
 
+        function login(user) {
+
+            return $http.post("/api/project/login", user);
+        }
 
 
     }

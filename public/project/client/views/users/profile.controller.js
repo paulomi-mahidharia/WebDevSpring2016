@@ -13,7 +13,12 @@
         var vm = this;
 
         function init() {
-            vm.user = {};
+            //vm.user = {};
+
+            /*var currUser = $rootScope.currentUser;
+            if(currUser != null){
+                vm.user = currUser;
+            }*/
 
             UserService
                 .findUserById($rootScope.currentUser._id)

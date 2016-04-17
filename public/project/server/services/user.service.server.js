@@ -3,8 +3,20 @@
  */
 module.exports = function(app, UserModel, NoteModel, uuid){
 
+    var bcrypt = require("bcrypt-nodejs");
+    var passport         = require('passport');
+    var LocalStrategy    = require('passport-local').Strategy;
+
+    var auth = authorized;
+    app.post  ('/api/project/login', passport.authenticate('local'), login);
+
+    //creates a new user embedded in the body of the request, and responds with an array of all users
+    app.post("/api/project/user", createUser);
+
     //responds with an array of all users
     app.get("/api/project/user", findAllUsers);
+
+
 
     //Return logged in user (possibly null)
     app.get("/api/project/user/loggedin", loggedIn);
@@ -13,8 +25,7 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     //The new properties are set to the values in the user object embedded in the HTTP request. Responds with an array of all users
     app.put("/api/project/user/:id", updateUser);
 
-    //creates a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/project/user", createUser);
+
 
     //removes an existing user whose id property is equal to the id path parameter.
     // Responds with an array of all users
@@ -32,6 +43,67 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     app.delete("/api/project/user/:userId/note/:noteId", removeLikedNote);
 
     app.get("/api/project/user/:userId/note/:noteId/favorite", isNoteFavForUser);
+
+
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function login(req, res) {
+
+        var user = req.user;
+        res.json(user);
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+
+        UserModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function localStrategy(username, password, done) {
+        UserModel
+            .findUserByCredentials({username: username, password: password})
+            .then(
+                function(user) {
+                    if(user) {
+
+                        return done(null, user);
+
+                    } else {
+
+                        return done(null, false);
+                    }
+                },
+                function(err) {
+
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+    function loggedIn(req, res) {
+
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function logout(req, res) {
+
+        req.logOut();
+        res.send(200);
+    }
 
 
     function isNoteFavForUser(req,res){
@@ -108,7 +180,9 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
         if(username != null && password!= null) {
 
-            var credentials = {username: username, password: password};
+            var credentials = {username: username,
+                               password: password};
+
             findUserByCredentials(credentials, req, res);
         }
 
@@ -155,7 +229,7 @@ module.exports = function(app, UserModel, NoteModel, uuid){
             );
     }
 
-    function loggedIn(req, res) {
+    /*function loggedIn(req, res) {
 
         res.json(req.session.currentUser);
     }
@@ -164,7 +238,7 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
         req.session.destroy();
         res.send(200);
-    }
+    }*/
 
     function findUserByUsername(req, res){
         var username = req.body;
@@ -221,9 +295,55 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     }
 
     function createUser(req,res){
-        var user = req.body;
+        var newUser = req.body;
 
-        user = UserModel.createUser(user)
+        UserModel.findUserByUsername(newUser.username)
+            .then(
+
+                function(user){
+
+                    if(user) {
+
+                        res.json(null);
+                    } else {
+
+                        // encrypt the password when registering
+                        //newUser.password = bcrypt.hashSync(newUser.password);
+
+                        return UserModel.createUser(newUser);
+                    }
+                },
+                function(err){
+
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user){
+
+                    if(user){
+
+                        req.login(user, function(err) {
+
+                            if(err) {
+
+                                res.status(400).send(err);
+                            } else {
+
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
+
+                    res.status(400).send(err);
+                }
+            );
+
+        /*user.password = bcrypt.hashSync(user.password);
+
+        UserModel.createUser(user)
             // handle model promise
             .then(
 
@@ -239,7 +359,7 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
                     res.status(400).send(err);
                 }
-            );
+            );*/
     }
 
     function deleteUserById(req, res){
@@ -262,4 +382,16 @@ module.exports = function(app, UserModel, NoteModel, uuid){
                 }
             );
     }
+
+    function authorized (req, res, next) {
+
+        if (!req.isAuthenticated()) {
+
+            res.send(401);
+        } else {
+            next();
+        }
+    }
+
+
 };

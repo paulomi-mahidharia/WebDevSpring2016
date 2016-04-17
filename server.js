@@ -49,7 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
+//require("./public/assignment/server/app.js")(app, uuid, db, mongoose);
 require("./public/project/server/app.js")(app, uuid, db, mongoose);
 
 
@@ -58,7 +58,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 
 
-function saveFile(req, callback)
+/*function saveFile(req, callback)
 {
     var path = req.files.someFile.path;
     var imagePage = path;
@@ -78,7 +78,7 @@ app.post('/upload/file', function (req, res) {
         res.send(200);
         //res.redirect("/#/" + username + "/profile");
     });
-});
+});*/
 
 app.listen(port, ipaddress, function () {
     console.log("Server is listening on: " + ipaddress + ":" + port);
