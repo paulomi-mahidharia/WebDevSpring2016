@@ -14,6 +14,7 @@
         vm.editNote = editNote;
         vm.toggleFavorite = toggleFavorite;
         vm.isNoteInFavourites = isNoteInFavourites;
+        vm.previewNote = previewNote;
 
         function init() {
 
@@ -123,15 +124,23 @@
                     });
             }
         }
-    }
 
-    function isNoteInFavourites(favourites, note) {
+        function isNoteInFavourites(favourites, note) {
 
-       var noteId = note._id;
-        for(var i in favourites) {
-            if(favourites[i] === noteId)
-                return true;
+            var noteId = note._id;
+            for(var i in favourites) {
+                if(favourites[i] === noteId)
+                    return true;
+            }
+            return false;
         }
-        return false;
+
+        function previewNote($index){
+
+            var noteId = vm.notes[$index]._id;
+            $location.url('/previewnote/'+noteId);
+        }
     }
+
+
 })();

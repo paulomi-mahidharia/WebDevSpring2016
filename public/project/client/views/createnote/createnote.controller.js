@@ -35,8 +35,6 @@
                         $location.url("/editnote/"+response.data._id);
 
                     });
-
-
             vm.widget = {};
         }
 

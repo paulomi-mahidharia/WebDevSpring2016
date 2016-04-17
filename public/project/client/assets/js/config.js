@@ -91,6 +91,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/previewnote/:noteId", {
+                templateUrl: "views/createnote/previewnote.view.html",
+                controller: "EditNoteController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/todo", {
                 templateUrl: "views/widgets/todoWidget/todoWidget.view.html",
                 controller: "toDoController"
