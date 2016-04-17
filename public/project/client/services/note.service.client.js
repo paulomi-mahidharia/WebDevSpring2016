@@ -14,7 +14,6 @@
             findAllNotesLikedByUser: findAllNotesLikedByUser,
             deleteNoteById: deleteNoteById,
             findAllNotesForUser: findAllNotesForUser,
-            //selectNoteById: selectNoteById,
             updateNoteById: updateNoteById,
             createNoteForUser: createNoteForUser,
             findNoteById: findNoteById,

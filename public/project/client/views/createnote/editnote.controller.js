@@ -17,6 +17,7 @@
         vm.editWidget = editWidget;
         vm.deleteWidget = deleteWidget;
         vm.getSrc = getSrc;
+        vm.saveNote = saveNote;
 
         var noteId;
 
@@ -92,6 +93,20 @@
             return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&q="+src);
         }
 
+        function saveNote(note){
+
+            note.updatedDate = new Date();
+
+
+
+            NoteService
+                .updateNoteById(noteId, note)
+                .then(
+                    function (response) {
+                        $location.url("/note");
+                    }
+                )
+        }
 
     }
 })();

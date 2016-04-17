@@ -2,16 +2,20 @@
      ng-controller="EditNoteController as model">
 
     <h1>Edit Note</h1>
+
     <div style="float: right">
+
         <button class="btn btn-default"
-                ng-click="model.addNote(model.widget)">
+                ng-click="model.saveNote(model.widget)">
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
         </button>
-        <button class="btn btn-default">
-            <a href="#/note">
+
+        <a href="#/note">
+            <button class="btn btn-default">
+
                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-            </a>
-        </button>
+            </button>
+        </a>
     </div>
 
 
