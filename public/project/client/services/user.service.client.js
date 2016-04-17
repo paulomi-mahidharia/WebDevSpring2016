@@ -22,7 +22,8 @@
             findNoteLikes: findNoteLikes,
             removeLikedNote: removeLikedNote,
             isNoteFavForUser: isNoteFavForUser,
-            login: login
+            login: login,
+            logout: logout
 
         };
 
@@ -92,6 +93,12 @@
 
             return $http.post("/api/project/login", user);
         }
+
+        function logout(){
+
+            return $http.post("/api/project/user/logout")
+        }
+
 
 
     }
