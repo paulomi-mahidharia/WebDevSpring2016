@@ -10,8 +10,8 @@ module.exports = function(db, mongoose, NoteModel) {
         createWidget: createWidget,
         findNoteById: findNoteById,
         updateWidget: updateWidget,
-        removeWidget: removeWidget
-        //sortWidget  : sortWidget
+        removeWidget: removeWidget,
+        sortWidgets  : sortWidgets
     };
     return api;
 
@@ -88,6 +88,22 @@ module.exports = function(db, mongoose, NoteModel) {
                 }
             );
     }
+
+    function sortWidgets(noteId, startIndex, endIndex) {
+        return Note
+            .findById(noteId)
+            .then(
+                function(note) {
+                    note.widgets.splice(endIndex, 0, note.widgets.splice(startIndex, 1)[0]);
+
+                    // notify mongoose 'pages' field changed
+                    note.markModified("widgets");
+
+                    note.save();
+                }
+            );
+    }
+
 
 
 };

@@ -21,6 +21,8 @@ module.exports = function (app, NoteModel) {
 
     app.post ("/api/upload", upload.single('myFile'), uploadFile);
 
+    app.put("/api/project/note/:noteId/widget", sortWidgets);
+
     function createWidget(req, res) {
         var noteId = req.params.noteId;
 
@@ -180,4 +182,29 @@ module.exports = function (app, NoteModel) {
 
         }
     }
+
+    function sortWidgets(req, res){
+
+        var noteId = req.params.noteId;
+        var startIndex = req.query.startIndex;
+        var endIndex = req.query.endIndex;
+
+        if(startIndex && endIndex){
+
+            NoteModel.sortWidgets(noteId, startIndex, endIndex)
+
+                .then(
+                    function (stat) {
+
+                        return res.json(200);
+                    },
+                    function (err) {
+
+                        res.status(400).send(err);
+                    }
+                );
+        }
+
+    }
+
 };

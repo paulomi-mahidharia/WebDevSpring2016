@@ -18,6 +18,7 @@
         vm.deleteWidget = deleteWidget;
         vm.getSrc = getSrc;
         vm.saveNote = saveNote;
+        vm.sortWidgets = sortWidgets;
 
         var noteId;
 
@@ -44,6 +45,8 @@
                 );
         }
         init();
+
+
 
         function trustAsHtml(html) {
 
@@ -106,6 +109,18 @@
                         $location.url("/note");
                     }
                 )
+        }
+
+        function sortWidgets(start, end) {
+            NoteService
+                .sortWidgets(noteId, start, end)
+                .then(
+                    function (response) {
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
         }
 
     }

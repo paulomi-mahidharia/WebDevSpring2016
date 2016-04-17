@@ -18,6 +18,7 @@
             createNoteForUser: createNoteForUser,
             findNoteById: findNoteById,
             removeLikedUser: removeLikedUser,
+            sortWidgets: sortWidgets,
 
             //Notebook services
             deleteNotebookById: deleteNotebookById,
@@ -71,10 +72,10 @@
             return $http.post("/api/project/user/"+userId+"/note", newNote);
         }
 
-        /*function removeNoteLikes(userId, noteId){
+        function sortWidgets(noteId, startIndex, endIndex) {
 
-            return $http.delete("/api/project/user/"+userId+"/note/"+noteId);
-        }*/
+            return $http.put("/api/project/note/"+noteId+"/widget?startIndex="+startIndex+"&endIndex="+endIndex);
+        }
 
 
 
