@@ -11,7 +11,8 @@ module.exports = function(db, mongoose, NoteModel) {
         findNoteById: findNoteById,
         updateWidget: updateWidget,
         removeWidget: removeWidget,
-        sortWidgets  : sortWidgets
+        sortWidgets  : sortWidgets,
+        getMongooseModel : getMongooseModel
     };
     return api;
 
@@ -71,6 +72,14 @@ module.exports = function(db, mongoose, NoteModel) {
                     }
                 }
 
+                if(widget.widgetType === "IMAGE"){
+                    if(newWidget.image){
+                        widget.image = {
+                            url : newWidget.image.url
+                        }
+                    }
+                }
+
                 return note.save();
             }
         );
@@ -102,6 +111,10 @@ module.exports = function(db, mongoose, NoteModel) {
                     note.save();
                 }
             );
+    }
+
+    function getMongooseModel() {
+        return Note;
     }
 
 

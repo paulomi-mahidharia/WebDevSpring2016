@@ -74,7 +74,7 @@
                         </a>
                     </button>
                     <button class="btn btn-default">
-                        <a href="#/image">
+                        <a href="#/note/{{model.noteId}}/image">
                             <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
                         </a>
                     </button>
@@ -128,10 +128,18 @@
 
                             <div ng-switch-when="UPLOAD">
 
-                                <a ng-href="/project/public/uploads/{{widget.upload.url}}" target="_blank">
+                                <a ng-href="{{widget.upload.url}}" target="_blank">
                                     <label>{{widget.upload.name}}</label>
                                 </a>
 
+                            </div>
+
+                            <div ng-switch-when="IMAGE">
+
+                                <a ng-href="{{widget.image.url}}" target="_blank">
+                                    <img ng-src="{{widget.image.url}}"
+                                     width="375px"/>
+                                </a>
                             </div>
             </div>
 

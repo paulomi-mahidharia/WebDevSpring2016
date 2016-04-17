@@ -117,40 +117,56 @@ module.exports = function (app, NoteModel) {
     function uploadFile(req, res) {
 
         var noteId        = req.body.noteId;
-
         var widgetId      = req.body.widgetId;
+        var widgetType    = req.body.widgetType;
 
         var myFile        = req.file;
 
         var destination   = myFile.destination;
         var path          = myFile.path;
-
         var originalname  = myFile.originalname;
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
+        var filename      = myFile.filename;
 
+        //Get the file type
         var mimes = mimetype.split('/');
         var extension = mimes[mimes.length - 1];
 
-        var filename      = myFile.filename;
-
+        //Append the file extension at the end of randomly generated filename
         var file = filename+"."+extension;
 
         var newpath = path+"."+extension;
 
+        //Rename the file path
         fs.rename(path, newpath);
 
-        var widget = {
-            widgetType : "UPLOAD",
-            upload : {
-                url : file, //originalname;
-                name : originalname
-            }
-        };
+        //Check whether the upload is for UPLOAD widget or IMAGE widget
+        if(widgetType == "UPLOAD"){
 
+            var widget = {
+                widgetType: "UPLOAD",
+                upload: {
+                    url: "/project/public/uploads/"+file, //originalname;
+                    name: originalname
+                }
+            };
+        }
+        else{
+
+            var widget = {
+                widgetType: "IMAGE",
+                image: {
+                    url: "/project/public/uploads/"+file //originalname;
+                }
+            };
+        }
+
+        //Check whether the widget needs to be edited or created!
         if(widgetId){
 
             //Edit mode
+
 
             NoteModel
                 .updateWidget(noteId, widgetId, widget)

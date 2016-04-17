@@ -68,6 +68,11 @@
 
                 $location.url("/note/"+noteId+"/fileupload/"+widget._id);
             }
+
+            if(widget.widgetType == "IMAGE"){
+
+                $location.url("/note/"+noteId+"/image/"+widget._id);
+            }
         }
 
         function deleteWidget(widget){

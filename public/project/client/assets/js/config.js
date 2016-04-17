@@ -106,9 +106,21 @@
                 templateUrl: "views/widgets/todoWidget/todoWidget.view.html",
                 controller: "toDoController"
             })
-            .when("/image", {
+            .when("/note/:noteId/image", {
                 templateUrl: "views/widgets/imageWidget/imageWidget.view.html",
-                controller: "imageController"
+                controller: "ImageController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/note/:noteId/image/:widgetId", {
+                templateUrl: "views/widgets/imageWidget/imageWidget.view.html",
+                controller: "ImageController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/youtube", {
                 templateUrl: "views/widgets/youtubeApiWidget/youtubeApiWidget.view.html",

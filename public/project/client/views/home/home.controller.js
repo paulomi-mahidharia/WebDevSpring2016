@@ -26,6 +26,7 @@
                         // Error alert if the user does not exist in database OR
                         // Credentials entered are invalid and do not match with any entry in the database
 
+                        console.log(response);
                         if(response.data == null){
 
                             user.username = null;

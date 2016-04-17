@@ -229,16 +229,6 @@ module.exports = function(app, UserModel, NoteModel, uuid){
             );
     }
 
-    /*function loggedIn(req, res) {
-
-        res.json(req.session.currentUser);
-    }
-
-    function logout(req, res) {
-
-        req.session.destroy();
-        res.send(200);
-    }*/
 
     function findUserByUsername(req, res){
         var username = req.body;

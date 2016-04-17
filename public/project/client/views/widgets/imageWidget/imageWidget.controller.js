@@ -1,55 +1,69 @@
 /**
- * Created by anvitasurapaneni on 2/12/16.
+ * Created by paulomimahidharia on 4/17/16.
  */
 (function(){
     angular
         .module("NoteSpace")
-        .controller("imageController", imageController );
-
-    function imageController($scope){
-        var images  = [
-            {"_id": "000", "url":"http://static3.businessinsider.com/image/51b5fc246bb3f7f33a000017/19-unlikely-animals-who-are-best-friends.jpg"},
-            {"_id": "010", "url":"http://static.ddmcdn.com/gif/1-cow_670x440-animals-in-your-medicine-cabinet-photos-140204.jpg"},
-            {"_id": "020", "url": "http://i4.mirror.co.uk/incoming/article4041282.ece/ALTERNATES/s615/Red-Fox-in-The-Wonder-of-Animals.jpg"},
-        ];
-        $scope.images = images;
-
-        // event handlers decleration
-        $scope.addImage = addImage;
-        $scope.deleteImage = deleteImage;
-        $scope.selectImage = selectImage;
-        $scope.updateImage = updateImage;
+        .controller("ImageController", imageController );
 
 
-        // event handlers implementation
-        function addImage(image){
-            console.log("add image url");
-            console.log( image);
-            var  newID = (new Date).getTime();
-            var NewImage =  {_id: newID,
-                url: image.url};
-            $scope.image ={};
-            $scope.images.push(NewImage);
+
+
+    function imageController($routeParams, WidgetService, $location){
+
+        var vm = this;
+
+        vm.addImage = addImage;
+
+        vm.noteId = $routeParams.noteId;
+
+        var noteId = vm.noteId;
+
+        function init(){
+
+            var widgetId = $routeParams.widgetId;
+
+
+            if(widgetId){
+
+                //console.log(widgetId);
+
+                vm.widgetId = widgetId;
+
+                document.getElementById('imageEdit').style.display = 'inline';
+
+                WidgetService
+                    .getWidgetById(noteId, widgetId)
+                    .then(
+                        function(response){
+
+                            vm.widget = response.data;
+
+                        }
+                    );
+
+
+            }
+
         }
+        init();
 
-        function deleteImage(image){
-            var index = $scope.images.indexOf(image);
-            $scope.images.splice(index, 1);
+        function addImage(widget){
 
+            var widget = {
+                widgetType : "IMAGE",
+                image : {
+                    url : widget.image.url
+                }
+            };
+
+            WidgetService
+                .addWidget(noteId, widget)
+                .then(
+                    function(response){
+                        $location.url("/editnote/"+noteId);
+                    }
+                );
         }
-
-        function  selectImage(image)
-        {
-            $scope.selectedImageIndex = $scope.images.indexOf(image);
-
-            $scope.image = {_id: image._id,
-                url: image.url};
-        }
-
-        function  updateImage(image)
-        {
-            $scope.images[$scope.selectedImageIndex] = image;
-        }
-
     }
 })();
