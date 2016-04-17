@@ -206,9 +206,10 @@
             // User is Not Authenticated
             else
             {
+                $rootScope.currentUser = null;
                 $rootScope.errorMessage = 'You need to log in.';
                 deferred.reject();
-                $location.url('/login');
+                $location.url('/home');
             }
         });
 

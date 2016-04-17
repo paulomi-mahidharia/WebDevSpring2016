@@ -295,6 +295,7 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     }
 
     function createUser(req,res){
+
         var newUser = req.body;
 
         UserModel.findUserByUsername(newUser.username)
@@ -306,9 +307,6 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
                         res.json(null);
                     } else {
-
-                        // encrypt the password when registering
-                        //newUser.password = bcrypt.hashSync(newUser.password);
 
                         return UserModel.createUser(newUser);
                     }
@@ -341,25 +339,6 @@ module.exports = function(app, UserModel, NoteModel, uuid){
                 }
             );
 
-        /*user.password = bcrypt.hashSync(user.password);
-
-        UserModel.createUser(user)
-            // handle model promise
-            .then(
-
-                // login user if promise resolved
-                function ( doc ) {
-
-                    req.session.currentUser = doc;
-                    res.json(doc);
-                },
-
-                // send error if promise rejected
-                function ( err ) {
-
-                    res.status(400).send(err);
-                }
-            );*/
     }
 
     function deleteUserById(req, res){
