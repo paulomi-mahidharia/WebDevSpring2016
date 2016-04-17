@@ -3,7 +3,7 @@
 
     <h1>{{model.widget.title}}</h1>
 
-    <p>NOTEBOOK : {{notebook.name}}</p>
+    <h5>NOTEBOOK : {{notebook.name}}</h5>
 
     <div style="float: right">
 
@@ -22,18 +22,17 @@
         </a>
     </div>
 
-
-    <p>A user can add multiple widgets...</p>
+    <br/>
     <br/>
 
+    <form action="" id="my-form" >
 
-    <div class="table-responsive darker padding-all-sides" >
-        <table class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
-            <tbody>
-            <tr ng-repeat="widget in model.widgets">
+        <div class="row" ng-repeat="widget in model.widgets">
 
-                <td>
-                    <div ng-switch="widget.widgetType">
+            <div class="col-sm-4 col-md-4" ng-switch on="widget.widgetType">
+
+            <br/>
+            <div ng-switch="widget.widgetType">
 
                         <!-- use textangular directive to render a WYSIWYG HTML editor -->
                         <div ng-switch-when="TEXT">
@@ -64,12 +63,10 @@
 
                         </div>
                     </div>
-                </td>
 
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            </div>
+        </div>
+    </form>
 
 </div>
 
