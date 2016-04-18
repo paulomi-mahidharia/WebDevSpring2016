@@ -22,7 +22,8 @@ module.exports = function(db, mongoose) {
         updateUser: updateUser,
         userLikesNote: userLikesNote,
         removeLikedNote: removeLikedNote,
-        isNoteFavForUser: isNoteFavForUser
+        isNoteFavForUser: isNoteFavForUser,
+        findUserByFacebookId: findUserByFacebookId,
     };
 
     return api;
@@ -192,5 +193,11 @@ module.exports = function(db, mongoose) {
 
         return deferred.promise;
     }
+
+    function findUserByFacebookId(facebookId) {
+
+        return User.findOne({'facebook.id': facebookId});
+    }
+
 
 };

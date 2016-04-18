@@ -15,6 +15,10 @@ module.exports = function(mongoose) {
         phones: [String],
         // note ids of notes this user likes
         likes: [String],
+        facebook:   {
+            id:    String,
+            token: String
+        },
         // movies this user likes
         likesNotes: [NoteSchema]
         // collection property sets
