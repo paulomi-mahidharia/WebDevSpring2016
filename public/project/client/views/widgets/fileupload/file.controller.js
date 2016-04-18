@@ -8,13 +8,15 @@
         .module("NoteSpace")
         .controller("FileUploadController", FileUploadController);
 
-    function FileUploadController($routeParams, WidgetService) {
+    function FileUploadController($routeParams, WidgetService, $location) {
 
         var vm = this;
 
         vm.noteId = $routeParams.noteId;
 
         var noteId = vm.noteId;
+
+        vm.addFile = addFile;
 
         //console.log(vm.noteId);
 
@@ -51,6 +53,32 @@
         }
         init();
 
+        function addFile(widget){
 
-    }
+                if(widget.upload.name){
+
+                    var widget = {
+                        widgetType : "UPLOAD",
+                        upload : {
+                            url : widget.upload.url,
+                            name : widget.upload.name
+                        }
+                    };
+
+                    WidgetService
+                        .addWidget(noteId, widget)
+                        .then(
+                            function(response){
+                                $location.url("/editnote/"+noteId);
+                            }
+                        );
+                }
+                else{
+
+                    alert("You are missing NAME of the document!")
+                }
+
+            }
+
+        }
 })();

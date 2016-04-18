@@ -8,10 +8,31 @@
             <a ng-href="/project/public/uploads/{{widget.upload.url}}" target="_blank">
                 <label>{{model.widget.upload.name}}</label>
             </a><br/>
-            <h3>Replace with :</h3>
+            <h3>Replace with :</h3><br/>
 
         </div>
 
+        URL
+        <input ng-model="model.widget.upload.url"
+               class="form-control"
+                placeholder="Enter URL"/>
+        <br/>
+
+        <input ng-model="model.widget.upload.name"
+               class="form-control"
+               placeholder="Enter document name"/>
+        <br/>
+
+        <button class="btn btn-block btn-orange"  
+                ng-click="model.addFile(model.widget)">
+                            UPLOAD FILE VIA URL          
+                    </button>
+        <br/>
+
+        <center><h1>OR</h1></center>
+        <br/>
+
+        UPLOAD FILE
         <form action="/api/upload"
               method="post"
               enctype="multipart/form-data">
