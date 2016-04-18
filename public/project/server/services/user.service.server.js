@@ -45,12 +45,11 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
     app.get("/api/project/user/:userId/note/:noteId/favorite", isNoteFavForUser);
 
-
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-
+    //Facebook authentication!
     app.get   ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback',
          passport.authenticate('facebook', {
