@@ -1,12 +1,13 @@
 /**
  * Created by paulomimahidharia on 3/16/16.
  */
-module.exports = function(app, UserModel, NoteModel, uuid){
 
-    var bcrypt = require("bcrypt-nodejs");
-    var passport         = require('passport');
-    var LocalStrategy    = require('passport-local').Strategy;
-    var FacebookStrategy = require('passport-facebook').Strategy;
+//var bcrypt = require("bcrypt-nodejs");
+var passport         = require('passport');
+var LocalStrategy    = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+module.exports = function(app, UserModel, NoteModel, uuid){
 
     var auth = authorized;
     app.post  ('/api/project/login', passport.authenticate('local'), login);
@@ -26,8 +27,6 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     //The new properties are set to the values in the user object embedded in the HTTP request. Responds with an array of all users
     app.put("/api/project/user/:id", updateUser);
 
-
-
     //removes an existing user whose id property is equal to the id path parameter.
     // Responds with an array of all users
     app.delete("/api/project/user/:id", deleteUserById);
@@ -45,9 +44,7 @@ module.exports = function(app, UserModel, NoteModel, uuid){
 
     app.get("/api/project/user/:userId/note/:noteId/favorite", isNoteFavForUser);
 
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+
 
     //Facebook authentication!
     app.get   ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
@@ -66,6 +63,9 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     };
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
 
 
     function login(req, res) {
