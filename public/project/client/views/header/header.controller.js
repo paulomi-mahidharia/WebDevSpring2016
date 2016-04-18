@@ -7,13 +7,20 @@
         .module("NoteSpace")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, UserService){
+    function HeaderController($location, UserService, $rootScope){
         var vm = this;
 
         vm.logout = logout;
 
         function init() {
             vm.$location = $location;
+
+            /*if($rootScope.currentUser.firstName){
+                vm.user = $rootScope.currentUser.firstName;
+            }
+            else{
+                vm.user = $rootScope.currentUser.username;
+            }*/
         }
         init();
 

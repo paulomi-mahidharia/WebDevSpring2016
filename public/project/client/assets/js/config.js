@@ -122,9 +122,13 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
-            .when("/youtube", {
+            .when("/note/:noteId/youtube", {
                 templateUrl: "views/widgets/youtubeApiWidget/youtubeApiWidget.view.html",
-                controller: "YouTubeController"
+                controller: "YouTubeController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/notebook", {
                 templateUrl: "views//notebook/notebook.view.html",

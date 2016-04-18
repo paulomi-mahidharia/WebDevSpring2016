@@ -19,6 +19,7 @@
         vm.getSrc = getSrc;
         vm.saveNote = saveNote;
         vm.sortWidgets = sortWidgets;
+        vm.safeYouTubeUrl = safeYouTubeUrl;
 
         var noteId;
 
@@ -126,6 +127,17 @@
                         vm.error = err;
                     }
                 );
+        }
+
+        function safeYouTubeUrl(widget) {
+
+            if(widget && widget.youtube) {
+
+                var urlParts = widget.youtube.url.split("/");
+                var youTubeId = urlParts[urlParts.length-1];
+                return $sce.trustAsResourceUrl("https://www.youtube.com/embed/"+youTubeId);
+            }
+            return "";
         }
 
     }

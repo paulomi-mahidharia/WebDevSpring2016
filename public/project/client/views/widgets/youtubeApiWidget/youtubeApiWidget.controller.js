@@ -1,9 +1,6 @@
 /**
- * Created by anvitasurapaneni on 2/3/16.
+ * Created by paulomimahidharia on 4/17/16.
  */
-
-
-
 
 (function() {
 
@@ -11,84 +8,74 @@
         .module("NoteSpace")
         .controller("YouTubeController", YouTubeController);
 
-    function YouTubeController($http, $scope) {
-        //$(init);
-        //var $MovieName;
-        //var $SearchMovieTitle;
-        //var $tbody;
+    function YouTubeController($http, $sce, WidgetService, $routeParams, $location) {
 
-        $scope.selectVideo = selectVideo;
-        $scope.trustSrcurl = function(data)
-        {
-            return $sce.trustAsResourceUrl(data);
+        var vm =this;
+
+        vm.SafeYoutubeUrl = SafeYoutubeUrl;
+        vm.addVideo = addVideo;
+        vm.searchVideo = searchVideo;
+
+        var noteId = $routeParams.noteId;
+        var keyword;
+
+
+        function searchVideo(widget){
+            console.log(widget);
+
+            keyword = widget.youtube.keyword;
+            console.log(keyword);
+
+            $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet" +
+                "&maxResults=5&q="+keyword+"&key=AIzaSyBId_35KFQKeZoRy-aRDZxma65PqdmkUI8")
+                .then(
+                    function(response){
+                        console.log(response);
+
+                        var videos = response.data.items;
+
+                        console.log(videos);
+
+                        var videoURLs =[];
+
+                        for(var i in videos){
+                            videoURLs.push("http://www.youtube.com/embed/"+videos[i].id.videoId);
+                        }
+
+                        vm.urls = videoURLs;
+                    },
+                    function (err){
+                        console.log(err);
+                    }
+                );
         }
 
-        function selectVideo(url){
-            $scope.slelectedUrl = url;
-            $scope.slelectedUrl.link = url.link;
-
-            console.log(url);
-
-        }
-
-        function init() {
-           var $searchurl = "https://www.googleapis.com/youtube/v3/search?part=snippet" +
-               "&maxResults=5&q=CATEGORY&key=AIzaSyBId_35KFQKeZoRy-aRDZxma65PqdmkUI8";
-
-            $VideoName = $("#VideoName");
-            console.log($VideoName);
-            $SearchVideoTitle = $("#SearchVideoTitle");
-            $SearchVideoTitle.click(searchVideo);
-
-            function searchVideo(){
-                var category = $VideoName.val();
-                var url = $searchurl.replace("CATEGORY", category);
-                console.log("new url:");
-                console.log(url);
 
 
-                $http.get(url)
-                    .success(callback);
+        function addVideo($index){
+
+            var widgetURL = vm.urls[$index];
+
+            var widget = {
+                widgetType : "YOUTUBE",
+                youtube : {
+                keyword: keyword,
+                    url: widgetURL
             }
+            };
 
-
-
-
-
+            WidgetService.addWidget(noteId, widget)
+                .then(
+                    function(response){
+                        $location.url("/editnote/"+noteId);
+                    }
+                )
 
         }
-        init();
 
-        function callback(response) {
-
-            var url_temp = "http://www.youtube.com/embed/ID?autoplay=1";
-            $scope.data = response.items;
-            console.log("Data");
-            console.log($scope.data);
-            var data = $scope.data;
-            var url_link = {};
-            var urls = [];
-            for(var i =0; i<data.length; i++){
-                var newid = data[i].id.videoId;
-                var title = data[i].snippet.title;
-                console.log(newid);
-
-                var v1 = url_temp.replace("ID", newid);
-                console.log("v1:");
-                console.log("title:");
-                console.log(title);
-                console.log(v1);
-             //   url_link = {"link": v1}
-             //   console.log(url_link);
-               // urls.push(url_link);
-                urls.push(v1);
-                console.log(urls);
-                url_temp = "http://www.youtube.com/embed/ID?autoplay=1"
-                $scope.urls = urls;
-            }
+        function  SafeYoutubeUrl(url){
+            return $sce.trustAsResourceUrl(url);
         }
-console.log($scope.urls);
+
     }
-
-
 })();

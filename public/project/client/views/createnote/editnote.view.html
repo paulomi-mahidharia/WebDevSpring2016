@@ -84,7 +84,7 @@
                         </a>
                     </button>
                     <button class="btn btn-default">
-                        <a href="#/youtube">
+                        <a href="#/note/{{model.noteId}}/youtube">
                             <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
                         </a>
                     </button>
@@ -106,41 +106,50 @@
             <div class="col-sm-4 col-md-4" ng-switch on="widget.widgetType">
 
                 <!-- use textangular directive to render a WYSIWYG HTML editor -->
-                            <div ng-switch-when="TEXT">
+                <div ng-switch-when="TEXT">
 
-                                <div ng-bind-html="model.trustAsHtml(widget.html.text)"></div>
+                    <div ng-bind-html="model.trustAsHtml(widget.html.text)"></div>
 
-                            </div>
+                </div>
 
-                            <div ng-switch-when="MAP">
+                <div ng-switch-when="MAP">
 
-                                <iframe
-                                        width="350"
-                                        height="300"
-                                        frameborder="0" style="border:0"
-                                        ng-src="{{model.getSrc(widget.map.location)}}"
-                                        allowfullscreen>
+                    <iframe
+                            width="350"
+                            height="300"
+                            frameborder="0" style="border:0"
+                            ng-src="{{model.getSrc(widget.map.location)}}"
+                            allowfullscreen>
 
-                                </iframe>
+                    </iframe>
 
 
-                            </div>
+                </div>
 
-                            <div ng-switch-when="UPLOAD">
+                <div ng-switch-when="UPLOAD">
 
-                                <a ng-href="{{widget.upload.url}}" target="_blank">
-                                    <label>{{widget.upload.name}}</label>
-                                </a>
+                    <a ng-href="{{widget.upload.url}}" target="_blank">
+                        <label>{{widget.upload.name}}</label>
+                    </a>
 
-                            </div>
+                </div>
 
-                            <div ng-switch-when="IMAGE">
+                <div ng-switch-when="IMAGE">
 
-                                <a ng-href="{{widget.image.url}}" target="_blank">
-                                    <img ng-src="{{widget.image.url}}"
-                                     width="375px"/>
-                                </a>
-                            </div>
+                    <a ng-href="{{widget.image.url}}" target="_blank">
+                        <img ng-src="{{widget.image.url}}"
+                         width="350"/>
+                    </a>
+                </div>
+
+                <div ng-switch-when="YOUTUBE">
+                    <iframe ng-src="{{model.safeYouTubeUrl(widget)}}"
+                            width="350"
+                            height="300"
+                            frameborder="0"
+                            allowfullscreen>
+                    </iframe>
+                </div>
             </div>
 
 

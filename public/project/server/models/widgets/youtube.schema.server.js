@@ -5,7 +5,8 @@ module.exports = function(mongoose) {
 
     // use mongoose to declare a user schema
     var YoutubeSchema = mongoose.Schema({
-        youtubeURL: String
+        keyword : String,
+        url: String
         // collection property sets
         // collection name to 'user'
     }, {collection: 'project.youtube'});
