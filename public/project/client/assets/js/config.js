@@ -102,9 +102,21 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
-            .when("/todo", {
+            .when("/note/:noteId/todo", {
                 templateUrl: "views/widgets/todoWidget/todoWidget.view.html",
-                controller: "toDoController"
+                controller: "ToDoController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/note/:noteId/todo/:widgetId", {
+                templateUrl: "views/widgets/todoWidget/todoWidget.view.html",
+                controller: "ToDoController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/note/:noteId/image", {
                 templateUrl: "views/widgets/imageWidget/imageWidget.view.html",

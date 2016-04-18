@@ -4,51 +4,134 @@
 (function(){
     angular
         .module("NoteSpace")
-        .controller("toDoController", toDoController);
+        .controller("ToDoController", toDoController);
 
-    function toDoController($scope){
-        var toDoList  = [
-            {"_id": "000", "task": "finish assignment"},
-            {"_id": "001", "task": "finish project_individual_modules"}
-        ];
-        $scope.toDoList = toDoList;
+    function toDoController(WidgetService, $routeParams, $location){
+
+        var vm = this;
+
+        var tasks = [];
+
+        var selectedIndex = -1;
+
+        var noteId = $routeParams.noteId;
+        var widgetId = $routeParams.widgetId;
 
         // event handlers decleration
-        $scope.addToDo = addToDo;
-        $scope.deleteToDo = deleteToDo;
-        $scope.selectToDo = selectToDo;
-        $scope.updateToDo = updateToDo;
+        vm.addToDo = addToDo;
+        vm.deleteToDo = deleteToDo;
+        vm.selectToDo = selectToDo;
+        vm.updateToDo = updateToDo;
 
+        // Note specifice event handlers
+
+        vm.addTodoToNote = addTodoToNote;
+        vm.updateTodoToNote = updateTodoToNote;
+
+        function init(){
+
+            if(widgetId){
+
+                document.getElementById("addTodo").style.display = 'none';
+
+                WidgetService
+                    .getWidgetById(noteId, widgetId)
+                    .then(
+                        function(response){
+
+                            console.log(response.data);
+                            vm.widget = response.data;
+                        }
+                    );
+            }
+            else{
+
+                document.getElementById("updateTodo").style.display = 'none';
+            }
+
+        }
+        init();
 
         // event handlers implementation
-        function addToDo(toDo){
-            console.log("add todo");
-            console.log( toDo);
-            var  newID = (new Date).getTime();
-            var NewToDo =  {_id: newID,
-                task: toDo.task};
-            $scope.toDo ={};
-            $scope.toDoList.push(NewToDo);
+        function addToDo(widget) {
+
+            if(widget.todo.title){
+
+                tasks.push(widget.todo.task);
+                vm.widget.todo.tasks = tasks;
+
+                widget.todo.task = null;
+            }
+            else {
+                alert("Enter a title for your tasks!");
+                widget.todo.task = null;
+            }
+
+
         }
 
-        function deleteToDo(toDo){
-            var index = $scope.toDoList.indexOf(toDo);
-            $scope.toDoList.splice(index, 1);
+        function deleteToDo($index){
+
+            vm.widget.todo.tasks.splice($index, 1);
 
         }
 
-        function  selectToDo(toDo)
+        function  selectToDo($index)
         {
-            $scope.selectedToDoIndex = $scope.toDoList.indexOf(toDo);
+            var selectedTask = vm.widget.todo.tasks[$index];
+            vm.widget.todo.task = selectedTask;
 
-            $scope.toDo = {_id: toDo._id,
-                task: toDo.task};
+            selectedIndex = $index;
         }
 
-        function  updateToDo(toDo)
+        function  updateToDo(widget)
         {
-            $scope.toDoList[$scope.selectedToDoIndex] = toDo;
-            $scope.toDo ={};
+            vm.widget.todo.tasks[selectedIndex] = widget.todo.task;
+            selectedIndex = -1;
+
+            vm.widget.todo.task = null;
+        }
+
+        // Note specific event handlers
+
+        function addTodoToNote(widget){
+
+            var widget = {
+                widgetType : "TODO",
+                todo : {
+                    title : widget.todo.title,
+                    tasks : widget.todo.tasks
+                }
+            };
+
+            WidgetService
+                .addWidget(noteId, widget)
+                .then(
+                    function(response){
+
+                        $location.url("/editnote/"+noteId);
+                    }
+                );
+        }
+
+        function updateTodoToNote(widget){
+
+            var widget = {
+                widgetType : "TODO",
+                todo : {
+                    title : widget.todo.title,
+                    tasks : widget.todo.tasks
+                }
+            };
+
+            WidgetService
+                .updateWidget(noteId, widgetId, widget)
+                .then(
+                    function(response){
+
+                        $location.url("/editnote/"+noteId);
+                    }
+                );
         }
 
     }

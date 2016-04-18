@@ -89,6 +89,15 @@ module.exports = function(db, mongoose, NoteModel) {
                     }
                 }
 
+                if(widget.widgetType === "TODO"){
+                    if(newWidget.todo){
+                        widget.todo = {
+                            title : newWidget.todo.title,
+                            tasks : newWidget.todo.tasks
+                        }
+                    }
+                }
+
                 return note.save();
             }
         );

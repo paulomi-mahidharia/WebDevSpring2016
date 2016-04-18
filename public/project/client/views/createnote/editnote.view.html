@@ -69,7 +69,7 @@
                         </a>
                     </button>
                     <button class="btn btn-default">
-                        <a href=#/note/{{model.noteId}}/fileupload>
+                        <a href="#/note/{{model.noteId}}/fileupload">
                             <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
                         </a>
                     </button>
@@ -79,7 +79,7 @@
                         </a>
                     </button>
                     <button class="btn btn-default">
-                        <a href="#/todo">
+                        <a href="#/note/{{model.noteId}}/todo">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
                         </a>
                     </button>
@@ -150,6 +150,17 @@
                             allowfullscreen>
                     </iframe>
                 </div>
+
+                <div ng-switch-when="TODO">
+                    <h4>{{widget.todo.title}}</h4>
+                    <ul ng-repeat="task in widget.todo.tasks">
+                        <!--style="list-style-image: url('../../assets/img/bullet.jpg');"-->
+
+                        <li>{{task}}</li>
+
+                    </ul>
+                </div>
+
             </div>
 
 

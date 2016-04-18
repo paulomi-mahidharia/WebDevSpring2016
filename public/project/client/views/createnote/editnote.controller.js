@@ -79,6 +79,10 @@
 
                 $location.url("/note/"+noteId+"/youtube/"+widget._id);
             }
+            if(widget.widgetType == "TODO"){
+
+                $location.url("/note/"+noteId+"/todo/"+widget._id);
+            }
         }
 
         function deleteWidget(widget){
