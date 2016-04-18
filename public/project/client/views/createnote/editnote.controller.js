@@ -74,6 +74,11 @@
 
                 $location.url("/note/"+noteId+"/image/"+widget._id);
             }
+
+            if(widget.widgetType == "YOUTUBE"){
+
+                $location.url("/note/"+noteId+"/youtube/"+widget._id);
+            }
         }
 
         function deleteWidget(widget){
@@ -99,7 +104,8 @@
 
         function getSrc(src){
 
-            return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&q="+src);
+            return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?"
+            +"key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&q="+src);
         }
 
         function saveNote(note){
@@ -135,6 +141,7 @@
 
                 var urlParts = widget.youtube.url.split("/");
                 var youTubeId = urlParts[urlParts.length-1];
+
                 return $sce.trustAsResourceUrl("https://www.youtube.com/embed/"+youTubeId);
             }
             return "";

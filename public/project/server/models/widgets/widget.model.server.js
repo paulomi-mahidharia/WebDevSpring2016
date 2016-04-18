@@ -80,6 +80,15 @@ module.exports = function(db, mongoose, NoteModel) {
                     }
                 }
 
+                if(widget.widgetType === "YOUTUBE"){
+                    if(newWidget.youtube){
+                        widget.youtube = {
+                            keyword : newWidget.youtube.keyword,
+                            url : newWidget.youtube.url
+                        }
+                    }
+                }
+
                 return note.save();
             }
         );

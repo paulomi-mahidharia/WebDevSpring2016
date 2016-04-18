@@ -17,8 +17,31 @@
         vm.searchVideo = searchVideo;
 
         var noteId = $routeParams.noteId;
+        var widgetId = $routeParams.widgetId;
         var keyword;
 
+        function init(){
+
+            if(widgetId){
+
+                console.log(widgetId);
+
+                //Edit mode
+                WidgetService.getWidgetById(noteId, widgetId)
+                    .then(
+                        function(response){
+
+                            var widget = response.data;
+                            vm.widget = widget;
+
+                            searchVideo(widget);
+                        }
+                    );
+
+            }
+
+        }
+        init();
 
         function searchVideo(widget){
             console.log(widget);
@@ -27,7 +50,7 @@
             console.log(keyword);
 
             $http.get("https://www.googleapis.com/youtube/v3/search?part=snippet" +
-                "&maxResults=5&q="+keyword+"&key=AIzaSyBId_35KFQKeZoRy-aRDZxma65PqdmkUI8")
+                "&maxResults=10&q="+keyword+"&key=AIzaSyBId_35KFQKeZoRy-aRDZxma65PqdmkUI8")
                 .then(
                     function(response){
                         console.log(response);
@@ -41,6 +64,8 @@
                         for(var i in videos){
                             videoURLs.push("http://www.youtube.com/embed/"+videos[i].id.videoId);
                         }
+
+                        document.getElementById('searchResults').style.display = 'inline';
 
                         vm.urls = videoURLs;
                     },
@@ -59,21 +84,41 @@
             var widget = {
                 widgetType : "YOUTUBE",
                 youtube : {
-                keyword: keyword,
+                    keyword: keyword,
                     url: widgetURL
-            }
+                }
             };
 
-            WidgetService.addWidget(noteId, widget)
-                .then(
-                    function(response){
-                        $location.url("/editnote/"+noteId);
-                    }
-                )
+            if(widgetId){
+
+                //Update widget
+
+                WidgetService.updateWidget(noteId, widgetId, widget)
+                    .then(
+                        function(response){
+                            $location.url("/editnote/"+noteId);
+                        }
+                    );
+
+            }
+            else {
+
+                //Add Widget
+
+                WidgetService.addWidget(noteId, widget)
+                    .then(
+                        function(response){
+                            $location.url("/editnote/"+noteId);
+                        }
+                    );
+            }
+
+
 
         }
 
         function  SafeYoutubeUrl(url){
+
             return $sce.trustAsResourceUrl(url);
         }
 

@@ -20,41 +20,45 @@
 
             </button>
 
-            <h2>Related Videos</h2>
+            <div id="searchResults" style="display: none">
 
-            <table id="searchResults"
-               class="table table-bordered table-striped"
-               border="3"
-               style="border-collapse:collapse">
+                <h2>Related Videos</h2>
 
-                <thead>
-                <tr>
-                    <th>Videos</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
+                <table id="results"
+                   class="table table-bordered table-striped"
+                   border="3"
+                   style="border-collapse:collapse">
 
-                <tbody>
-                <tr ng-repeat="url in model.urls">
-                    <td>
-                        <iframe width="250" height="250"
-                                ng-src="{{model.SafeYoutubeUrl(url)}}">
-                        </iframe>
-                    </td>
-                    <td>
-                        <button class="btn btn-default"
-                                ng-click="model.addVideo($index)">
+                    <thead>
+                    <tr>
+                        <th>Videos</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
 
-                        <span
-                                class="glyphicon glyphicon-plus"
-                                aria-hidden="true">
-                        </span>
-                        </button>
+                    <tbody>
+                    <tr ng-repeat="url in model.urls">
+                        <td>
+                            <iframe width="250" height="250"
+                                    ng-src="{{model.SafeYoutubeUrl(url)}}">
+                            </iframe>
+                        </td>
+                        <td>
+                            <button class="btn btn-default"
+                                    ng-click="model.addVideo($index)">
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                            <span
+                                    class="glyphicon glyphicon-plus"
+                                    aria-hidden="true">
+                            </span>
+                            </button>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
 
         </div>
 </div>

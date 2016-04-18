@@ -130,6 +130,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/note/:noteId/youtube/:widgetId", {
+                templateUrl: "views/widgets/youtubeApiWidget/youtubeApiWidget.view.html",
+                controller: "YouTubeController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/notebook", {
                 templateUrl: "views//notebook/notebook.view.html",
                 controller: "noteBookController",
