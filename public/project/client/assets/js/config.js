@@ -199,6 +199,60 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/inbox", {
+                templateUrl: "views/inbox/inbox.view.html",
+                controller: "InboxController",
+                controllerAs : "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/sharenote/:noteId", {
+                templateUrl: "views/sharenote/sharenote.view.html",
+                controller: "ShareNoteController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/createGroup", {
+                templateUrl: "views/group/creategroup.view.html",
+                controller: "GroupController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/group", {
+                templateUrl: "views/group/group.view.html",
+                controller: "GroupController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+
+            .when("/group/:groupId/editGroup", {
+
+                templateUrl: "views/group/editGroup.view.html",
+                controller: "GroupController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/group/:groupIdV/viewGroup", {
+
+                templateUrl: "views/group/viewGroup.view.html",
+                controller: "GroupController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+
+
+
 
             .otherwise({
                 redirectTo: "/home"

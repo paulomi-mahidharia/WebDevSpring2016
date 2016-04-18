@@ -1,0 +1,58 @@
+<div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
+     ng-controller="GroupController as model">
+
+    <h1>View Group</h1>
+
+    <a href="#/group">
+        <div style="float: right">
+            <button class="btn btn-default"
+                    ng-click= "s =1" >
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+            </button>
+        </div>
+    </a>
+
+
+    <h3 style="color: orange" >Group Name: {{model.currentGroup.title}}</h3><br/>
+
+    <p>A user can add users to groups</p>
+    <br/>
+
+    <div class="table-responsive darker padding-all-sides" >
+
+        <table  class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+
+            <tbody>
+                <tr>
+                    <th>Group Members</th>
+                </tr>
+
+                <tr ng-repeat="user in model.usersOfCurrentGroup">
+
+                    <td>
+                        <h3>{{user.username}}</h3>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table  class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+
+            <tbody>
+                <tr>
+                    <th>Shared Notes</th>
+                </tr>
+
+                <tr ng-repeat="note in model.currentGroup.receivesNotes">
+                    <td>
+                        <h3>{{note.title}}</h3>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+

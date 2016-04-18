@@ -10,11 +10,16 @@ module.exports = function(mongoose) {
         title: String,
         notebook: String,
         createdBy: String,
+
+        // ids of users that receive this note
+        receives: [String],
+
         // ids of users that like this note
         likes: [String],
         createdDate: String,
         updatedDate: String,
         widgets: [WidgetSchema]
+
         // collection property sets
         // collection name to 'user'
     }, {collection: 'project.note'});

@@ -13,6 +13,7 @@ module.exports = function(mongoose) {
         lastName: String,
         emails: [String],
         phones: [String],
+
         // note ids of notes this user likes
         likes: [String],
         facebook:   {
@@ -20,7 +21,20 @@ module.exports = function(mongoose) {
             token: String
         },
         // movies this user likes
-        likesNotes: [NoteSchema]
+        likesNotes: [NoteSchema],
+
+        //NodeIds of received notes
+        receives: [String],
+
+        //GroupIds for which the user is an admin
+        userIsAdminOfGroup:[String],
+
+        //GroupIds for which the user is a member
+        userIsMemberOfGroup:[String],
+
+        //Notes received by the user
+        receivesNotes:[NoteSchema]
+
         // collection property sets
         // collection name to 'user'
     }, {collection: 'project.user'});

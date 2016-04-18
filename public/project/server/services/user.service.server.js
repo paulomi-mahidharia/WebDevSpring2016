@@ -18,8 +18,6 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     //responds with an array of all users
     app.get("/api/project/user", findAllUsers);
 
-
-
     //Return logged in user (possibly null)
     app.get("/api/project/user/loggedin", loggedIn);
 

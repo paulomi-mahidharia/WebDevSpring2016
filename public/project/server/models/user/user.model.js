@@ -24,6 +24,8 @@ module.exports = function(db, mongoose) {
         removeLikedNote: removeLikedNote,
         isNoteFavForUser: isNoteFavForUser,
         findUserByFacebookId: findUserByFacebookId,
+        userReceivesNote: userReceivesNote,
+        getMongooseModel: getMongooseModel
     };
 
     return api;
@@ -122,7 +124,7 @@ module.exports = function(db, mongoose) {
 
     function findAllUsers(){
 
-        return users;
+        return User.find();
     }
 
     function updateUser(userId, user){
@@ -198,6 +200,44 @@ module.exports = function(db, mongoose) {
 
         return User.findOne({'facebook.id': facebookId});
     }
+
+    function getMongooseModel() {
+        return User;
+    }
+
+
+    function userReceivesNote(userId, note) {
+
+        var deferred = q.defer();
+
+        // find the user
+        User.findById(userId, function (err, doc) {
+
+            // reject promise if error
+            if (err) {
+                deferred.reject(err);
+            } else {
+
+                // add movie id to user likes
+                doc.receives.push (note._id);
+
+                // save user
+                doc.save (function (err, doc) {
+
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+
+                        // resolve promise with user
+                        deferred.resolve (doc);
+                    }
+                });
+            }
+        });
+
+        return deferred;
+    }
+
 
 
 };
