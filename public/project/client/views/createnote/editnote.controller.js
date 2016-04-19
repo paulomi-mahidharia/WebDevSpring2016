@@ -187,7 +187,7 @@
                     .then(
                         function(updatedNotebook){
 
-                            $location.url("/editnote/"+noteId);
+                            $location.url("/note");
                         }
 
                     );

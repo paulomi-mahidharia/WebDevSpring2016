@@ -6,13 +6,17 @@
         .module("NoteSpace")
         .controller("PreviewNoteController", PreviewNoteController);
 
-    function PreviewNoteController(NoteService, $routeParams, WidgetService, $rootScope) {
+    function PreviewNoteController(NoteService, $routeParams, WidgetService, $rootScope, $sce) {
 
         var vm = this;
 
         var noteId;
 
         var userId = $rootScope.currentUser._id;
+
+        vm.trustAsHtml = trustAsHtml;
+        vm.getSrc = getSrc;
+        vm.safeYouTubeUrl = safeYouTubeUrl;
 
         function init() {
 
@@ -47,6 +51,29 @@
 
         }
         init();
+
+        function trustAsHtml(html) {
+
+            return $sce.trustAsHtml(html);
+        }
+
+        function getSrc(src){
+
+            return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?"
+                +"key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&q="+src);
+        }
+
+        function safeYouTubeUrl(widget) {
+
+            if(widget && widget.youtube) {
+
+                var urlParts = widget.youtube.url.split("/");
+                var youTubeId = urlParts[urlParts.length-1];
+
+                return $sce.trustAsResourceUrl("https://www.youtube.com/embed/"+youTubeId);
+            }
+            return "";
+        }
 
     }
 })();
