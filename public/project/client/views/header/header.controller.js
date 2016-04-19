@@ -15,6 +15,8 @@
         function init() {
             vm.$location = $location;
 
+          //  vm.currentUser = $rootScope.currentUser;
+
             /*if($rootScope.currentUser.firstName){
                 vm.user = $rootScope.currentUser.firstName;
             }
@@ -29,8 +31,8 @@
             UserService
                 .logout()
                 .then(function(user){
-
                     UserService.setCurrentUser(null);
+                   vm.currentUser = null;
                     $location.url("/home");
                 });
 

@@ -2,22 +2,7 @@
 <div class=" main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
      ng-controller="noteBookController as model">
 
-
-
-    Search :<br/><br/>
-    <input class="form-control" style="background: transparent"
-                        ng-model="query[queryBy]"
-                        placeholder="Enter URL"/><br/>
-
-    Search By :<br/><br/>
-    <select class="form-control" ng-model="queryBy" style="background: transparent">
-
-        <option value="name">NAME</option>
-        <option value="description">DESCRIPTION</option>
-
-    </select>
-
-    <h1>Note Book
+    <h1>Notebooks
         <div style="float: right">
 
             <button class="btn btn-default"
@@ -57,8 +42,18 @@
     </h1>
 
 
+    Search :<br/><br/>
+    <input class="form-control" style="background: transparent"
+                        ng-model="query[queryBy]"
+                        placeholder="Enter URL"/><br/>
 
+    Search By :<br/><br/>
+    <select class="form-control" ng-model="queryBy" style="background: transparent">
 
+        <option value="name">NAME</option>
+        <option value="description">DESCRIPTION</option>
+
+    </select>
 
     <table class="table table-bordered table-striped" border="3" style="border-collapse:collapse" >
 
@@ -88,8 +83,6 @@
         </tr>
         </tbody>
         </table>
-
-    <h3>Note book Crud functionality</h3><br/>
 
     <div class="table-responsive darker padding-all-sides" >
         <table class="table table-bordered table-striped" border="3" style="border-collapse:collapse" >

@@ -185,8 +185,9 @@
                 }
             })
             .when("/sidebar", {
-                templateUrl: "views/sidebar/sidebar.view.html",
-                controller: "SidebarController",
+                templateUrl: "views/header/sidebar.view.html",
+                controller: "HeaderController",
+                controllerAs : "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn
                 }
