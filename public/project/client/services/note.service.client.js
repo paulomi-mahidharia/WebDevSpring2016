@@ -63,6 +63,7 @@
         }
 
         function findAllNotesForUser(userId){
+
             return $http.get("/api/project/user/"+userId+"/note");
         }
 

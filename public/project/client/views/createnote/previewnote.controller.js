@@ -20,12 +20,20 @@
 
         function init() {
 
+
+
             noteId = $routeParams.noteId;
             vm.noteId = noteId;
 
             NoteService.findNoteById(noteId)
                 .then(
                     function(response){
+
+                        if(userId != response.data.createdBy){
+
+                            document.getElementById('editbutton').style.display = 'none';
+                            document.getElementById('removebutton').style.display = 'none';
+                        }
 
                         vm.widget = response.data;
                     }

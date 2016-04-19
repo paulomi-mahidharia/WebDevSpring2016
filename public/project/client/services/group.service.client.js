@@ -31,13 +31,13 @@
 
         function deleteNoteFromGroup(noteId, groupId){
 
-            return $http.delete("/api/project/user/group/"+groupId+"/note/"+noteId);
+            return $http.delete("/api/project/group/"+groupId+"/note/"+noteId);
 
         }
 
         function renameGroup(groupId, title){
 
-            return $http.put("/api/project/user/group/"+groupId+"/title/"+title);
+            return $http.put("/api/project/group/"+groupId+"/title/"+title);
         }
 
         function getMembersOfGroup(groupId){
@@ -47,18 +47,18 @@
 
         function deleteGroupById(groupId) {
 
-            return $http.delete("/api/project/user/group/"+groupId);
+            return $http.delete("/api/project/group/"+groupId);
         }
 
         function deleteGroupFromCurrentMember(groupId, userId) {
 
-            return $http.delete("/api/project/user/"+userId+"/unfollow1/group/"+groupId);
+            return $http.delete("/api/project/group/"+groupId+"/unfollow1/user/"+userId);
         }
 
 
         function deleteCurrentMemberFromGroup(userId, groupId) {
 
-            return $http.delete("/api/project/user/"+userId+"/unfollow/group/"+groupId);
+            return $http.delete("/api/project/group/"+groupId+"/unfollow/user/"+userId);
         }
 
         function getMemberGroups(userId){
@@ -81,7 +81,7 @@
 
             var deferred = $q.defer();
 
-            var url = "/api/project/user/:userId/group/:groupId";
+            var url = "/api/project/group/:groupId/user/:userId";
             url = url.replace(":userId", userId);
             url = url.replace(":groupId", groupId);
 
@@ -95,7 +95,7 @@
 
         function getGroupById(groupId){
 
-            return $http.get("/api/project/user/group/"+groupId);
+            return $http.get("/api/project/group/"+groupId);
         }
 
         function addMemberToGroup(userId, groupId){
@@ -105,7 +105,7 @@
 
         function createGroupForUser(userId, group) {
 
-            return $http.post("/api/project/user/" + userId + "/group", group);
+            return $http.post("/api/project/group/user/" + userId, group);
         }
 
     }

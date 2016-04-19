@@ -111,7 +111,9 @@ module.exports = function(db, mongoose, UserModel, NotebookModel) {
 
     function findAllNotesForUser(userId){
 
-        return Note.find();
+        return Note.find({
+            createdBy : userId
+        });
     }
 
     function findNoteById(noteId){

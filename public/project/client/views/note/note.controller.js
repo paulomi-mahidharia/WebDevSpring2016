@@ -19,6 +19,8 @@
 
         function init() {
 
+            console.log($rootScope.currentUser._id);
+
             NoteService
                 .findAllNotesForUser($rootScope.currentUser._id)
 
@@ -28,7 +30,7 @@
 
                     vm.notes = foundNotes.data;
 
-                    //console.log(vm.notes);
+                    console.log(foundNotes.data);
 
                     vm.$location = $location;
                 });

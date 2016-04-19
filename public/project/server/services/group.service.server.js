@@ -4,19 +4,19 @@
 
 module.exports = function(app, GroupModel, UserModel, uuid){
 
-    app.post("/api/project/user/:userId/group", createGroupForUser);
+    app.post("/api/project/group/user/:userId", createGroupForUser);
     app.post("/api/project/group/:groupId/user/:userId", addMemberToGroup);
-    app.get("/api/project/user/group/:groupId", findGroupById);
-    app.delete("/api/project/user/:userId/group/:groupId", deleteMemberFromGroup);
+    app.get("/api/project/group/:groupId", findGroupById);
+    app.delete("/api/project/group/:groupId/user/:userId", deleteMemberFromGroup);
     app.get("/api/project/group", findAllGroups);
     app.get("/api/project/group/admin/:userId", getAdminGroups);
     app.get("/api/project/group/member/:userId", getMemberGroups);
-    app.delete("/api/project/user/:userId/unfollow/group/:groupId", deleteCurrentMemberFromGroup);
-    app.delete("/api/project/user/group/:id", deleteGroupById);
-    app.delete("/api/project/user/:userId/unfollow1/group/:groupId", deleteGroupFromCurrentMember);
+    app.delete("/api/project/group/:groupId/unfollow/user/:userId", deleteCurrentMemberFromGroup);
+    app.delete("/api/project/group/:id", deleteGroupById);
+    app.delete("/api/project/group/:groupId/unfollow1/user/:userId", deleteGroupFromCurrentMember);
     app.get("/api/project/group/members/:groupId", getMembersOfGroup);
-    app.put("/api/project/user/group/:groupId/title/:title", renameGroup);
-    app.delete("/api/project/user/group/:groupId/note/:noteId", deleteNoteFromGroup);
+    app.put("/api/project/group/:groupId/title/:title", renameGroup);
+    app.delete("/api/project/group/:groupId/note/:noteId", deleteNoteFromGroup);
 
 
     //share note
@@ -57,13 +57,7 @@ module.exports = function(app, GroupModel, UserModel, uuid){
                     res.status(400).send(err);
                 }
             );
-
-
-
     }
-
-
-
 
     function renameGroup(req,res){
             var groupId = req.params.groupId;
