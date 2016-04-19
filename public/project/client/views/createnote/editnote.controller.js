@@ -145,12 +145,24 @@
 
         function saveNote(note){
 
+            var latestNote;
+
             if(notebookId != note.notebook){
 
                 //Delete this note from current notebook and save it to different notebook
 
                 NoteService
-                    .selectNoteBookById(note.notebook)
+                    .findNoteById(noteId)
+                    .then(
+
+                        function(foundNote){
+
+                            latestNote = foundNote.data;
+
+                            return NoteService
+                                .selectNoteBookById(note.notebook);
+                        }
+                    )
                     .then(
                         function(response){
 
@@ -163,11 +175,10 @@
                                 receives: note.receives,
                                 likes: note.likes,
                                 updatedDate: new Date(),
-                                widgets: note.widgets
+                                widgets: latestNote.widgets
                             };
 
-                            return NoteService
-                                .updateNoteById(noteId, updatedNote);
+                            return NoteService.updateNoteById(noteId, updatedNote);
                         }
                     )
                     .then(
@@ -197,13 +208,23 @@
                 // Save note to notebook
 
                 NoteService
-                    .selectNoteBookById(note.notebook)
+                    .findNoteById(noteId)
+                    .then(
+
+                        function(foundNote){
+
+                            latestNote = foundNote.data;
+
+                            return NoteService
+                                .selectNoteBookById(note.notebook);
+                        }
+                    )
                     .then(
                         function (response){
 
-                            note.notebook = response.data.name;
+                            latestNote.notebook = response.data.name;
 
-                            return NoteService.updateNoteById(noteId, note);
+                            return NoteService.updateNoteById(noteId, latestNote);
                         }
                     )
                     .then(
