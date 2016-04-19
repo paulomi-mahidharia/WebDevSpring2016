@@ -15,10 +15,13 @@
         vm.toggleFavorite = toggleFavorite;
         vm.isNoteInFavourites = isNoteInFavourites;
         vm.previewNote = previewNote;
+        vm.shareNote = shareNote;
 
         function init() {
 
-            NoteService.findAllNotesForUser($rootScope.currentUser._id)
+            NoteService
+                .findAllNotesForUser($rootScope.currentUser._id)
+
                 .then(function (foundNotes) {
 
                     var favNotes = [];
@@ -29,13 +32,27 @@
                     vm.$location = $location;
                 });
 
-            NoteService.findAllNoteBooksForUser($rootScope.currentUser._id)
+            NoteService
+                .findAllNoteBooksForUser($rootScope.currentUser._id)
 
                 .then(function (foundNoteBooks){
 
                     vm.notebooks = foundNoteBooks.data;
                     vm.$location = $location;
-                })
+                });
+
+            NoteService
+                .findAllNotesReceivedByUser($rootScope.currentUser._id)
+
+                .then(function (foundNotes) {
+
+                    var favNotes = [];
+
+                    vm.foundNotes = foundNotes.data;
+                    //console.log(vm.notes);
+
+                    vm.$location = $location;
+                });
         }
         init();
 
@@ -58,6 +75,7 @@
         }
 
         function editNote($index){
+
             var noteId = vm.notes[$index]._id;
 
             $location.url("/editnote/"+noteId);
@@ -139,6 +157,14 @@
 
             var noteId = vm.notes[$index]._id;
             $location.url('/previewnote/'+noteId);
+        }
+
+        //share note
+
+        function shareNote($index){
+            var noteId = vm.notes[$index]._id;
+
+            $location.url("/sharenote/"+noteId);
         }
     }
 

@@ -1,65 +1,54 @@
 /**
- * Created by paulomimahidharia on 3/25/16.
+ * Created by anvitasurapaneni on 3/25/16.
  */
-var notebooks = require("./notebook.mock.json");
+// var notebooks = require("./notebook.mock.json");
+var q = require("q");
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
+
+    var NotebookSchema = require("./notebook.schema.server.js")(mongoose);
+    var Notebook = mongoose.model('Notebook', NotebookSchema);
+
     var api = {
         findAllNoteBooksForUser: findAllNoteBooksForUser,
         deleteNotebookById: deleteNotebookById,
         selectNoteBookById: selectNoteBookById,
         updateNoteBookById: updateNoteBookById,
-        addNoteBookForUser: addNoteBookForUser
+        createNotebook: createNotebook
     };
 
     return api;
 
     function findAllNoteBooksForUser(userId){
-        var userNotebooks = [];
-        for(var i in notebooks){
-            var notebookObj = notebooks[i];
-            //console.log(noteObj.createdBy);
-            if(notebookObj.createdBy == userId){
-                userNotebooks.push(notebookObj);
-            }
-        }
-        //console.log(userNotes);
-        return userNotebooks;
+        return Notebook.find({ "createdBy": userId });
     }
 
 
     function deleteNotebookById(NBId){
-        for (var nb in notebooks) {
-            if (notebooks[nb]._id == NBId) {
-                notebooks.splice(nb,1);
-                break;
-            }
-        }
+        return Notebook.findByIdAndRemove(NBId);
     }
 
 
     function selectNoteBookById(NBId){
-        console.log("nbid:"+NBId);
-        for (var nb in notebooks) {
-            console.log("nb:"+nb);
-            if(notebooks[nb]._id == NBId) {
-                return notebooks[nb];
+        var deferred = q.defer();
+        Notebook.findById(NBId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return null;
+
+        });
+        return deferred.promise;
+
     }
 
     function updateNoteBookById(NBId, newNB){
-        for (var nb in notebooks) {
-            if (notebooks[nb]._id == NBId) {
-                notebooks[nb] = newNB;
-                return newNB;
-            }
-        }
+        return Notebook.findByIdAndUpdate(NBId, newNB);
     }
 
-    function addNoteBookForUser(userId, newNB){
-        notebooks.push(newNB);
+    function createNotebook(notebook) {
+        return Notebook.create(notebook);
     }
 
 };

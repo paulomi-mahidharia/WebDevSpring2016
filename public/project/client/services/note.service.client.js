@@ -7,7 +7,7 @@
         .module("NoteSpace")
         .factory("NoteService", NoteService);
 
-    function NoteService($http, $rootScope) {
+    function NoteService($http, $q) {
         var api = {
             //Note services
             userLikesNote: userLikesNote,
@@ -25,7 +25,15 @@
             selectNoteBookById: selectNoteBookById,
             updateNoteBookById: updateNoteBookById,
             addNoteBookForUser: addNoteBookForUser,
-            findAllNoteBooksForUser: findAllNoteBooksForUser
+            findAllNoteBooksForUser: findAllNoteBooksForUser,
+
+
+            // share
+            findAllNotesReceivedByUser: findAllNotesReceivedByUser,
+            shareNoteWithUser: shareNoteWithUser,
+            deleteReceivedNoteForUser: deleteReceivedNoteForUser,
+            shareNoteWithGroup: shareNoteWithGroup
+
 
         };
 
@@ -38,15 +46,17 @@
         }
 
         function userLikesNote(userId, note){
+
             return $http.post("/api/project/user/"+userId+"/note/"+note._id, note);
         }
 
         function findAllNotesLikedByUser(userId){
+
             return $http.get("/api/project/user/"+userId+"/note/liked");
         }
 
         function deleteNoteById(noteId) {
-           //console.log(noteId);
+
            return $http.delete("/api/project/note/"+noteId);
         }
 
@@ -55,20 +65,17 @@
         }
 
         function findNoteById(noteId){
+
             return $http.get("/api/project/note/"+noteId);
         }
 
-        function findAllNoteBooksForUser(userId){
-            return $http.get("/api/project/user/"+userId+"/notebook");
-        }
-
         function updateNoteById(noteId, newNote){
-            //console.log(newNote);
+
             return $http.put("/api/project/note/"+noteId, newNote);
         }
 
         function createNoteForUser(userId, newNote){
-            //console.log("gcdng");
+
             return $http.post("/api/project/user/"+userId+"/note", newNote);
         }
 
@@ -81,23 +88,87 @@
 
         ////////////////////////////////////////////////////////////////////
         function deleteNotebookById(NBId){
-            console.log(NBId);
-            return $http.delete("/api/project/notebook/"+NBId);
 
+            return $http.delete("/api/project/notebook/"+NBId);
         }
 
         function selectNoteBookById(NBId){
+
             return $http.get("/api/project/notebook/"+NBId);
         }
 
         function updateNoteBookById(NBId, newNB){
-            return $http.put("/api/project/notebook/"+NBId, newNB);
 
+            return $http.put("/api/project/notebook/"+NBId, newNB);
         }
 
         function addNoteBookForUser(userId,newNB){
+
             return $http.post("/api/project/user/"+userId+"/notebook/", newNB);
         }
 
+        function findAllNoteBooksForUser(userId){
+
+            return $http.get("/api/project/user/"+userId+"/notebook");
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+
+        function shareNoteWithGroup(note, groupId){
+
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/user/group/share/:groupId/note";
+
+            url = url.replace(":groupId", groupId);
+
+            $http.post(url, note).success(function(response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+
+        }
+
+
+        function findAllNotesReceivedByUser(userId){
+
+            return $http.get("/api/project/user/"+userId+"/note");
+
+        }
+
+        function shareNoteWithUser(note, userId){
+
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/user/share/:userId/note";
+            url = url.replace(":userId", userId);
+
+            $http.post(url, note).success(function(response) {
+
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+
+        }
+
+        function deleteReceivedNoteForUser(noteId, userId){
+
+            var deferred = $q.defer();
+
+            var url = "/api/project/user/share/:userId/note/:noteId";
+            url = url.replace(":userId", userId);
+            url = url.replace(":noteId", noteId);
+
+            $http.delete(url).success(function(response) {
+                deferred.resolve(response);
+            });
+
+            return deferred.promise;
+        }
     }
 })();

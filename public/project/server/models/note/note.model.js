@@ -11,6 +11,9 @@ module.exports = function(db, mongoose) {
     var NoteSchema = require("./note.schema.server.js")(mongoose);
     var Note = mongoose.model('Note', NoteSchema);
 
+    var UserSchema = require("./../user/user.schema.server.js")(mongoose);
+    var User = mongoose.model('User', UserSchema);
+
     var api = {
 
         deleteNoteById: deleteNoteById,
@@ -21,7 +24,13 @@ module.exports = function(db, mongoose) {
         userLikesNote: userLikesNote,
         findNotesByIds: findNotesByIds,
         removeLikedUser: removeLikedUser,
-        getMongooseModel: getMongooseModel
+        getMongooseModel: getMongooseModel,
+
+        // share note functions
+        findAllNotesReceivedByUser: findAllNotesReceivedByUser,
+        userReceivesNote: userReceivesNote,
+        shareNoteWithUser:shareNoteWithUser,
+        deleteReceivedNoteForUser: deleteReceivedNoteForUser
 
     };
 
@@ -114,6 +123,59 @@ module.exports = function(db, mongoose) {
     function getMongooseModel() {
 
         return Note
+    }
+
+    function deleteReceivedNoteForUser(noteId, userId) {
+
+        return User.update(
+            { _id: userId },
+            { $pull: { 'receivesNotes': { _id : noteId } } }
+        );
+
+    }
+
+    function shareNoteWithUser(note, userId){
+
+        return User.findById(userId)
+            .then(
+                function(user){
+                    user.receivesNotes.push(note);
+                    return user.save();
+                }
+            );
+    }
+
+    function userReceivesNote(userId, note){
+        var deferred = q.defer();
+
+        Note.findOne({_id: note._id},
+
+            function (err, doc) {
+
+                if (err) {
+                    deferred.reject(err);
+                }
+
+                if (doc) {
+                    doc.receives.push (userId);
+                    // save changes
+                    doc.save(function(err, doc){
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function findAllNotesReceivedByUser(userID){
+
+        return Note.find();
+
     }
 
 
