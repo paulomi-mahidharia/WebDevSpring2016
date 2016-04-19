@@ -5,6 +5,8 @@ module.exports = function(mongoose) {
 
     var WidgetSchema = require("../widgets/widget.schema.server.js")(mongoose);
 
+    //var NotebookSchema = require("../notebook/notebook.schema.server.js")(mongoose);
+
     // use mongoose to declare a user schema
     var NoteSchema = mongoose.Schema({
         title: String,

@@ -3,6 +3,30 @@
     <div id="second">
         <form class="form-horizontal">
 
+            <center>
+
+            <div class="form-group">
+
+                <img ng-src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png">
+
+                <form action="/api/upload"
+                      method="post"
+                      enctype="multipart/form-data">
+
+                    <input name="noteId" value="{{model.currentUser._id}}" style="display: none"/>
+
+                    <input  type="file" name="myFile"/><br/>
+
+                    <p>
+                        <button type="submit" class="btn btn-orange">UPLOAD PHOTO</button>
+                    </p>
+                </form>
+
+
+            </div>
+
+            </center>
+
             <div class="form-group">
 
                 <label for="exampleInputUsername" class="col-sm-2 control-label">Username:</label>
@@ -13,6 +37,7 @@
                            id="exampleInputUsername"
                            placeholder="Username"
                            style="background: transparent"/>
+                    <br/>
                 </div>
             </div>
             <div class="form-group">
@@ -24,6 +49,7 @@
                            id="exampleInputPassword1"
                            placeholder="Password"
                            style="background: transparent"/>
+                    <br/>
                 </div>
             </div>
             <div class="form-group">
@@ -35,6 +61,7 @@
                            id="exampleInputFirstName"
                            placeholder="First Name"
                            style="background: transparent"/>
+                    <br/>
                 </div>
             </div>
             <div class="form-group">
@@ -46,6 +73,7 @@
                            id="exampleInputLastName"
                            placeholder="Last Name"
                            style="background: transparent"/>
+                    <br/>
                 </div>
             </div>
             <div class="form-group">
@@ -62,6 +90,7 @@
                            id="exampleInputEmail1"
                            placeholder="Emails separated by comma"
                            style="background: transparent">
+                    <br/>
                 </div>
             </div>
             <div class="form-group">

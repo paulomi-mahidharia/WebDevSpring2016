@@ -30,19 +30,47 @@
 
         function addNote(note){
 
+            console.log(note);
+
             var currentUser = $rootScope.currentUser;
             var currentUserId = currentUser._id;
+
+            var noteId;
 
             note.createdBy = currentUser;
             note.createdDate = new Date();
 
-            NoteService.createNoteForUser(currentUserId, note)
+            NoteService
+                .selectNoteBookById(note.notebook)
+                .then(
+                    function(response){
+
+                        var createNote = {
+                            createdBy : note.createdBy,
+                            createdDate : note.createdDate,
+                            title : note.title,
+                            notebook : response.data.name
+                        };
+
+                        return NoteService
+                            .createNoteForUser(currentUserId, createNote);
+                    }
+                )
                 .then(
                     function(response) {
 
-                        $location.url("/editnote/"+response.data._id);
+                        noteId = response.data._id;
 
-                    });
+                        return NoteService.addNoteToNotebook(noteId, note.notebook);
+
+                    })
+                .then(
+                    function(notebook){
+
+                        $location.url("/editnote/"+noteId);
+                    }
+                );
+
             vm.widget = {};
         }
 

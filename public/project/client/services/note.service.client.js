@@ -19,6 +19,7 @@
             findNoteById: findNoteById,
             removeLikedUser: removeLikedUser,
             sortWidgets: sortWidgets,
+            addNoteToNotebook : addNoteToNotebook,
 
             //Notebook services
             deleteNotebookById: deleteNotebookById,
@@ -84,7 +85,10 @@
             return $http.put("/api/project/note/"+noteId+"/widget?startIndex="+startIndex+"&endIndex="+endIndex);
         }
 
+        function addNoteToNotebook(noteId, notebookId){
 
+            return $http.put("/api/project/note/"+noteId+"/notebook/"+notebookId);
+        }
 
         ////////////////////////////////////////////////////////////////////
         function deleteNotebookById(NBId){

@@ -20,34 +20,30 @@ module.exports = function(db, mongoose) {
     return api;
 
     function findAllNoteBooksForUser(userId){
+
         return Notebook.find({ "createdBy": userId });
     }
 
 
     function deleteNotebookById(NBId){
+
         return Notebook.findByIdAndRemove(NBId);
     }
 
 
     function selectNoteBookById(NBId){
-        var deferred = q.defer();
-        Notebook.findById(NBId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
 
-        });
-        return deferred.promise;
+        return Notebook.findById(NBId);
 
     }
 
     function updateNoteBookById(NBId, newNB){
+
         return Notebook.findByIdAndUpdate(NBId, newNB);
     }
 
     function createNotebook(notebook) {
+
         return Notebook.create(notebook);
     }
 

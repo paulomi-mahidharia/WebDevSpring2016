@@ -27,6 +27,7 @@
                     var favNotes = [];
 
                     vm.notes = foundNotes.data;
+
                     //console.log(vm.notes);
 
                     vm.$location = $location;

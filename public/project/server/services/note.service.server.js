@@ -14,6 +14,7 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
     app.post("/api/project/user/:userId/note", createNoteForUser);
     app.post("/api/project/user/:userId/note/:noteId", userLikesNote);
     app.delete("/api/project/note/:noteId/user/:userId", removeLikedUser);
+    app.put("/api/project/note/:noteId/notebook/:notebookId", addNoteToNotebook);
 
     //Notebook api calls
     app.get("/api/project/user/:userId/notebook", findAllNoteBooksForUser);
@@ -31,6 +32,31 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
 
     //Note functions
 
+    function addNoteToNotebook(req, res){
+
+        var noteId = req.params.noteId;
+
+        var notebookId = req.params.notebookId;
+
+        NotebookModel
+            .selectNoteBookById(notebookId)
+            .then(
+
+                function(notebook){
+
+                    notebook.notes.push(noteId);
+
+                    notebook.save();
+
+                    res.json(notebook);
+                },
+                function (err) {
+
+                    res.status(400).send(err);
+                }
+            );
+    }
+
 
     function removeLikedUser(req, res) {
 
@@ -44,7 +70,7 @@ module.exports = function(app, NoteModel, NotebookModel, UserModel, uuid) {
             .removeLikedUser(userId, noteId)
             .then(
                 function (stats) {
-                    console.log(stats);
+
                     res.send(200);
                 },
                 function (err) {

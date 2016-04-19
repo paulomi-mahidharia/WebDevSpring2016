@@ -7,6 +7,7 @@ module.exports = function(mongoose) {
 
     // use mongoose to declare a user schema
     var UserSchema = mongoose.Schema({
+        photo : String,
         username: String,
         password: String,
         firstName: String,
