@@ -11,6 +11,7 @@ module.exports = function(mongoose) {
     var NoteSchema = mongoose.Schema({
         title: String,
         notebook: String,
+        notebookId : String,
         createdBy: String,
 
         // ids of users that receive this note

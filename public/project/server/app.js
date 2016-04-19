@@ -4,9 +4,9 @@ module.exports = function(app, uuid, db, mongoose) {
 
     var UserModel   = require("./models/user/user.model.js")(db, mongoose);
 
-    var NoteModel = require("./models/note/note.model.js")(db, mongoose, UserModel);
-
     var NotebookModel = require("./models/notebook/notebook.model.js")(db, mongoose);
+
+    var NoteModel = require("./models/note/note.model.js")(db, mongoose, UserModel, NotebookModel);
 
     var WidgetModel = require("./models/widgets/widget.model.server.js")(db, mongoose, NoteModel);
 

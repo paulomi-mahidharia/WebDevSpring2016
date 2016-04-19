@@ -23,6 +23,8 @@
 
         var noteId;
 
+        var notebookId;
+
         var userId = $rootScope.currentUser._id;
 
         function init() {
@@ -34,7 +36,24 @@
                 .then(
                     function(response){
 
-                        vm.widget = response.data;
+                        var receivedNote = response.data;
+
+                        var currentNote = {
+
+                            title: receivedNote.title,
+                            notebook: receivedNote.notebookId,
+                            notebookId : receivedNote.notebookId,
+                            createdBy: receivedNote.createdBy,
+                            receives: receivedNote.receives,
+                            likes: receivedNote.likes,
+                            createdDate: receivedNote.createdDate,
+                            updatedDate: receivedNote.updatedDate,
+                            widgets: receivedNote.widgets
+                        };
+
+                        notebookId = receivedNote.notebookId;
+
+                        vm.widget = currentNote;
                     }
                 );
 
@@ -126,28 +145,74 @@
 
         function saveNote(note){
 
-            var recentNote;
+            if(notebookId != note.notebook){
 
-            NoteService
-                .findNoteById(noteId)
-                .then(
-                    function(response){
-                        recentNote = response.data;
-                    }
+                //Delete this note from current notebook and save it to different notebook
 
-                );
+                NoteService
+                    .selectNoteBookById(note.notebook)
+                    .then(
+                        function(response){
 
-            note.updatedDate = new Date();
+                            var updatedNote = {
+                                createdBy : note.createdBy,
+                                createdDate : note.createdDate,
+                                title : note.title,
+                                notebook : response.data.name,
+                                notebookId : note.notebook,
+                                receives: note.receives,
+                                likes: note.likes,
+                                updatedDate: new Date(),
+                                widgets: note.widgets
+                            };
 
+                            return NoteService
+                                .updateNoteById(noteId, updatedNote);
+                        }
+                    )
+                    .then(
+                        function(response) {
 
+                            noteId = response.data._id;
 
-            NoteService
-                .updateNoteById(noteId, recentNote)
-                .then(
-                    function (response) {
-                        $location.url("/note");
-                    }
-                )
+                            return NoteService.addNoteToNotebook(noteId, note.notebook);
+
+                        })
+                    .then(
+                        function(notebook){
+
+                            return NoteService.deleteNoteFromNotebook(noteId, notebookId);
+                        }
+                    )
+                    .then(
+                        function(updatedNotebook){
+
+                            $location.url("/editnote/"+noteId);
+                        }
+
+                    );
+            }
+            else{
+
+                // Save note to notebook
+
+                NoteService
+                    .selectNoteBookById(note.notebook)
+                    .then(
+                        function (response){
+
+                            note.notebook = response.data.name;
+
+                            return NoteService.updateNoteById(noteId, note);
+                        }
+                    )
+                    .then(
+                        function (response) {
+
+                            $location.url("/note");
+                        }
+                    );
+            }
         }
 
         function sortWidgets(start, end) {

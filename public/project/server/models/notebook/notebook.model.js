@@ -14,7 +14,8 @@ module.exports = function(db, mongoose) {
         deleteNotebookById: deleteNotebookById,
         selectNoteBookById: selectNoteBookById,
         updateNoteBookById: updateNoteBookById,
-        createNotebook: createNotebook
+        createNotebook: createNotebook,
+        getMongooseModel : getMongooseModel
     };
 
     return api;
@@ -45,6 +46,11 @@ module.exports = function(db, mongoose) {
     function createNotebook(notebook) {
 
         return Notebook.create(notebook);
+    }
+
+    function getMongooseModel(){
+
+        return Notebook;
     }
 
 };

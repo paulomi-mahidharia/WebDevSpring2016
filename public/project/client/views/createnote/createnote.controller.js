@@ -49,7 +49,8 @@
                             createdBy : note.createdBy,
                             createdDate : note.createdDate,
                             title : note.title,
-                            notebook : response.data.name
+                            notebook : response.data.name,
+                            notebookId : note.notebook
                         };
 
                         return NoteService
@@ -60,6 +61,8 @@
                     function(response) {
 
                         noteId = response.data._id;
+
+                        console.log(response.data);
 
                         return NoteService.addNoteToNotebook(noteId, note.notebook);
 

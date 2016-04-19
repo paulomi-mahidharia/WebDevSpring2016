@@ -96,7 +96,7 @@
             })
             .when("/previewnote/:noteId", {
                 templateUrl: "views/createnote/previewnote.view.html",
-                controller: "EditNoteController",
+                controller: "PreviewNoteController",
                 controllerAs: "model",
                 resolve: {
                     checkLoggedIn: checkLoggedIn

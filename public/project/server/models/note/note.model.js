@@ -6,12 +6,14 @@
 var notes = require("./note.mock.json");
 var q = require("q");
 
-module.exports = function(db, mongoose, UserModel) {
+module.exports = function(db, mongoose, UserModel, NotebookModel) {
 
     var NoteSchema = require("./note.schema.server.js")(mongoose);
     var Note = mongoose.model('Note', NoteSchema);
 
     var User = UserModel.getMongooseModel();
+
+    var Notebook = NotebookModel.getMongooseModel();
 
     var api = {
 
@@ -24,6 +26,7 @@ module.exports = function(db, mongoose, UserModel) {
         findNotesByIds: findNotesByIds,
         removeLikedUser: removeLikedUser,
         getMongooseModel: getMongooseModel,
+        deleteNoteFromNotebook : deleteNoteFromNotebook,
 
         // share note functions
         findAllNotesReceivedByUser: findAllNotesReceivedByUser,
@@ -34,6 +37,14 @@ module.exports = function(db, mongoose, UserModel) {
     };
 
     return api;
+
+    function deleteNoteFromNotebook(noteId, notebookId){
+
+        return Notebook.update(
+            { _id: notebookId },
+            { $pull: { 'notes': { $in: [noteId]} } }
+        );
+    }
 
     function removeLikedUser(userId, noteId){
 

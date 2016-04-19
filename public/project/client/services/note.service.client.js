@@ -20,6 +20,7 @@
             removeLikedUser: removeLikedUser,
             sortWidgets: sortWidgets,
             addNoteToNotebook : addNoteToNotebook,
+            deleteNoteFromNotebook : deleteNoteFromNotebook,
 
             //Notebook services
             deleteNotebookById: deleteNotebookById,
@@ -88,6 +89,11 @@
         function addNoteToNotebook(noteId, notebookId){
 
             return $http.put("/api/project/note/"+noteId+"/notebook/"+notebookId);
+        }
+
+        function deleteNoteFromNotebook(noteId, notebookId){
+
+            return $http.delete("/api/project/note/"+noteId+"/notebook/"+notebookId);
         }
 
         ////////////////////////////////////////////////////////////////////
