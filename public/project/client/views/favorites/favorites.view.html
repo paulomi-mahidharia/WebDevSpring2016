@@ -11,7 +11,7 @@
             <tbody>
                 <tr ng-repeat="note in model.notes">
                     <td>
-                        <h3>{{note.title}}</h3>
+                        <h3><a href="#/previewnote/{{note._id}}">{{note.title}}</a></h3>
                     </td>
                     <td><button class="btn btn-default" ng-click="model.deleteFavNote($index)">
                                     <span

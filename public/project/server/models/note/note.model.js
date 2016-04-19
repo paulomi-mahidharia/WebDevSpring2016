@@ -6,13 +6,12 @@
 var notes = require("./note.mock.json");
 var q = require("q");
 
-module.exports = function(db, mongoose) {
+module.exports = function(db, mongoose, UserModel) {
 
     var NoteSchema = require("./note.schema.server.js")(mongoose);
     var Note = mongoose.model('Note', NoteSchema);
 
-    var UserSchema = require("./../user/user.schema.server.js")(mongoose);
-    var User = mongoose.model('User', UserSchema);
+    var User = UserModel.getMongooseModel();
 
     var api = {
 

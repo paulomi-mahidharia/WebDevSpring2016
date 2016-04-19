@@ -9,7 +9,7 @@
         .module("NoteSpace")
         .controller("EditNoteController", EditNoteController);
 
-    function EditNoteController(NoteService, $routeParams, $location, $sce, WidgetService) {
+    function EditNoteController(NoteService, $routeParams, $location, $sce, WidgetService, $rootScope) {
 
         var vm = this;
 
@@ -22,6 +22,8 @@
         vm.safeYouTubeUrl = safeYouTubeUrl;
 
         var noteId;
+
+        var userId = $rootScope.currentUser._id;
 
         function init() {
 
@@ -44,6 +46,16 @@
 
                     }
                 );
+
+            NoteService
+                .findAllNoteBooksForUser(userId)
+                .then(
+                    function (response){
+
+                        vm.notebooks = response.data;
+                    }
+                )
+
         }
         init();
 
@@ -114,12 +126,23 @@
 
         function saveNote(note){
 
+            var recentNote;
+
+            NoteService
+                .findNoteById(noteId)
+                .then(
+                    function(response){
+                        recentNote = response.data;
+                    }
+
+                );
+
             note.updatedDate = new Date();
 
 
 
             NoteService
-                .updateNoteById(noteId, note)
+                .updateNoteById(noteId, recentNote)
                 .then(
                     function (response) {
                         $location.url("/note");

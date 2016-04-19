@@ -15,6 +15,14 @@
 
         function init() {
 
+            NoteService
+                .findAllNoteBooksForUser($rootScope.currentUser._id)
+                .then(
+                    function (response){
+                        vm.notebooks = response.data;
+                    }
+                );
+
         }
         init();
 
