@@ -131,8 +131,6 @@ module.exports = function(db, mongoose) {
 
         delete user._id;
 
-        var deferred = q.defer();
-
         return User.update({_id: userId}, {$set: user});
     }
 
