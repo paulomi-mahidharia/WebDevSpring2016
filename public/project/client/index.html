@@ -11,6 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="shortcut icon" href="assets/img/fevicon.png">
 
+
         <title>NoteSpace</title>
         
         <!-- stylesheets -->
@@ -29,6 +30,8 @@
         <link rel="stylesheet" href="assets/css/textAngular.css">
         <link rel="stylesheet" href="assets/css/carousel.css">
 
+        <link href="assets/css/full-slider.css" rel="stylesheet">
+
 
         <!-- scripts -->
         <script type="text/javascript" src="assets/js/modernizr.custom.97074.js"></script>
@@ -36,8 +39,6 @@
     </head>
 
     <body background="assets/img/slider1.jpg">
-
-
 
             <div ng-include="'views/header/header.view.html'"></div>
 
@@ -60,8 +61,12 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCf4_tYh0DMPul0ewcyzdK9l5K_jNHDU9Y&signed_in=true&libraries=places"
                     async defer></script>
 
-        <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
-        <script type="text/javascript" src="assets/js/jquery.hoverdir.js"></script>
+        <script src="assets/js/jquery.hoverdir.js"></script>
+        <script src="assets/js/modernizr.custom.97074.js"></script>
+        <script src="assets/js/owl.carousel.js"></script>
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/timer.js"></script>
+        <script src="assets/js/wow.min.js"></script>
 
         <script src="assets/js/app.js"></script>
         <script src="assets/js/config.js"></script>
@@ -109,56 +114,5 @@
 
 
         <!-- script for portfolio section using hoverdirection -->
-
-
-        <script type="text/javascript">
-            $(function() {
-
-                $('.portfolio-item > .item-image').each( function() { $(this).hoverdir({
-                    hoverDelay : 75
-                }); } );
-
-            });
-        </script>
-
-
-        <!-- script for twitter-feed using owl carousel-->
-        <script type="text/javascript">
-            $(document).ready(function() {
- 
-                $("#twit").owlCarousel({
-                 
-                    navigation : true, // Show next and prev buttons
-                    slideSpeed : 100,
-                    paginationSpeed : 400,
-                    navigationText : false,
-                    singleItem: true,
-                    autoPlay: true,
-                    pagination: false
-                });
- 
-            });
-        </script>
-
-
-        <!-- script for testimonial section using owl carousel -->
-        <script type="text/javascript">
-            $(document).ready(function() {
- 
-                $("#client-speech").owlCarousel({
-                 
-                    autoPlay: 5000, //Set AutoPlay to 3 seconds
-                    stopOnHover: true,
-                    singleItem:true
-                });
- 
-            });
-        </script>
-
-        <script type="text/javascript">
-            $('.carousel').carousel();
-        </script>
-
-
     </body>
 </html>

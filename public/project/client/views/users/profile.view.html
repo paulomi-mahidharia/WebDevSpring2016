@@ -14,13 +14,13 @@
                       method="post"
                       enctype="multipart/form-data">
 
-                    <input name="noteId" value="{{model.currentUser._id}}" style="display: none"/>
+                    <input name="userId" value="{{currentUser._id}}" style="display: none"/>
+                    <input name="widgetType" value="USER" style="display: none"/>
 
                     <input  type="file" name="myFile"/><br/>
-
-                    <p>
-                        <button type="submit" class="btn btn-orange">UPLOAD PHOTO</button>
-                    </p>
+                    <button type="submit" class="btn btn-orange">
+                        Upload Photo
+                    </button>
                 </form>
 
 

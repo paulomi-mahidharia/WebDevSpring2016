@@ -45,21 +45,21 @@ html {
     }
 }
 .item:nth-child(1) {
-    background: url(../img/note1.jpg) no-repeat center center fixed;
+    background: url('../../assets/img/note2.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 .item:nth-child(2) {
-    background: url(../img/note2.jpg) no-repeat center center fixed;
+    background: url('../../assets/img/note5.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 .item:nth-child(3) {
-    background: url(../img/note3.jpg) no-repeat center center fixed;
+    background: url('../../assets/img/note1.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

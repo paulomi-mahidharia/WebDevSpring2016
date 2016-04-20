@@ -116,6 +116,8 @@ module.exports = function (app, NoteModel) {
 
     function uploadFile(req, res) {
 
+        console.log("Here!");
+
         var noteId        = req.body.noteId;
         var widgetId      = req.body.widgetId;
         var widgetType    = req.body.widgetType;
@@ -152,7 +154,7 @@ module.exports = function (app, NoteModel) {
                 }
             };
         }
-        else{
+        else if(widgetType == "IMAGE"){
 
             var widget = {
                 widgetType: "IMAGE",
@@ -160,6 +162,10 @@ module.exports = function (app, NoteModel) {
                     url: "/project/public/uploads/"+file //originalname;
                 }
             };
+        }
+        else{
+
+            console.log("Almost there!");
         }
 
         //Check whether the widget needs to be edited or created!

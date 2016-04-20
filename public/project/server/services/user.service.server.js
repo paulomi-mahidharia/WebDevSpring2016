@@ -7,7 +7,13 @@ var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
+
 module.exports = function(app, UserModel, NoteModel, uuid){
+
+    //var fs = require("fs");
+
+    //var multer  = require('multer');
+    //var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
     var auth = authorized;
     app.post  ('/api/project/login', passport.authenticate('local'), login);
@@ -41,6 +47,9 @@ module.exports = function(app, UserModel, NoteModel, uuid){
     app.delete("/api/project/user/:userId/note/:noteId", removeLikedNote);
 
     app.get("/api/project/user/:userId/note/:noteId/favorite", isNoteFavForUser);
+
+    //app.post ("/api/upload/userphoto", upload.single('myFile'), uploadPhoto);
+
 
 
 
@@ -414,6 +423,5 @@ module.exports = function(app, UserModel, NoteModel, uuid){
                 }
             );
     }
-
 
 };

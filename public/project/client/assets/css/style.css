@@ -443,7 +443,7 @@ a:hover {
 }
 
 .bg-white {
-	background-color: #ffffff;
+	background-color: orange;
 }
 
 blockquote {
@@ -874,23 +874,23 @@ section {
 	color: #fff;
 }
 
-#twit .item .twit-content {
+#twit .items .twit-content {
     margin: 0px 75px;
 }
 
-#twit .item .twit-content p {
+#twit .items .twit-content p {
     color: #fff;
     font-size: 12px;
     font-weight: 100;
 }
 
 
-#twit .item .twit-content h3 {
+#twit .items .twit-content h3 {
     margin-bottom: 1.414em;
     font-weight: 100;
 }
 
-#twit .item .twit-content .twit-icon i {
+#twit .items .twit-content .twit-icon i {
     font-size: 2.5em;
 }
 
