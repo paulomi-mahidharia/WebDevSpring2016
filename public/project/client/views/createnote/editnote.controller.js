@@ -225,13 +225,19 @@
                     .then(
                         function (response){
 
-                            latestNote.title = note.title
-                            latestNote.notebook = response.data.name;
-                            latestNote.notebookId = response.data._id;
+                            var updatedNote = {
+                                createdBy : note.createdBy,
+                                createdDate : note.createdDate,
+                                title : note.title,
+                                notebook : response.data.name,
+                                notebookId : note.notebook,
+                                receives: note.receives,
+                                likes: note.likes,
+                                updatedDate: new Date(),
+                                widgets: latestNote.widgets
+                            };
 
-                            console.log(latestNote);
-
-                            return NoteService.updateNoteById(note._id, latestNote);
+                            return NoteService.updateNoteById(noteId, updatedNote);
                         }
                     )
                     .then(
