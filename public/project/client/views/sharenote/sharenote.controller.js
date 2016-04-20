@@ -58,7 +58,10 @@
                     .then(function (response) {
 
                     });
+
             }
+
+            alert("note shared successfully with group");
         }
 
         function shareNoteWithUser(note, user){
@@ -67,6 +70,7 @@
                 .shareNoteWithUser(note, user._id)
 
                 .then(function (response) {
+                    alert("note shared successfully with user");
                 });
 
         }

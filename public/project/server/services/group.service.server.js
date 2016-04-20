@@ -24,11 +24,13 @@ module.exports = function(app, GroupModel, UserModel, uuid){
 
 
 
+
+
     function deleteNoteFromGroup(req, res){
 
         var noteId = req.params.noteId;
         var groupId = req.params.groupId;
-        //  console.log(groupId);
+        //  console.log(groupId);
 
         GroupModel.deleteNoteFromGroup(noteId, groupId)
             .then (
@@ -45,12 +47,12 @@ module.exports = function(app, GroupModel, UserModel, uuid){
     function shareNoteWithGroup(req, res){
         var note = req.body;
         var groupId = req.params.groupId;
-        var group =  GroupModel.findGroupById(groupId);
+        var group =  GroupModel.findGroupById(groupId);
 
         GroupModel.shareNoteWithGroup(note, groupId)
             .then (
                 function (group) {
-                    //   console.log(form);
+                    //   console.log(form);
                     res.json (group);
                 },
                 function (err) {
@@ -60,52 +62,52 @@ module.exports = function(app, GroupModel, UserModel, uuid){
     }
 
     function renameGroup(req,res){
-            var groupId = req.params.groupId;
-            var title = req.params.title;
+        var groupId = req.params.groupId;
+        var title = req.params.title;
 
-            var renameGroup = GroupModel.renameGroup(groupId, title)
-                .then(
-                    function (doc) {
+        var renameGroup = GroupModel.renameGroup(groupId, title)
+            .then(
+                function (doc) {
 
-                        res.json(doc);
-                    },
+                    res.json(doc);
+                },
 
-                    // send error if promise rejected
-                    function ( err ) {
+                // send error if promise rejected
+                function ( err ) {
 
-                        res.status(400).send(err);
-                    });
-        }
+                    res.status(400).send(err);
+                });
+    }
 
 
 
-function getMembersOfGroup(req,res){
-    var groupId = req.params.groupId;
-    var group = null;
-    GroupModel.findGroupById(groupId)
-        .then(
+    function getMembersOfGroup(req,res){
+        var groupId = req.params.groupId;
+        var group = null;
+        GroupModel.findGroupById(groupId)
+            .then(
 
-            // first retrieve the user by user id
-            function (doc) {
+                // first retrieve the user by user id
+                function (doc) {
 
-                group = doc;
-                GroupModel.getMembersByGroupMemberIds(doc.members)
-                    .then(function(response){
-                            res.json(response);
-                            console.log(response);
-                        },
-                        function (err){
-                            res.status(400).send(err);
-                        })
-            },
+                    group = doc;
+                    GroupModel.getMembersByGroupMemberIds(doc.members)
+                        .then(function(response){
+                                res.json(response);
+                                console.log(response);
+                            },
+                            function (err){
+                                res.status(400).send(err);
+                            })
+                },
 
-            // reject promise if error
-            function (err) {
-                res.status(400).send(err);
-            }
-        )
+                // reject promise if error
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
 
-}
+    }
 
 
 
@@ -151,12 +153,12 @@ function getMembersOfGroup(req,res){
 
 
 
-  //  ("/api/project/user/"+userId+"/unfollow/group/"+GroupId)
+    //  ("/api/project/user/"+userId+"/unfollow/group/"+GroupId)
     function deleteCurrentMemberFromGroup(req, res){
 
         var userId = req.params.userId;
         var groupId = req.params.groupId;
-      //  console.log(groupId);
+        //  console.log(groupId);
 
         GroupModel.deleteCurrentMemberFromGroup(userId, groupId)
             .then (
@@ -172,43 +174,43 @@ function getMembersOfGroup(req,res){
     }
 
 
-function getMemberGroups(req, res){
-    var userId = req.params.userId;
-    var user = null;
-    console.log("user");
-    console.log(userId);
-    UserModel.findUserById(userId)
-        .then(
+    function getMemberGroups(req, res){
+        var userId = req.params.userId;
+        var user = null;
+        console.log("user");
+        console.log(userId);
+        UserModel.findUserById(userId)
+            .then(
 
-            // first retrieve the user by user id
-            function (doc) {
+                // first retrieve the user by user id
+                function (doc) {
 
-                user = doc;
-
-
-                // fetch movies this user likes
-                GroupModel.findGroupsByGroupIDs(doc.userIsMemberOfGroup)
-                    .then(function(response){
-                            res.json(response);
-                            console.log(response);
-                        },
-                        function (err){
-                            res.status(400).send(err);
-                        })
-            },
-
-            // reject promise if error
-            function (err) {
-                res.status(400).send(err);
-            }
-        )
-
-}
+                    user = doc;
 
 
+                    // fetch movies this user likes
+                    GroupModel.findGroupsByGroupIDs(doc.userIsMemberOfGroup)
+                        .then(function(response){
+                                res.json(response);
+                                console.log(response);
+                            },
+                            function (err){
+                                res.status(400).send(err);
+                            })
+                },
+
+                // reject promise if error
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+
+    }
 
 
-    function  getAdminGroups(req, res){
+
+
+    function  getAdminGroups(req, res){
         var userId = req.params.userId;
         var user = null;
         console.log("user");
@@ -225,12 +227,12 @@ function getMemberGroups(req, res){
                     // fetch movies this user likes
                     GroupModel.findGroupsByGroupIDs(doc.userIsAdminOfGroup)
                         .then(function(response){
-                            res.json(response);
-                            console.log(response);
-                        },
-                        function (err){
-                            res.status(400).send(err);
-                        })
+                                res.json(response);
+                                console.log(response);
+                            },
+                            function (err){
+                                res.status(400).send(err);
+                            })
                 },
 
                 // reject promise if error
@@ -242,20 +244,20 @@ function getMemberGroups(req, res){
     }
 
 
-function findAllGroups(req, res){
-    GroupModel.findAllGroups()
-        .then(
-            function (doc) {
+    function findAllGroups(req, res){
+        GroupModel.findAllGroups()
+            .then(
+                function (doc) {
 
-                res.json(doc);
-            },
+                    res.json(doc);
+                },
 
-            // send error if promise rejected
-            function ( err ) {
-                res.status(400).send(err);
-            }
-        );
-}
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function deleteMemberFromGroup(req, res){
 
@@ -277,22 +279,22 @@ function findAllGroups(req, res){
 
 
 
-function findGroupById(req, res){
+    function findGroupById(req, res){
 
-    var groupId = req.params.groupId;
-    GroupModel.findGroupById(groupId)
-.then(
-        function (doc) {
+        var groupId = req.params.groupId;
+        GroupModel.findGroupById(groupId)
+            .then(
+                function (doc) {
 
-            res.json(doc);
-        },
+                    res.json(doc);
+                },
 
-        // send error if promise rejected
-        function ( err ) {
-            res.status(400).send(err);
-        }
-    );
-}
+                // send error if promise rejected
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function addMemberToGroup(req, res) {
 
@@ -330,27 +332,27 @@ function findGroupById(req, res){
 
 
 
-        /*    .then(
-                function (doc) {
-                    console.log(doc);
-                    doc.members.push(userId);
-                    doc.save();
+    /*    .then(
+                     function (doc) {
+                         console.log(doc);
+                         doc.members.push(userId);
+                         doc.save();
 
-                    console.log(doc);
-                    res.json(doc);
-                },
+                         console.log(doc);
+                         res.json(doc);
+                     },
 
-                // send error if promise rejected
-                function ( err ) {
+                     // send error if promise rejected
+                     function ( err ) {
 
-                    res.status(400).send(err);
-                }
-        );
-
-
+                         res.status(400).send(err);
+                     }
+             );
 
 
-    } */
+
+
+         } */
 
 
     function createGroupForUser(req,res){
@@ -364,27 +366,27 @@ function findGroupById(req, res){
         var createdGroup;
 
 
-         GroupModel.createGroupForUser(group)
-             .then(
-                 function (doc) {
-                     groupId = doc._id;
+        GroupModel.createGroupForUser(group)
+            .then(
+                function (doc) {
+                    groupId = doc._id;
 
-                     createdGroup = doc;
+                    createdGroup = doc;
 
-                     return GroupModel.userIsAdminOfGroup(userId);
+                    return GroupModel.userIsAdminOfGroup(userId);
 
-                 }
-             )
-             .then(
-                 function (user) {
+                }
+            )
+            .then(
+                function (user) {
 
-                     user.userIsAdminOfGroup.push(groupId);
+                    user.userIsAdminOfGroup.push(groupId);
 
-                     user.save();
+                    user.save();
 
-                     res.json(createdGroup);
-                 }
-             );
+                    res.json(createdGroup);
+                }
+            );
 
     }
 

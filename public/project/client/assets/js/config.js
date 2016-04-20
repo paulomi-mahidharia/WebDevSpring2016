@@ -251,10 +251,15 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/notebook/:NotebookId/viewNotebook", {
 
-
-
-
+                templateUrl: "views/notebook/viewnotebook.view.html",
+                controller: "ViewNotebookController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .otherwise({
                 redirectTo: "/home"
             });

@@ -42,6 +42,11 @@
                             $location.url("/profile");
                         }
 
+                    },
+                    function(err){
+
+                        alert("You are not a member of NoteSpace. Create Account to continue!");
+                        $location.url("/register");
                     });
             }
             else {
@@ -49,35 +54,7 @@
                 alert("Enter required fields!");
             }
 
-            /*if (user) {
 
-                UserService.findUserByCredentials(user.username, user.password)
-                    .then(function (response) {
-
-                        // Error alert if the user does not exist in database OR
-                        // Credentials entered are invalid and do not match with any entry in the database
-
-                        if(response.data == null){
-
-                            user.username = null;
-                            user.password = null;
-                            alert("Invalide credentials! Try again");
-                        }
-
-                        // When the response has a valid user data existing in the database
-
-                        else if (response) {
-
-                            UserService.setCurrentUser(response.data);
-                            $location.url("/profile");
-                        }
-
-                    });
-            }
-            else {
-
-                alert("Enter required fields!");
-            }*/
         }
     }
 })();

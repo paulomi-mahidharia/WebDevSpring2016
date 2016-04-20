@@ -28,6 +28,8 @@
             updateNoteBookById: updateNoteBookById,
             addNoteBookForUser: addNoteBookForUser,
             findAllNoteBooksForUser: findAllNoteBooksForUser,
+            findNotebookById : findNotebookById,
+            getNotesOfNotebook : getNotesOfNotebook,
 
 
             // share
@@ -181,5 +183,16 @@
 
             return deferred.promise;
         }
+
+        function findNotebookById(NBId){
+
+            return $http.get("/api/project/note/notebookId/"+NBId);
+        }
+
+        function  getNotesOfNotebook(notebookId){
+
+            return $http.get("/api/project/note/notebook/"+notebookId);
+        }
+
     }
 })();

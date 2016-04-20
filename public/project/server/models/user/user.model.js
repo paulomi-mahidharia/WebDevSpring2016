@@ -2,7 +2,7 @@
  * Created by paulomimahidharia on 3/16/16.
  */
 
-var users = require("./user.mock.json");
+
 var q = require("q");
 
 var noUser = {};

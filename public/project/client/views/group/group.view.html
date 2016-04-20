@@ -1,7 +1,7 @@
 <div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
       ng-controller="GroupController as model">
 
-    <h1>Groups Of User</h1>
+    <h2 style="color: darkorange">Groups Of  {{currentUser.username}}</h2>
 
     <a href="#/createGroup">
 
@@ -25,7 +25,7 @@
     </h3>
 
 
-    <p>All groups of users  </p>
+    <p>All groups of {{currentUser.username}}  </p>
 
     <br/>
 
@@ -33,8 +33,14 @@
 
 
         <div style="float: right; width: 40%">
-            <h4>User Is Admin</h4>
+
                 <table  class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+
+                    <caption>
+                        <h4>User is admin</h4>
+                        <h5>Select to edit Group </h5>
+
+                    </caption>
 
                     <tbody>
                         <tr>
@@ -45,7 +51,7 @@
 
                     <tr ng-repeat="groupA in model.AdminGroups">
                     <td>
-                        <a href="#group/{{groupA._id}}/editGroup"> <h3>{{groupA.title}}</h3> </a>
+                        <a href="#group/{{groupA._id}}/editGroup"> <h4>{{groupA.title}}</h4> </a>
 
                     </td>
 
@@ -64,8 +70,13 @@
         </div>
 
         <div style="float: left; width: 40%">
-            <h4>User is member</h4>
+
             <table  class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" >
+                <caption>
+                    <h4>User is member</h4>
+                    <h5>Select to view Group </h5>
+
+                </caption>
 
                 <tbody>
 
@@ -77,7 +88,7 @@
                     <tr ng-repeat="groupM in model.MemberGroups">
 
                         <td>
-                            <a href="#group/{{groupM._id}}/viewGroup"> <h3> {{groupM.title}}</h3> </a>
+                            <a href="#group/{{groupM._id}}/viewGroup"> <h4> {{groupM.title}}</h4> </a>
 
                         </td>
 

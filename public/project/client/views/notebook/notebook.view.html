@@ -2,7 +2,7 @@
 <div class=" main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"
      ng-controller="noteBookController as model">
 
-    <h1 style="color: darkorange">Notebooks</h1>
+    <h1 style="color: darkorange">Notebooks
         <div style="float: right">
 
             <button class="btn btn-default"
@@ -39,18 +39,19 @@
             </button>
 
         </div>
-
+    </h1>
 
     <br/><br/>
+
     Search :<br/><br/>
     <input class="form-control" style="background: transparent"
                         ng-model="query[queryBy]"
-                        placeholder="Enter URL"/><br/>
+                        placeholder="Enter keyword.."/><br/>
 
     Search By :<br/><br/>
-    <select class="form-control" ng-model="queryBy" style="background: transparent">
+    <select class="form-control" ng-model="queryBy" style="background: transparent" >
 
-        <option value="name">NAME</option>
+        <option value="name" selected="selected">NAME</option>
         <option value="description">DESCRIPTION</option>
 
     </select>
@@ -60,14 +61,14 @@
         <tbody>
         <tr ng-show="showTableAdd==1" >
             <td>Name <input type="text" class="form-control"
-                            ng-model = "model.notebook.name"
+                            ng-model = "model.notebook1.name"
                             id="nbname" placeholder="Name">
 
                 <br>
 
 
                 Description <input type="text" class="form-control"
-                                   ng-model = "model.notebook.description"
+                                   ng-model = "model.notebook1.description"
                                    id="desc" placeholder="Description">
                 <br>
 
@@ -75,7 +76,7 @@
             <td>
 
                 <button class="btn btn-default transparent"
-                   ng-click="model.addNoteBook(model.notebook); showTableAdd = 2" >
+                   ng-click="model.addNoteBook(model.notebook1); showTableAdd = 2" >
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
 
@@ -115,13 +116,13 @@
 
             <tr ng-repeat="notebook in model.notebooks | filter:query">
                 <td>
-                    <h3>  {{notebook.name}}</h3>
+          <a href="#notebook/{{notebook._id}}/viewNotebook">
+
+                  <h3>  {{notebook.name}}</h3>
+          </a>
                     <text> <b>Description:</b> {{notebook.description}} </text>
 
-                    <h5>notes of {{notebook.name}}:</h5>
-                    <ul ng-repeat="note in notebook.notes" >
-                        <li><b>-></b> {{notebook.notes}} </li>
-                    </ul>
+
 
 
                 </td>

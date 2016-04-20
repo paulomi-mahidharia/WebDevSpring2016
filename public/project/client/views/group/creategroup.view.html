@@ -2,7 +2,7 @@
      ng-controller="GroupController as model">
 
 
-    <h1>Create Group</h1>
+    <h1 style="color: darkorange">Create Group</h1>
 
     <a href="#/group">
 
@@ -88,7 +88,7 @@
                 </td>
 
                 <td><button class="btn btn-default"
-                            ng-click="model.addMemberToGroup(model.userToBeAddedToGroup)">
+                            ng-click="model.addMemberToGroup(model.userToBeAddedToGroup); showusers=1">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
                 </td>
@@ -99,7 +99,7 @@
         </br>
         <br/>
 
-        <table  class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" ng-show="showrest==1">
+        <table  class="table table-bordered table-striped"   border="3" style="border-collapse:collapse" ng-show="showusers==1">
 
             <tbody>
             <tr>

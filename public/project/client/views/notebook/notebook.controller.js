@@ -10,6 +10,11 @@
 
         var vm = this;
         var  selectedIndex = -1;
+        var displayNotebook = {};
+        var notebooks1;
+      //  var notesList;
+
+        var notebooks = [];
 
         var user = $rootScope.currentUser;
         var userId = user._id;
@@ -21,7 +26,25 @@
                 .then(function (foundNoteBooks){
                     vm.notebooks = foundNoteBooks.data;
                     vm.$location = $location;
+
+
+                    notebooks = foundNoteBooks.data;
+
+                    var notes = [];
+
+
+
+
+
+
+
                 });
+
+
+
+
+
+
         }
         init();
 
@@ -112,6 +135,8 @@
                         if(response) {
 
                             vm.notebooks = response;
+
+                            vm.notebook1 = null
                             init();
                         }
                     });

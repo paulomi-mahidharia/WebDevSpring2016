@@ -34,6 +34,7 @@
 
         function init() {
 
+
             GroupService.getAdminGroups($rootScope.currentUser._id)
 
                 .then(function (allAdminGroups){

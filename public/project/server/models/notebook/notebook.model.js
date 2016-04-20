@@ -1,7 +1,7 @@
 /**
  * Created by anvitasurapaneni on 3/25/16.
  */
-// var notebooks = require("./notebook.mock.json");
+
 var q = require("q");
 
 module.exports = function(db, mongoose) {
@@ -15,6 +15,7 @@ module.exports = function(db, mongoose) {
         selectNoteBookById: selectNoteBookById,
         updateNoteBookById: updateNoteBookById,
         createNotebook: createNotebook,
+        findNotebookById: findNotebookById,
         getMongooseModel : getMongooseModel
     };
 
@@ -52,5 +53,12 @@ module.exports = function(db, mongoose) {
 
         return Notebook;
     }
+
+    function findNotebookById(NBId){
+
+        return Notebook.findById(NBId);
+
+    }
+
 
 };

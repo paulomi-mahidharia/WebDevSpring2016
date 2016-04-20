@@ -1,5 +1,5 @@
 <div class="main col-sm-9 col-sm-offset-5 col-md-10 col-md-offset-2"  ng-controller="InboxController as model">
-    <h1>Notes received by user</h1>
+    <h1 style="color: darkorange">Received Notes</h1>
     <div style="float: right">
 
         <button class="btn btn-default"
@@ -35,7 +35,7 @@
 
             <tr ng-repeat="note in model.receivedNotes">
                 <td>
-                    <h3>{{note.title}}</h3>
+                    <a href="#/previewnote/{{note._id}}"><h3>{{note.title}}</h3></a>
                     <br/>
                     Notebook of {{note.title}} : {{note.notebook}}
                 </td>
@@ -53,9 +53,6 @@
 
                 </td>
             </tr>
-
-
-
 
             </tbody>
         </table>
