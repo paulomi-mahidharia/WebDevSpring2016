@@ -95,24 +95,23 @@
 
                 var position = vm.notebooks[selectedIndex];
                 var newNB = {
-                    //"_id": notebook._id,
+
                     "name": notebook.name,
-                    "description": notebook.description,
-                    //"notes": notebook.notes,
-                    //"createdBy": notebook.createdBy
-                };
+                    "description": notebook.description
+                 };
 
 
                 NoteService.updateNoteBookById(notebook._id,newNB)
                     .then(function (response) {
 
                         vm.notebooks[selectedIndex] = response.data;
-                        vm.notebook = null;
+
                         vm.selectedIndex = -1;
 
                         init();
             });
 
+                vm.notebook = null;
         }}
 
 
