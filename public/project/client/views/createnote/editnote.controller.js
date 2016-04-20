@@ -23,7 +23,7 @@
 
         var noteId;
 
-        var notebookId;
+        var notebookId = null;
 
         var userId = $rootScope.currentUser._id;
 
@@ -145,7 +145,7 @@
 
         function saveNote(note){
 
-            var latestNote;
+            var latestNote = {};
 
             if(notebookId != note.notebook){
 
@@ -165,6 +165,9 @@
                     )
                     .then(
                         function(response){
+
+                            console.log("In here");
+                            console.log(latestNote);
 
                             var updatedNote = {
                                 createdBy : note.createdBy,
@@ -222,7 +225,11 @@
                     .then(
                         function (response){
 
+                            latestNote.title = note.title
                             latestNote.notebook = response.data.name;
+                            latestNote.notebookId = response.data._id;
+
+                            console.log(latestNote);
 
                             return NoteService.updateNoteById(noteId, latestNote);
                         }
