@@ -129,17 +129,11 @@ module.exports = function(db, mongoose) {
 
     function updateUser(userId, user){
 
+        delete user._id;
+
         var deferred = q.defer();
 
-        User.findByIdAndUpdate(userId, user, function (err,doc){
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc);
-            }
-        });
-
-        return deferred.promise;
+        return User.update({_id: userId}, {$set: user});
     }
 
     function findUserById(UserId){
