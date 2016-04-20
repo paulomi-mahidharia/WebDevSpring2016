@@ -95,11 +95,11 @@
 
                 var position = vm.notebooks[selectedIndex];
                 var newNB = {
-                    "_id": notebook._id,
+                    //"_id": notebook._id,
                     "name": notebook.name,
                     "description": notebook.description,
-                    "notes": notebook.notes,
-                    "createdBy": notebook.createdBy
+                    //"notes": notebook.notes,
+                    //"createdBy": notebook.createdBy
                 };
 
 
