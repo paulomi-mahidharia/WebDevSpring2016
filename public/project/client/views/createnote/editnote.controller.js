@@ -231,7 +231,7 @@
 
                             console.log(latestNote);
 
-                            return NoteService.updateNoteById(noteId, latestNote);
+                            return NoteService.updateNoteById(note._id, latestNote);
                         }
                     )
                     .then(
