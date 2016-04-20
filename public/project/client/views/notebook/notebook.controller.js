@@ -135,7 +135,7 @@
 
                             vm.notebooks = response;
 
-                            vm.notebook1 = null
+                            vm.notebook1 = null;
                             init();
                         }
                     });
