@@ -235,22 +235,6 @@
 
         }
 
-        /*function isUserAlreadyThere(user){
-            getCurrentGroup();
-            var existingUsers = vm.currentGroup.members;
-
-            for(i=0; i<existingUsers.length; i++){
-                console.log("compare");
-                console.log(existingUsers[i]._id);
-                console.log(vm.userToComapreId);
-                if (existingUsers[i]._id == vm.userToComapreId){
-                   return true;
-                }
-
-            }
-         return false;
-        }*/
-
 
         function createGroupForUser(group){
 
