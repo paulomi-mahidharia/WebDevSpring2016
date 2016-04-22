@@ -22,6 +22,8 @@
             if (user) {
 
                 UserService.login(user)
+
+
                     .then(function (response) {
 
                         // Error alert if the user does not exist in database OR

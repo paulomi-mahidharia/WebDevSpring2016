@@ -42,6 +42,7 @@
                 lastName: user.lastName,
                 username: user.username,
                 password: user.password,
+                roles: user.roles,
                 emails : user.emails.trim().split(","),
                 phones : user.phones.trim().split(",")
 
