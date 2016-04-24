@@ -12,17 +12,15 @@
 
         var vm = this;
 
-        function init() {
-            //vm.user = {};
+        var user ;
 
-            /*var currUser = $rootScope.currentUser;
-            if(currUser != null){
-                vm.user = currUser;
-            }*/
+        function init() {
 
             UserService
                 .findUserById($rootScope.currentUser._id)
                 .then(function (response) {
+
+                    user = response.data;
 
                     vm.user = response.data;
                     vm.user.emails = vm.user.emails.join(response.emails);
