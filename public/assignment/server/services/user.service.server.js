@@ -10,20 +10,15 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function(app, UserModel, uuid){
 
     var auth = authorized;
-    app.post  ('/api/assignment/login', passport.authenticate('local'), login);
+
+    //Admin functionalities
 
     //responds with an array of all users
     app.get("/api/assignment/admin/user",auth, findAllUsers);
 
-    //Return logged in user (possibly null)
-    app.get("/api/assignment/user/loggedin", loggedIn);
-
     //updates an existing user whose id property is equal to the id path parameter.
     //The new properties are set to the values in the user object embedded in the HTTP request. Responds with an array of all users
     app.put("/api/assignment/admin/user/:id",auth, updateUser);
-
-    //registers a new user embedded in the body of the request, and responds with an array of all users
-    app.post("/api/assignment/register", register);
 
     //admin creates a new user embedded in the body of the request, and responds with an array of all users
     app.post("/api/assignment/admin/user", createUser);
@@ -33,7 +28,17 @@ module.exports = function(app, UserModel, uuid){
     app.delete("/api/assignment/admin/user/:id",auth, deleteUserById);
 
     //responds with a single user whose id property is equal to the id path parameter
-    app.get("/api/assignment/admin/user/:UserId", findUserById);
+    app.get("/api/assignment/admin/user/:UserId", auth, findUserById);
+
+    //User functionalities
+
+    app.post  ('/api/assignment/login', passport.authenticate('local'), login);
+
+    //Return logged in user (possibly null)
+    app.get("/api/assignment/user/loggedin", loggedIn);
+
+    //registers a new user embedded in the body of the request, and responds with an array of all users
+    app.post("/api/assignment/register", register);
 
     //Logout current user
     app.post("/api/assignment/user/logout", logout);
@@ -172,8 +177,6 @@ module.exports = function(app, UserModel, uuid){
         var userId = req.params.id;
         var newUser = req.body;
 
-        newUser.password = bcrypt.hashSync(newUser.password);
-
         if(!isAdmin(req.user)) {
 
             delete newUser.roles;
@@ -183,28 +186,41 @@ module.exports = function(app, UserModel, uuid){
             newUser.roles = newUser.roles.split(",");
         }
 
-        UserModel
-            .updateUser(userId, newUser)
-            .then(
-                function(user){
+            UserModel
+                .findUserByUsername(newUser.username)
 
-                    return UserModel.findAllUsers();
-                },
-                function(err){
+                .then(function(user){
 
-                    res.status(400).send(err);
-                }
-            )
-            .then(
-                function(users){
+                        if(user){
+                            //check if the password was updated by user and handle accordingly
 
-                    res.json(users);
-                },
-                function(err){
+                            if(user.password != newUser.password){
 
-                    res.status(400).send(err);
-                }
-            );
+                                newUser.password = bcrypt.hashSync(newUser.password);
+                            }
+
+                            UserModel
+                                .updateUser(userId,newUser)
+                                .then(
+                                    //login in promise resolved
+                                    function( doc ){
+
+                                        res.json(doc);
+                                    },
+                                    //send error if promise rejected
+                                    function( err ){
+
+                                        res.status(400).send(err);
+                                    }
+                                );
+                        }else{
+                            res.send(400);
+                        }
+                    },
+                    function(err){
+
+                        res.status(400).send(err);
+                    });
     }
 
     function register(req,res){
