@@ -14,6 +14,8 @@
 
         function init(){
 
+            UserService.setCurrentUser(null);
+
         }
 
         function login(user){
