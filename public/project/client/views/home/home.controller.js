@@ -25,31 +25,36 @@
                 UserService.login(user)
                     .then(function (response) {
 
-                        // Error alert if the user does not exist in database OR
-                        // Credentials entered are invalid and do not match with any entry in the database
+                            // Error alert if the user does not exist in database OR
+                            // Credentials entered are invalid and do not match with any entry in the database
 
-                        console.log(response);
-                        if(response.data == null){
+                            if(response.data == null){
 
-                            user.username = null;
-                            user.password = null;
-                            alert("Invalide credentials! Try again");
-                        }
+                                user.username = null;
+                                user.password = null;
+                                alert("Invalide credentials! Try again");
+                            }
 
-                        // When the response has a valid user data existing in the database
+                            // When the response has a valid user data existing in the database
 
-                        else if (response) {
+                            else if (response) {
 
-                            UserService.setCurrentUser(response.data);
-                            $location.url("/profile");
-                        }
+                                UserService.setCurrentUser(response.data);
+                                $location.url("/profile");
+                            }
 
-                    });
+                        },
+                        function(err){
+
+                            alert("Invalid credentials entered OR You are not a member of NoteSpace. Create Account to continue!");
+                            $location.url("/register");
+                        });
             }
             else {
 
                 alert("Enter required fields!");
             }
+
         }
     }
 })();

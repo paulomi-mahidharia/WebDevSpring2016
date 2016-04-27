@@ -45,7 +45,7 @@
                     },
                     function(err){
 
-                        alert("You are not a member of NoteSpace. Create Account to continue!");
+                        alert("Invalid credentials entered OR You are not a member of NoteSpace. Create Account to continue!");
                         $location.url("/register");
                     });
             }
