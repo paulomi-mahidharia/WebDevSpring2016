@@ -2036,3 +2036,39 @@ Tags: responsive layout, multiple-page
 		margin-right: 0;
 	}
 }
+
+/* for divs */
+
+.wrapper {
+
+	overflow:hidden;
+}
+
+.wrapper div {
+	min-height: 200px;
+	padding: 10px;
+}
+#one {
+
+	float:left;
+	margin-right:10px;
+
+
+}
+#two {
+
+	overflow:hidden;
+	margin:10px;
+
+
+}
+
+@media screen and (max-width: 400px) {
+	#one {
+		float: none;
+		margin-right:0;
+		width:auto;
+		border:0;
+
+	}
+}
