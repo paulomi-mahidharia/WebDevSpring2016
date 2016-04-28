@@ -28,9 +28,14 @@
 
         vm.addNote = addNote;
 
-        function addNote(note){
+        function addNote(note) {
 
-            console.log(note);
+            if (note.notebook == null) {
+
+                alert("You should have a notebook to which this note belongs!");
+                $location.url("/createnote");
+            }
+
 
             var currentUser = $rootScope.currentUser;
             var currentUserId = currentUser._id;
@@ -43,14 +48,14 @@
             NoteService
                 .selectNoteBookById(note.notebook)
                 .then(
-                    function(response){
+                    function (response) {
 
                         var createNote = {
-                            createdBy : note.createdBy,
-                            createdDate : note.createdDate,
-                            title : note.title,
-                            notebook : response.data.name,
-                            notebookId : note.notebook
+                            createdBy: note.createdBy,
+                            createdDate: note.createdDate,
+                            title: note.title,
+                            notebook: response.data.name,
+                            notebookId: note.notebook
                         };
 
                         return NoteService
@@ -58,7 +63,7 @@
                     }
                 )
                 .then(
-                    function(response) {
+                    function (response) {
 
                         noteId = response.data._id;
 
@@ -68,14 +73,14 @@
 
                     })
                 .then(
-                    function(notebook){
+                    function (notebook) {
 
-                        $location.url("/editnote/"+noteId);
+                        $location.url("/editnote/" + noteId);
                     }
                 );
 
             vm.widget = {};
-        }
 
+        }
     }
 })();
